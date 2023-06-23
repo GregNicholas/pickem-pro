@@ -22,10 +22,17 @@
   margin: 0 0 1rem;
   line-height: 1.15;
   font-size: 3.6rem;
+  transition: .5s;
 }
 
 .title {
   text-align: center;
+}
+
+.title:hover {
+  color: magenta;
+  scale: 1.1;
+  transform: translate(10px, -20px);
 }
 
 .title,
