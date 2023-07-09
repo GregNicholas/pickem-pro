@@ -3,8 +3,12 @@
   font-size: 5rem;
   color: magenta;
   text-align: center;
+  text-shadow: 1px 1px 5px coral;
 }
 
 .post {
   background-color: lime;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px;
 }
