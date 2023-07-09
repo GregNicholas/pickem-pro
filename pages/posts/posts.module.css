@@ -1,0 +1,10 @@
+.postHeading {
+  font-weight: bold;
+  font-size: 5rem;
+  color: magenta;
+  text-align: center;
+}
+
+.post {
+  background-color: lime;
+}
