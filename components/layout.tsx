@@ -5,7 +5,7 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 
 export const name = "Gregory";
-export const siteTitle = "Next.js site";
+export const siteTitle = "Pickem Hub";
 
 export default function Layout({ children, home }) {
   return (
@@ -43,7 +43,7 @@ export default function Layout({ children, home }) {
             <Link href="/">
               <Image
                 priority
-                src="/images/profile.avif"
+                src="/images/profile.jpg"
                 className={utilStyles.borderCircle}
                 height={108}
                 width={108}
