@@ -2,11 +2,12 @@ import Link from "next/link";
 import Head from "next/head";
 import Script from "next/script";
 import Layout from "../../components/layout";
+import styles from "./posts.module.css";
 
 export default function FirstPost() {
   return (
     <Layout home={undefined}>
-      <>
+      <div className={styles.post}>
       <Head>
         <title>First Post</title>
       </Head>
@@ -19,12 +20,12 @@ export default function FirstPost() {
         }
       />
 
-      <h1>First Post</h1>
+      <h1 className={styles.postHeading}>First Post</h1>
+      <p>Hello paragraph Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti ut! Vel nihil velit suscipit? Eius, veniam iusto! Omnis ipsum modi tempore beatae perferendis odio magnam a sequi reprehenderit dolor.</p>
       <h2>
         <Link href="/">Back to home</Link>
       </h2>
-      <p>Hello paragraph</p>
-      </>
+      </div>
     </Layout>
   );
 }
