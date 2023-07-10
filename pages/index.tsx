@@ -4,6 +4,7 @@ import Link from "next/link";
 import Layout, { siteTitle, name } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from '../lib/posts';
+import { AuthContextProvider } from '../context/AuthContext';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = await getSortedPostsData();
@@ -18,6 +19,7 @@ export default function Home({ allPostsData }) {
 
   console.log(allPostsData);
   return (
+    <AuthContextProvider>
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
@@ -28,5 +30,6 @@ export default function Home({ allPostsData }) {
           <Link href="/posts/first-post">See our first post! -{">"}</Link>
       </section>
     </Layout>
+    </AuthContextProvider>
   );
 }
