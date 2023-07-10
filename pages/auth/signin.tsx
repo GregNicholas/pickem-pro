@@ -18,7 +18,7 @@ function SignIn() {
 
         // else successful
         console.log(result)
-        return router.push("/home")
+        return router.push("/dashboard")
     }
     return (<div className="wrapper">
         <div className="form-wrapper">
