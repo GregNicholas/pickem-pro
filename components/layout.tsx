@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "./layout.module.css";
+import styles from "./Layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { AuthContextProvider } from "../context/AuthContext";
@@ -8,7 +8,7 @@ import { AuthContextProvider } from "../context/AuthContext";
 export const name = "Gregory";
 export const siteTitle = "Pickem Hub";
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home=false }) {
   return (
     <div className={styles.container}>
       <Head>
