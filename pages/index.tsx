@@ -17,7 +17,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home({ allPostsData }) {
 
-  console.log(allPostsData);
   return (
     <AuthContextProvider>
     <Layout home>
