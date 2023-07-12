@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 function Dashboard() {
     const { user } = useAuthContext()
     const router = useRouter()
-
+    console.log({ user })
     useEffect(() => {
         if (user == null) router.push("/")
     }, [user])
