@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import styles from "./posts.module.css";
 
 export default function FirstPost() {
