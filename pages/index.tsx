@@ -20,14 +20,11 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({ allPostsData }) {
   const { user } = useAuthContext();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-
+console.log(user)
   useEffect(() => {
     if (user) {
       router.push("/dashboard");
-    } else {
-      setIsLoading(false);
-    }
+    } 
   }, [user]);
 
   return (
@@ -38,7 +35,20 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>Hello, I'm {name}. I'm a software engineer.</p>
         <p>(Let's play ball!)</p>
-          <Link href="/posts/first-post">See our first post! -{">"}</Link>
+        <ul className={utilStyles.nav}>
+          <li className={utilStyles.navItem}>
+            <Link href="/posts/first-post">See our first post! -{">"}</Link>
+          </li>
+          <li className={utilStyles.navItem}>          
+            <Link href="/dashboard">Go to Dashboard -{">"}</Link>
+          </li>
+          <li className={utilStyles.navItem}>
+            <Link href="/auth/signin">Sign in! -{">"}</Link>
+          </li>
+          <li className={utilStyles.navItem}>
+            <Link href="/auth/signup">Sign up! -{">"}</Link>
+          </li>
+        </ul>
       </section>
     </Layout>
   );
