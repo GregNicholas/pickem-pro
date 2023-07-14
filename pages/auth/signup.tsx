@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import signUp from "../../firebase/auth/signup";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import Layout from "../../components/Layout";
 
 function SignUp() {
     const [username, setUsername] = useState('');
@@ -22,6 +23,7 @@ function SignUp() {
         return router.push("/dashboard");
     }
     return (
+      <Layout>
       <div className="wrapper">
         <div className="form-wrapper">
             <h1 className="mt-60 mb-30">Sign up</h1>
@@ -32,7 +34,7 @@ function SignUp() {
                 </label>
                 <label htmlFor="email">
                     <p>Email</p>
-                    <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
+                    <input onChange={(e) => setEmail(e.target.value)} required type="email" type="email" name="email" id="email" placeholder="example@mail.com" />
                 </label>
                 <label htmlFor="password">
                     <p>Password</p>
@@ -42,6 +44,7 @@ function SignUp() {
             </form>
         </div>
       </div>
+      </Layout>
     );
 }
 
