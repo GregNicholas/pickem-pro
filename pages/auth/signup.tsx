@@ -7,6 +7,7 @@ function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
     const router = useRouter();
 
     const handleForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -15,13 +16,15 @@ function SignUp() {
         const { result, error } = await signUp(email, password, username);
 
         if (error) {
-            return console.log(error);
+            return setError(error);
         }
 
         // else successful
-        console.log(result);
+        console.log("RES:", result);
         return router.push("/dashboard");
     }
+const str = "stringer";
+    console.log("error: ", str?.message?.replace("Firebase: ", ""));
     return (
       <Layout>
       <div className="wrapper">
@@ -41,6 +44,7 @@ function SignUp() {
                     <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
                 </label>
                 <button type="submit">Sign up</button>
+                {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>}
             </form>
         </div>
       </div>
