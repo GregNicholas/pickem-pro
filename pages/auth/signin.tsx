@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import Layout from "../../components/Layout";
 
 function SignIn() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const router = useRouter()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const router = useRouter();
 
     const handleForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -14,7 +15,7 @@ function SignIn() {
         const { result, error } = await signIn(email, password);
 
         if (error) {
-            return console.log(error)
+            return setError(error);
         }
 
         // else successful
@@ -36,6 +37,7 @@ function SignIn() {
                         <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
                     </label>
                     <button type="submit">Sign in</button>
+                    {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>}
                 </form>
             </div>
         </div>
