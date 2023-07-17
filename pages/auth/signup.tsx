@@ -23,8 +23,7 @@ function SignUp() {
         console.log("RES:", result);
         return router.push("/dashboard");
     }
-const str = "stringer";
-    console.log("error: ", str?.message?.replace("Firebase: ", ""));
+
     return (
       <Layout>
       <div className="wrapper">
