@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import signUp from "../../firebase/auth/signup";
 import { useRouter } from 'next/navigation';
 import Layout from "../../components/Layout";
+import Link from "next/link";
 
 function SignUp() {
     const [username, setUsername] = useState('');
@@ -45,6 +46,7 @@ function SignUp() {
                 <button type="submit">Sign up</button>
                 {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>}
             </form>
+            <p>Already have an account? <Link href="/auth/signin">Sign in! -{">"}</Link></p>
         </div>
       </div>
       </Layout>
