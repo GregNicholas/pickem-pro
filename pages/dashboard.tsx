@@ -7,12 +7,19 @@ import Layout from "../components/Layout";
 function Dashboard() {
     const isLoading = useAuthProtection();
     const { user } = useAuthContext();
-    const [leagueName, setLeagueName] = useState('');
+    const [findLeagueName, setFindLeagueName] = useState('');
+    const [createLeagueName, setCreateLeagueName] = useState('');
 
     const handleFindLeague = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
+        setFindLeagueName('');
+    }
 
-        console.log("SEARCH: ", leagueName, "We need to check if this league exists and allow user to join")
+    const handleCreateLeague = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log("SEARCH: ", createLeagueName, "We need to check if this league exists, if not, create a new league");
+        setCreateLeagueName('');
     }
 
     // temp data for leagues
@@ -37,13 +44,24 @@ function Dashboard() {
 
             <h3>Find a league</h3>
             <form onSubmit={handleFindLeague} className="form">
-                    <label htmlFor="leagueName">
-                        <p>League Name</p>
-                        <input onChange={(e) => setLeagueName(e.target.value)} required name="leagueName" id="leagueName" placeholder="enter league name" />
-                    </label>
-                    <button type="submit">Search</button>
-                    {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
-                </form>
+                <label htmlFor="findLeagueName">
+                    <p>League Name</p>
+                    <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="enter league name" value={findLeagueName} />
+                </label>
+                <button type="submit">Search</button>
+                {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
+            </form>
+
+            <h3>Create a league</h3>
+            <p>Enter a name for your league here</p>
+            <form onSubmit={handleCreateLeague} className="form">
+                <label htmlFor="createLeagueName">
+                    <p>League Name</p>
+                    <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
+                </label>
+                <button type="submit">Search</button>
+                {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
+            </form>
 
             <button onClick={() => logOut()}>Sign Out</button>
         </Layout>
