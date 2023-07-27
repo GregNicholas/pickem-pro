@@ -29,10 +29,9 @@ function Dashboard() {
         return <div>checking user authentication</div>
     }
 
-    console.log(user.displayName)
     return (
         <Layout>
-            <h2>{user.displayName}'s Leagues</h2>
+            <h2>{user?.displayName}'s Leagues</h2>
             {myLeagues.length > 0 
             ? <ul>
                 {myLeagues.map((league) => {
