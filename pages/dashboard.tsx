@@ -4,6 +4,8 @@ import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
 import Layout from "../components/Layout";
 
+import data from "../teamdata.json";
+
 function Dashboard() {
     const isLoading = useAuthProtection();
     const { user } = useAuthContext();
@@ -16,6 +18,8 @@ function Dashboard() {
         setFindLeagueName('');
     }
 
+    console.log({ data })
+
     const handleCreateLeague = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("SEARCH: ", createLeagueName, "We need to check if this league exists, if not, create a new league");
@@ -23,7 +27,9 @@ function Dashboard() {
     }
 
     // temp data for leagues
-    const myLeagues = ["NFL Group", "Vikings"]
+    const myLeagues = data;
+    console.log("DATA TYPE: ", myLeagues.Vikings)
+    Object.keys(myLeagues).forEach(key => console.log(key, ": ", myLeagues[key]))
 
     if (isLoading) {
         return <div>checking user authentication</div>
@@ -32,9 +38,9 @@ function Dashboard() {
     return (
         <Layout>
             <h2>{user?.displayName}'s Leagues</h2>
-            {myLeagues.length > 0 
+            {Object.keys(myLeagues).length > 0 
             ? <ul>
-                {myLeagues.map((league) => {
+                {Object.keys(myLeagues).map((league) => {
                     return <li key={league} className="leagueListItem">{league}</li>
                 })}
             </ul> 
