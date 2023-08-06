@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuthProtection } from "../hooks/useAuthProtection";
 import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
@@ -14,6 +14,8 @@ function Dashboard() {
     const { user } = useAuthContext();
     const [findLeagueName, setFindLeagueName] = useState('');
     const [createLeagueName, setCreateLeagueName] = useState('');
+    const [myLeagues, setMyLeagues] = useState('');
+
 
     const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -45,6 +47,7 @@ function Dashboard() {
         } else {
             const newLeague = await setDoc(doc(db, "leagues", createLeagueName), {
                 name: createLeagueName,
+                memberIds: [user.uid],
                 members: [{ 
                             name: user.displayName, 
                             id: user.uid, 
@@ -76,7 +79,7 @@ function Dashboard() {
     }
 
     // temp data for leagues
-    const myLeagues = data;
+    // const myLeagues = data;
     // console.log("DATA TYPE: ", myLeagues.Vikings)
     // Object.keys(myLeagues).forEach(key => console.log(key, ": ", myLeagues[key]))
 
