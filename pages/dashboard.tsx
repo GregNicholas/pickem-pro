@@ -3,7 +3,7 @@ import { useAuthProtection } from "../hooks/useAuthProtection";
 import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
 import Layout from "../components/Layout";
-import { doc, setDoc, getDoc } from "firebase/firestore"; 
+import { doc, setDoc, getDoc, query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
 
 import data from "../teamdata.json";
@@ -14,8 +14,27 @@ function Dashboard() {
     const { user } = useAuthContext();
     const [findLeagueName, setFindLeagueName] = useState('');
     const [createLeagueName, setCreateLeagueName] = useState('');
-    const [myLeagues, setMyLeagues] = useState('');
+    const [myLeagues, setMyLeagues] = useState([]);
+    const [updatingLeague, setUpdatingLeague] = useState(0);
 
+    useEffect(() => {
+    // query for leagues that have current user in member id list and update state
+      const getMyLeagues = async () => {
+        const leaguesRef = collection(db, "leagues");
+        // find my owned leagues
+        // const q = query(leaguesRef, where("owner", "==", "mL5gupm506Uu7EQCG1Do8LAXVql1"));
+        const q = query(leaguesRef, where("memberIds", "array-contains", user.uid));
+        const myLeaguesData = await getDocs(q);
+        const myFoundLeagues = [];
+        myLeaguesData.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            myFoundLeagues.push(doc.data());
+        });
+        setMyLeagues(myFoundLeagues);
+      }  
+
+      getMyLeagues();
+    }, [updatingLeague]);
 
     const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -24,6 +43,7 @@ function Dashboard() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+        // we will display the league name and option to join
         console.log("Document data:", docSnap.data());
         } else {
         // docSnap.data() will be undefined in this case
@@ -32,21 +52,19 @@ function Dashboard() {
         setFindLeagueName('');
     }
 
-    // console.log({ data })
-
     const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("SEARCH: ", createLeagueName, "We need to check if this league exists, if not, create a new league");
         // Add a new document in collection "cities"
         const docRef = doc(db, "leagues", createLeagueName);
-        console.log("before setting docsnap")
         const docSnap = await getDoc(docRef);
-        console.log("before if statement")
         if (docSnap.exists()) {
+            // change to display message to user
             console.log("league already exists");
         } else {
-            const newLeague = await setDoc(doc(db, "leagues", createLeagueName), {
+            await setDoc(doc(db, "leagues", createLeagueName), {
                 name: createLeagueName,
+                owner: user.uid,
                 memberIds: [user.uid],
                 members: [{ 
                             name: user.displayName, 
@@ -73,15 +91,10 @@ function Dashboard() {
                             }
                          }],
             });
-            console.log("NEW LEAGUE++++++++++++++++", newLeague)
         }
         setCreateLeagueName('');
+        setUpdatingLeague(prev => prev + 1);
     }
-
-    // temp data for leagues
-    // const myLeagues = data;
-    // console.log("DATA TYPE: ", myLeagues.Vikings)
-    // Object.keys(myLeagues).forEach(key => console.log(key, ": ", myLeagues[key]))
 
     if (isLoading) {
         return <div>checking user authentication</div>
@@ -90,10 +103,10 @@ function Dashboard() {
     return (
         <Layout>
             <h2>{user?.displayName}'s Leagues</h2>
-            {Object.keys(myLeagues).length > 0 
+            {myLeagues.length > 0 
             ? <ul>
-                {Object.keys(myLeagues).map((league) => {
-                    return <li key={league} className="leagueListItem">{league}</li>
+                {myLeagues.map((league) => {
+                    return <li key={league.name} className="leagueListItem">{league.name}</li>
                 })}
             </ul> 
             : <p>No leagues yet</p>
