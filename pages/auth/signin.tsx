@@ -1,19 +1,19 @@
-import {FormEvent, useState} from "react";
+import { useState, useRef, FormEvent } from "react";
 import signIn from "../../firebase/auth/signin";
 import { useRouter } from 'next/navigation';
 import Layout from "../../components/Layout";
 import Link from "next/link";
 
 function SignIn() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const emailRef = useRef<HTMLInputElement>();
+    const passwordRef = useRef<HTMLInputElement>();
     const [error, setError] = useState(null);
     const router = useRouter();
 
     const handleForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        const { result, error } = await signIn(email, password);
+        const { result, error } = await signIn(emailRef.current.value, passwordRef.current.value);
 
         if (error) {
             return setError(error);
@@ -31,11 +31,11 @@ function SignIn() {
                 <form onSubmit={handleForm} className="form">
                     <label htmlFor="email">
                         <p>Email</p>
-                        <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
+                        <input required type="email" name="email" id="email" placeholder="example@mail.com" ref={emailRef} />
                     </label>
                     <label htmlFor="password">
                         <p>Password</p>
-                        <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
+                        <input required type="password" name="password" id="password" placeholder="password" ref={passwordRef} />
                     </label>
                     <button type="submit">Sign in</button>
                     {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>}

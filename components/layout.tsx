@@ -5,12 +5,11 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useAuthContext } from '../context/AuthContext';
 
-export const name = "Gregory";
 export const siteTitle = "Pickem Hub";
 
 export default function Layout({ children, home=false }) {
   const { user } = useAuthContext();
-  console.log({user})
+  const name = user?.displayName || "Welcome";
   return (
     <div className={styles.container}>
       <Head>
@@ -54,7 +53,7 @@ export default function Layout({ children, home=false }) {
               />
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
+              <Link href="/dashboard" className={utilStyles.colorInherit}>
                 {name}
               </Link>
             </h2>

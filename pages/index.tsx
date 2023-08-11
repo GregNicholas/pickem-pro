@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Layout, { siteTitle, name } from "../components/Layout";
+import Layout, { siteTitle } from "../components/Layout";
 import { useRouter } from 'next/router';
 import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({ allPostsData }) {
   const { user } = useAuthContext();
   const router = useRouter();
-console.log(user)
+
   useEffect(() => {
     if (user) {
       router.push("/dashboard");
@@ -33,7 +33,6 @@ console.log(user)
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello, I'm {name}. I'm a software engineer.</p>
         <p>(Let's play ball!)</p>
         <ul className={utilStyles.nav}>
           <li className={utilStyles.navItem}>
