@@ -53,7 +53,7 @@ function SignUp() {
                 </label>
                 <label htmlFor="email">
                     <p>Email</p>
-                    <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" ref={emailRef} />
+                    <input required type="email" name="email" id="email" placeholder="example@mail.com" ref={emailRef} />
                 </label>
                 <label htmlFor="password">
                     <p>Password</p>
