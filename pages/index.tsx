@@ -35,9 +35,6 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>(Let's play ball!)</p>
         <ul className={utilStyles.nav}>
-          <li className={utilStyles.navItem}>
-            <Link href="/posts/first-post">See our first post! -{">"}</Link>
-          </li>
           <li className={utilStyles.navItem}>          
             <Link href="/dashboard">Go to Dashboard -{">"}</Link>
           </li>
