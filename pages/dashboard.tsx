@@ -5,6 +5,7 @@ import logOut from "../firebase/auth/signout";
 import Layout from "../components/Layout";
 import { doc, setDoc, getDoc, query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
+import styles from "./Dashboard.module.css";
 
 // import data from "../teamdata.json";
 // import { create } from "domain";
@@ -98,6 +99,10 @@ function Dashboard() {
         setUpdatingLeague(prev => prev + 1);
     }
 
+    const showLeague = (leagueName: string) => {
+        console.log(leagueName);
+    }
+
     if (isLoading) {
         return <div>checking user authentication</div>
     }
@@ -108,7 +113,7 @@ function Dashboard() {
             {myLeagues.length > 0 
             ? <ul>
                 {myLeagues.map((league) => {
-                    return <li key={league.name} className="leagueListItem">{league.name}</li>
+                    return <li onClick={() => showLeague(league.name)} key={league.name} className={styles.leagueListItem}>{league.name}</li>
                 })}
             </ul> 
             : <p>No leagues yet</p>

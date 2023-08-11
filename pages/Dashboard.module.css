@@ -1,0 +1,8 @@
+.leagueListItem {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.leagueListItem:hover {
+  font-weight: bold;
+}
