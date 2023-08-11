@@ -6,8 +6,8 @@ import Layout from "../components/Layout";
 import { doc, setDoc, getDoc, query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
 
-import data from "../teamdata.json";
-import { create } from "domain";
+// import data from "../teamdata.json";
+// import { create } from "domain";
 
 function Dashboard() {
     const isLoading = useAuthProtection();
@@ -23,7 +23,7 @@ function Dashboard() {
         const leaguesRef = collection(db, "leagues");
         // find my owned leagues
         // const q = query(leaguesRef, where("owner", "==", "mL5gupm506Uu7EQCG1Do8LAXVql1"));
-        const q = query(leaguesRef, where("memberIds", "array-contains", user.uid));
+        const q = query(leaguesRef, where("memberIds", "array-contains", user?.uid));
         const myLeaguesData = await getDocs(q);
         const myFoundLeagues = [];
         myLeaguesData.forEach((doc) => {
@@ -33,7 +33,9 @@ function Dashboard() {
         setMyLeagues(myFoundLeagues);
       }  
 
-      getMyLeagues();
+      if (user) {
+        getMyLeagues();
+      }
     }, [updatingLeague]);
 
     const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {

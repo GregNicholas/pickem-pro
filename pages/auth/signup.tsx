@@ -1,23 +1,39 @@
-import { useState, FormEvent } from "react";
+import { useState, useRef, FormEvent } from "react";
 import signUp from "../../firebase/auth/signup";
 import { useRouter } from 'next/navigation';
 import Layout from "../../components/Layout";
 import Link from "next/link";
 
 function SignUp() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const usernameRef = useRef<HTMLInputElement>();
+    const emailRef = useRef<HTMLInputElement>();
+    const passwordRef = useRef<HTMLInputElement>();
+    const passwordConfirmationRef = useRef<HTMLInputElement>();
+    
     const [error, setError] = useState(null);
     const router = useRouter();
 
     const handleForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        const password = passwordRef.current?.value;
+        const passwordConfirm = passwordConfirmationRef.current?.value;
+        const email = emailRef.current?.value;
+        const username = usernameRef.current?.value;
+        
+        if (passwordConfirm && password) {
+            if(passwordConfirm !== password) {
+                return setError("Passwords do not match");
+            }
+        } else {
+            return setError("Enter password")
+        }
+        
         const { result, error } = await signUp(email, password, username);
 
         if (error) {
-            return setError(error);
+            console.log(typeof error, error)
+            return setError(error?.message?.replace("Firebase: ", ""));
         }
 
         // else successful
@@ -32,19 +48,23 @@ function SignUp() {
             <h1 className="mt-60 mb-30">Sign up</h1>
             <form onSubmit={handleForm} className="form">
                 <label htmlFor="username">
-                    <p>username</p>
-                    <input onChange={(e) => setUsername(e.target.value)} required type="username" name="username" id="username" placeholder="User Name" />
+                    <p>User Name</p>
+                    <input required type="text" name="username" id="username" placeholder="User Name" ref={usernameRef} />
                 </label>
                 <label htmlFor="email">
                     <p>Email</p>
-                    <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
+                    <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" ref={emailRef} />
                 </label>
                 <label htmlFor="password">
                     <p>Password</p>
-                    <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
+                    <input required type="password" name="password" id="password" placeholder="password" ref={passwordRef} />
+                </label>
+                <label htmlFor="confirmPassword">
+                    <p>Confirm Password</p>
+                    <input required type="password" name="password" id="password" placeholder="password" ref={passwordConfirmationRef} />
                 </label>
                 <button type="submit">Sign up</button>
-                {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>}
+                {error && <p className="errorMessage">{error}</p>}
             </form>
             <p>Already have an account? <Link href="/auth/signin">Sign in! -{">"}</Link></p>
         </div>
