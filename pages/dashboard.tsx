@@ -1,12 +1,13 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthProtection } from "../hooks/useAuthProtection";
 import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
 import Layout from "../components/Layout";
-import { doc, setDoc, getDoc, query, where, collection, getDocs } from "firebase/firestore"; 
+import { query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
 import styles from "./Dashboard.module.css";
 import FindLeague from "../components/FindLeague";
+import CreateLeague from "../components/CreateLeague";
 
 // import data from "../teamdata.json";
 // import { create } from "domain";
@@ -14,8 +15,6 @@ import FindLeague from "../components/FindLeague";
 function Dashboard() {
     const isLoading = useAuthProtection();
     const { user } = useAuthContext();
-    // const [findLeagueName, setFindLeagueName] = useState('');
-    const [createLeagueName, setCreateLeagueName] = useState('');
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
 
@@ -40,50 +39,6 @@ function Dashboard() {
       }
     }, [updatingLeague]);
 
-    const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log("SEARCH: ", createLeagueName, "We need to check if this league exists, if not, create a new league");
-        // Add a new document in collection "cities"
-        const docRef = doc(db, "leagues", createLeagueName);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            // change to display message to user
-            console.log("league already exists");
-        } else {
-            await setDoc(doc(db, "leagues", createLeagueName), {
-                name: createLeagueName,
-                owner: user.uid,
-                memberIds: [user.uid],
-                members: [{ 
-                            name: user.displayName, 
-                            id: user.uid, 
-                            picks: {
-                                week1: {},
-                                week2: {},
-                                week3: {},
-                                week4: {},
-                                week5: {},
-                                week6: {},
-                                week7: {},
-                                week8: {},
-                                week9: {},
-                                week10: {},
-                                week11: {},
-                                week12: {},
-                                week13: {},
-                                week14: {},
-                                week15: {},
-                                week16: {},
-                                week17: {},
-                                week18: {},
-                            }
-                         }],
-            });
-        }
-        setCreateLeagueName('');
-        setUpdatingLeague(prev => prev + 1);
-    }
-
     const showLeague = (leagueName: string) => {
         console.log(leagueName);
     }
@@ -105,17 +60,7 @@ function Dashboard() {
             }
 
             <FindLeague />
-
-            <h3>Create a league</h3>
-            <p>Enter a name for your league here</p>
-            <form onSubmit={handleCreateLeague} className="form">
-                <label htmlFor="createLeagueName">
-                    <p>League Name</p>
-                    <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
-                </label>
-                <button type="submit">Create</button>
-                {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
-            </form>
+            <CreateLeague setUpdatingLeague={setUpdatingLeague}/>
 
             <button onClick={() => logOut()}>Sign Out</button>
         </Layout>
