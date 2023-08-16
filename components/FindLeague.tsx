@@ -10,6 +10,7 @@ type FindLeagueProps = {
 
 export default function FindLeague() {
   const [findLeagueName, setFindLeagueName] = useState('');
+  const [error, setError] = useState('');
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -18,11 +19,12 @@ export default function FindLeague() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-    // we will display the league name and option to join
-    console.log("Document data:", docSnap.data());
+      // we will display the league name and option to join
+      console.log("Document data:", docSnap.data());
+      setError('');
     } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
+      // docSnap.data() will be undefined in this case
+      setError("League does not exist");
     }
     setFindLeagueName('');
 }
@@ -36,7 +38,7 @@ export default function FindLeague() {
             <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="enter league name" value={findLeagueName} />
         </label>
         <button type="submit">Search</button>
-        {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
+        {error && <p className="errorMessage">{error}</p>}
     </form>
     </>
   )
