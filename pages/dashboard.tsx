@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import { doc, setDoc, getDoc, query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
 import styles from "./Dashboard.module.css";
+import FindLeague from "../components/FindLeague";
 
 // import data from "../teamdata.json";
 // import { create } from "domain";
@@ -39,21 +40,21 @@ function Dashboard() {
       }
     }, [updatingLeague]);
 
-    const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
-        const docRef = doc(db, "leagues", findLeagueName);
-        const docSnap = await getDoc(docRef);
+    // const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
+    //     const docRef = doc(db, "leagues", findLeagueName);
+    //     const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-        // we will display the league name and option to join
-        console.log("Document data:", docSnap.data());
-        } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-        }
-        setFindLeagueName('');
-    }
+    //     if (docSnap.exists()) {
+    //     // we will display the league name and option to join
+    //     console.log("Document data:", docSnap.data());
+    //     } else {
+    //     // docSnap.data() will be undefined in this case
+    //     console.log("No such document!");
+    //     }
+    //     setFindLeagueName('');
+    // }
 
     const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -119,15 +120,7 @@ function Dashboard() {
             : <p>No leagues yet</p>
             }
 
-            <h3>Find a league</h3>
-            <form onSubmit={handleFindLeague} className="form">
-                <label htmlFor="findLeagueName">
-                    <p>League Name</p>
-                    <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="enter league name" value={findLeagueName} />
-                </label>
-                <button type="submit">Search</button>
-                {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
-            </form>
+            <FindLeague findLeagueName={findLeagueName} setFindLeagueName={setFindLeagueName}/>
 
             <h3>Create a league</h3>
             <p>Enter a name for your league here</p>
@@ -136,7 +129,7 @@ function Dashboard() {
                     <p>League Name</p>
                     <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
                 </label>
-                <button type="submit">Search</button>
+                <button type="submit">Create</button>
                 {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
             </form>
 
