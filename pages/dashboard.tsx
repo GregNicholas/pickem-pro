@@ -14,7 +14,7 @@ import FindLeague from "../components/FindLeague";
 function Dashboard() {
     const isLoading = useAuthProtection();
     const { user } = useAuthContext();
-    const [findLeagueName, setFindLeagueName] = useState('');
+    // const [findLeagueName, setFindLeagueName] = useState('');
     const [createLeagueName, setCreateLeagueName] = useState('');
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
@@ -39,22 +39,6 @@ function Dashboard() {
         getMyLeagues();
       }
     }, [updatingLeague]);
-
-    // const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
-    //     console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
-    //     const docRef = doc(db, "leagues", findLeagueName);
-    //     const docSnap = await getDoc(docRef);
-
-    //     if (docSnap.exists()) {
-    //     // we will display the league name and option to join
-    //     console.log("Document data:", docSnap.data());
-    //     } else {
-    //     // docSnap.data() will be undefined in this case
-    //     console.log("No such document!");
-    //     }
-    //     setFindLeagueName('');
-    // }
 
     const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -120,7 +104,7 @@ function Dashboard() {
             : <p>No leagues yet</p>
             }
 
-            <FindLeague findLeagueName={findLeagueName} setFindLeagueName={setFindLeagueName}/>
+            <FindLeague />
 
             <h3>Create a league</h3>
             <p>Enter a name for your league here</p>
