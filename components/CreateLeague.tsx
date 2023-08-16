@@ -9,7 +9,15 @@ type CreateLeagueProps = {
 
 export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
   const [createLeagueName, setCreateLeagueName] = useState('');
+  const [displayMessage, setDisplayMessage] = useState('');
   const { user } = useAuthContext();
+
+  const showMessage = (message: string) => {
+    setDisplayMessage(message);
+    setTimeout(() => {
+      setDisplayMessage('');
+    }, 5000);
+  }
 
   const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,7 +27,7 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         // change to display message to user
-        console.log("league already exists");
+        showMessage("league already exists");
     } else {
         await setDoc(doc(db, "leagues", createLeagueName), {
             name: createLeagueName,
@@ -50,6 +58,7 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
                         }
                      }],
         });
+        showMessage(`Created League: ${createLeagueName}`);
     }
     setCreateLeagueName('');
     setUpdatingLeague(prev => prev + 1);
@@ -65,7 +74,7 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
             <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
         </label>
         <button type="submit">Create</button>
-        {/* {error && <p className="errorMessage">{error?.message?.replace("Firebase: ", "")}</p>} */}
+        {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
     </>
   )
