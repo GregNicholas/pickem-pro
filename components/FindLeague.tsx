@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 
 type FindLeagueProps = {
@@ -8,7 +8,8 @@ type FindLeagueProps = {
 }
 
 
-export default function FindLeague({findLeagueName, setFindLeagueName}: FindLeagueProps) {
+export default function FindLeague() {
+  const [findLeagueName, setFindLeagueName] = useState('');
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
