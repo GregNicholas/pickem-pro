@@ -1,7 +1,13 @@
+import { Dispatch, SetStateAction } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 
-const Modal = ({ setIsOpen }) => {
+type ModalProps = {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  message: string;
+}
+
+const Modal = ({ setIsOpen, message }: ModalProps) => {
   return (
     <>
     <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -14,7 +20,7 @@ const Modal = ({ setIsOpen }) => {
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
           <div className={styles.modalContent}>
-            View "dummy" league?
+            {message}
           </div>
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>

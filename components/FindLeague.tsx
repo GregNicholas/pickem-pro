@@ -11,7 +11,8 @@ type FindLeagueProps = {
 export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [findLeagueName, setFindLeagueName] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
-  console.log("from Findleague", myLeagues.length);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,7 +33,8 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         showMessage(`You are already in ${findLeagueName}`);
       } else {
         console.log("Document data:", docSnap.data().owner);
-        // setDisplayMessage('');
+        setModalMessage(`open ${docSnap.data().name}?`);
+        setIsModalOpen(true);
       }
     } else {
       // docSnap.data() will be undefined in this case
@@ -43,7 +45,6 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
 
   return (
     <>
-    <Modal />
     <h3>Find a league</h3>
     <form onSubmit={handleFindLeague} className="form">
         <label htmlFor="findLeagueName">
@@ -53,6 +54,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         <button type="submit">Search</button>
         {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
+    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage}/>}
     </>
   )
 }
