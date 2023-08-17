@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Layout, { siteTitle } from "../components/Layout";
+import Layout, { siteTitle } from "../components/Layout/Layout";
 import { useRouter } from 'next/router';
 import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
