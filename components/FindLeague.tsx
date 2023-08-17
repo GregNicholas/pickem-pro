@@ -3,28 +3,39 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 
 type FindLeagueProps = {
-  findLeagueName: string;
-  setFindLeagueName: Dispatch<SetStateAction<string>>;
+  myLeagues: string[]
 }
 
 
-export default function FindLeague() {
+export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [findLeagueName, setFindLeagueName] = useState('');
-  const [error, setError] = useState('');
+  const [displayMessage, setDisplayMessage] = useState('');
+  console.log("from Findleague", myLeagues.length);
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
     const docRef = doc(db, "leagues", findLeagueName);
     const docSnap = await getDoc(docRef);
+    
+    const showMessage = (message: string) => {
+      setDisplayMessage(message);
+      setTimeout(() => {
+        setDisplayMessage('');
+      }, 5000);
+    }
 
     if (docSnap.exists()) {
       // we will display the league name and option to join
-      console.log("Document data:", docSnap.data());
-      setError('');
+      if (myLeagues.includes(findLeagueName)) {
+        showMessage(`You are already in ${findLeagueName}`);
+      } else {
+        console.log("Document data:", docSnap.data().owner);
+        // setDisplayMessage('');
+      }
     } else {
       // docSnap.data() will be undefined in this case
-      setError("League does not exist");
+      showMessage("League does not exist");
     }
     setFindLeagueName('');
 }
@@ -38,7 +49,7 @@ export default function FindLeague() {
             <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="enter league name" value={findLeagueName} />
         </label>
         <button type="submit">Search</button>
-        {error && <p className="errorMessage">{error}</p>}
+        {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
     </>
   )

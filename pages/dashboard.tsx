@@ -59,7 +59,7 @@ function Dashboard() {
             : <p>No leagues yet</p>
             }
 
-            <FindLeague />
+            <FindLeague myLeagues={myLeagues.map(league => league.name)}/>
             <CreateLeague setUpdatingLeague={setUpdatingLeague}/>
 
             <button onClick={() => logOut()}>Sign Out</button>
