@@ -1,7 +1,7 @@
 import { useState, useRef, FormEvent } from "react";
 import signUp from "../../firebase/auth/signup";
 import { useRouter } from 'next/navigation';
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import Link from "next/link";
 
 function SignUp() {

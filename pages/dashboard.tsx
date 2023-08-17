@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthProtection } from "../hooks/useAuthProtection";
 import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import { query, where, collection, getDocs } from "firebase/firestore"; 
 import { db } from "../firebase/config";
 import styles from "./Dashboard.module.css";

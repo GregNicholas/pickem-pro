@@ -1,6 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
+import Modal from "./Modal/Modal";
 
 type FindLeagueProps = {
   myLeagues: string[]
@@ -42,6 +43,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
 
   return (
     <>
+    <Modal />
     <h3>Find a league</h3>
     <form onSubmit={handleFindLeague} className="form">
         <label htmlFor="findLeagueName">
