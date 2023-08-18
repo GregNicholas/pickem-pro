@@ -1,13 +1,22 @@
 import { Dispatch, SetStateAction } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
+import { useRouter } from "next/router";
 
 type ModalProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   message: string;
+  name: string;
 }
 
-const Modal = ({ setIsOpen, message }: ModalProps) => {
+const Modal = ({ setIsOpen, message, name }: ModalProps) => {
+  const router = useRouter();
+
+  const goToLeaguePage = () => {
+    console.log(router.push(`leagues/${name}`));
+    setIsOpen(false)
+  }
+
   return (
     <>
     <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -24,8 +33,8 @@ const Modal = ({ setIsOpen, message }: ModalProps) => {
           </div>
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>
-              <button className={styles.deleteBtn} onClick={() => setIsOpen(false)}>
-                Join
+              <button className={styles.deleteBtn} onClick={goToLeaguePage}>
+                Go to League page
               </button>
               <button
                 className={styles.cancelBtn}
