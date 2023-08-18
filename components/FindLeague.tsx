@@ -40,7 +40,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
       // docSnap.data() will be undefined in this case
       showMessage("League does not exist");
     }
-    setFindLeagueName('');
+    // setFindLeagueName('');
 }
 
   return (
@@ -54,7 +54,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         <button type="submit">Search</button>
         {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
-    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage}/>}
+    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={findLeagueName}/>}
     </>
   )
 }
