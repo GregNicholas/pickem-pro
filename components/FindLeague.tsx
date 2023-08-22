@@ -2,6 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 import Modal from "./Modal/Modal";
+import { League } from "../types";
 
 type FindLeagueProps = {
   myLeagues: string[]
@@ -13,6 +14,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [displayMessage, setDisplayMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,9 +32,11 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
     if (docSnap.exists()) {
       // we will display the league name and option to join
       if (myLeagues.includes(findLeagueName)) {
+        console.log(docSnap.data());
+        setSelectedLeague(docSnap.data());
         showMessage(`You are already in ${findLeagueName}`);
       } else {
-        console.log("Document data:", docSnap.data().owner);
+        setSelectedLeague(docSnap.data());
         setModalMessage(`open ${docSnap.data().name}?`);
         setIsModalOpen(true);
       }
@@ -54,7 +58,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         <button type="submit">Search</button>
         {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
-    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={findLeagueName}/>}
+    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={selectedLeague.name}/>}
     </>
   )
 }
