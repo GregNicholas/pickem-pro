@@ -6,7 +6,7 @@ interface LeagueContextType {
   updateSelectedLeague: (leagueName: string) => void;
 }
 
-const LeagueContext = createContext<LeagueContextType | null>(null);
+const LeagueContext = createContext<LeagueContextType | undefined>(undefined);
 
 export const useLeagueContext = () => {
   const context = useContext(LeagueContext);
