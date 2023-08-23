@@ -1,10 +1,10 @@
 import { useState, createContext, useContext } from "react";
 import { League } from "../types";
+import { DocumentData } from "firebase/firestore";
 
 interface LeagueContextType {
-  // selectedLeague: string | null;
-  selectedLeague: League | null;
-  updateSelectedLeague: (leagueData: League) => void;
+  selectedLeague: League | DocumentData | null;
+  updateSelectedLeague: (leagueData: League | DocumentData) => void;
 }
 
 const LeagueContext = createContext<LeagueContextType | undefined>(undefined);
@@ -18,9 +18,9 @@ export const useLeagueContext = () => {
 };
 
 export const LeagueProvider = ({ children }) => {
-  const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<League | DocumentData | null>(null);
 
-  const updateSelectedLeague = (leagueData: League) => {
+  const updateSelectedLeague = (leagueData: League | DocumentData) => {
     setSelectedLeague(leagueData);
   }
 
