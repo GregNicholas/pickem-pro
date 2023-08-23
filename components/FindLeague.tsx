@@ -9,14 +9,20 @@ type FindLeagueProps = {
   myLeagues: string[]
 }
 
-const selectedLeague = useLeagueContext();
+// console.log("useLeagueContext####: ", useLeagueContext())
+
+// const { selectedLeague, updateSelectedLeague } = useLeagueContext();
+
+    // console.log(selectedLeague);
 
 export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [findLeagueName, setFindLeagueName] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [selectedLeague, setSelectedLeague] = useState<DocumentData | null>(null);
+  const [currentLeague, setCurrentLeague] = useState<DocumentData | null>(null);
+
+  const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
   console.log("From league context: ", selectedLeague);
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
@@ -36,10 +42,10 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
       // we will display the league name and option to join
       if (myLeagues.includes(findLeagueName)) {
         console.log(docSnap.data());
-        setSelectedLeague(docSnap.data());
+        setCurrentLeague(docSnap.data());
         showMessage(`You are already in ${findLeagueName}`);
       } else {
-        setSelectedLeague(docSnap.data());
+        setCurrentLeague(docSnap.data());
         setModalMessage(`open ${docSnap.data().name}?`);
         setIsModalOpen(true);
       }
@@ -61,7 +67,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         <button type="submit">Search</button>
         {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
-    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={selectedLeague.name}/>}
+    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={currentLeague.name}/>}
     </>
   )
 }
