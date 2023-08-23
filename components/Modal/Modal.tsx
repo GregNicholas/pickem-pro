@@ -13,7 +13,7 @@ const Modal = ({ setIsOpen, message, name }: ModalProps) => {
   const router = useRouter();
 
   const goToLeaguePage = () => {
-    console.log(router.push(`leagues/${name}`));
+    router.push(`leagues/${name}`);
     setIsOpen(false)
   }
 

@@ -1,42 +1,36 @@
-// THIS FILE IS AN EXAMPLE
+import { useState, createContext, useContext } from "react";
+import { League } from "../types";
 
-import { useState, useEffect, createContext, useContext } from "react";
-// import { onAuthStateChanged, getAuth, User } from "firebase/auth";
-import firebase_app from "../firebase/config";
+interface LeagueContextType {
+  selectedLeague: string | null;
+  updateSelectedLeague: (leagueName: string) => void;
+}
 
-// const auth = getAuth(firebase_app);
+const LeagueContext = createContext<LeagueContextType | null>(null);
 
-const LeagueContext =
-  createContext<{ user: User | null }>({ user: null });
+export const useLeagueContext = () => {
+  const context = useContext(LeagueContext);
+  if (!context) {
+    throw new Error('useLeagueContext must be used within a LeagueProvider');
+  }
+  return context;
+};
 
-export const useLeagueContext = () => useContext(LeagueContext);
+export const LeagueProvider = ({ children }) => {
+  const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
 
-export const LeagueContextProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const updateSelectedLeague = (leagueName: string) => {
+    setSelectedLeague(leagueName);
+  }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const value = {
-    user
-  };
+  const value: LeagueContextType = {
+    selectedLeague,
+    updateSelectedLeague,
+  }
 
   return (
     <LeagueContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </LeagueContext.Provider>
   );
 };
-
-export default LeagueContext;
