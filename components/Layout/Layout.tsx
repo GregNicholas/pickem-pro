@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./Layout.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import { useAuthContext } from '../../context/AuthContext';
 
 export const siteTitle = "Pickem Hub";
@@ -10,6 +11,9 @@ export const siteTitle = "Pickem Hub";
 export default function Layout({ children, home=false }) {
   const { user } = useAuthContext();
   const name = user?.displayName || "Welcome";
+
+  const router = useRouter();
+  console.log("LAYOUT ROUTING: ", router.pathname, router.query, router.asPath);
   return (
     <div className={styles.container}>
       <Head>
@@ -61,9 +65,13 @@ export default function Layout({ children, home=false }) {
         )}
       </header>
       <main>{children}</main>
-      {!home && (
+      {(!home && !router.pathname.includes("dashboard")) && (
         <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
+          {
+            router.pathname.includes("leagues") 
+            ? <Link href="/dashboard">← Back to dashboard</Link> 
+            : <Link href="/">← Back to home</Link> 
+          }
         </div>
       )}
     </div>
