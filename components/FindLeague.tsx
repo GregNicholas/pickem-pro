@@ -3,28 +3,21 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 import Modal from "./Modal/Modal";
 import { League } from "../types";
-import { useLeagueContext } from "../context/LeagueContext";
+// import { useLeagueContext } from "../context/LeagueContext";
 
 type FindLeagueProps = {
   myLeagues: string[]
 }
-
-// console.log("useLeagueContext####: ", useLeagueContext())
-
-// const { selectedLeague, updateSelectedLeague } = useLeagueContext();
-
-    // console.log(selectedLeague);
 
 export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [findLeagueName, setFindLeagueName] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [currentLeague, setCurrentLeague] = useState<DocumentData | null>(null);
+  const [currentLeague, setCurrentLeague] = useState<any | null>(null);
 
-  const { selectedLeague, updateSelectedLeague } = useLeagueContext();
+  // const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
-  console.log("From league context: ", selectedLeague);
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
@@ -67,7 +60,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         <button type="submit">Search</button>
         {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
-    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} name={currentLeague.name}/>}
+    {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} leagueData={currentLeague}/>}
     </>
   )
 }

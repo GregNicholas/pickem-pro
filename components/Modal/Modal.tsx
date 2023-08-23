@@ -2,18 +2,22 @@ import { Dispatch, SetStateAction } from "react";
 import styles from "./Modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { useLeagueContext } from "../../context/LeagueContext";
+import { League } from "../../types";
 
 type ModalProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   message: string;
-  name: string;
+  leagueData: League;
 }
 
-const Modal = ({ setIsOpen, message, name }: ModalProps) => {
+const Modal = ({ setIsOpen, message, leagueData }: ModalProps) => {
   const router = useRouter();
+  const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
   const goToLeaguePage = () => {
-    router.push(`leagues/${name}`);
+    router.push(`leagues/${leagueData.name}`);
+    updateSelectedLeague(leagueData); 
     setIsOpen(false)
   }
 

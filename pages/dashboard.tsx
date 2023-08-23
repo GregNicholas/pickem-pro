@@ -8,7 +8,7 @@ import { db } from "../firebase/config";
 import styles from "./Dashboard.module.css";
 import FindLeague from "../components/FindLeague";
 import CreateLeague from "../components/CreateLeague";
-import { useLeagueContext } from "../context/LeagueContext";
+// import { useLeagueContext } from "../context/LeagueContext";
 
 // import data from "../teamdata.json";
 // import { create } from "domain";
@@ -19,7 +19,7 @@ function Dashboard() {
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
 
-    const { selectedLeague, updateSelectedLeague } = useLeagueContext();
+    // const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
     useEffect(() => {
     // query for leagues that have current user in member id list and update state

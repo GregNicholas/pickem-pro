@@ -2,8 +2,9 @@ import { useState, createContext, useContext } from "react";
 import { League } from "../types";
 
 interface LeagueContextType {
-  selectedLeague: string | null;
-  updateSelectedLeague: (leagueName: string) => void;
+  // selectedLeague: string | null;
+  selectedLeague: League | null;
+  updateSelectedLeague: (leagueData: League) => void;
 }
 
 const LeagueContext = createContext<LeagueContextType | undefined>(undefined);
@@ -17,10 +18,10 @@ export const useLeagueContext = () => {
 };
 
 export const LeagueProvider = ({ children }) => {
-  const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
 
-  const updateSelectedLeague = (leagueName: string) => {
-    setSelectedLeague(leagueName);
+  const updateSelectedLeague = (leagueData: League) => {
+    setSelectedLeague(leagueData);
   }
 
   const value: LeagueContextType = {
