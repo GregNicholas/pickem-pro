@@ -1,0 +1,29 @@
+.pageTitle {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.subHeader {
+  font-size: 2rem;
+}
+
+.joinButton {
+  color: navy;
+  cursor: pointer;
+  padding: 0.5rem 1.4rem;
+  border-radius: 10px;
+  border: none;
+  background-color: aqua;
+  box-shadow: 1px 3px black;
+}
+
+.joinButton:hover {
+  font-weight: bold;
+  background-color: royalblue;
+  color: black;
+}
+
+.joinButton:active {
+  transform: translateX(1px) translateY(3px);
+  box-shadow: none;
+}
