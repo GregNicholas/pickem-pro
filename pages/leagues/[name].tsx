@@ -89,6 +89,28 @@ export default function League() {
               return <li key={member.id}>{member.name}</li>
             })}
           </ul>
+          <h2 className={styles.subHeader}>Make Picks</h2>
+          <label htmlFor="week-select">Choose a week:</label>
+          <select name="weeks" id="week-select">
+            <option value="week1">Week 1</option>
+            <option value="week2">Week 2</option>
+            <option value="week3">Week 3</option>
+            <option value="week4">Week 4</option>
+            <option value="week5">Week 5</option>
+            <option value="week6">Week 6</option>
+            <option value="week7">Week 7</option>
+            <option value="week8">Week 8</option>
+            <option value="week9">Week 9</option>
+            <option value="week10">Week 10</option>
+            <option value="week11">Week 11</option>
+            <option value="week12">Week 12</option>
+            <option value="week13">Week 13</option>
+            <option value="week14">Week 14</option>
+            <option value="week15">Week 15</option>
+            <option value="week16">Week 16</option>
+            <option value="week17">Week 17</option>
+            <option value="week18">Week 18</option>
+          </select>
         </>
       }
     </Layout>
