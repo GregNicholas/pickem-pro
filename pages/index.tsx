@@ -8,24 +8,31 @@ import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from '../lib/posts';
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = await getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
+// export const getStaticProps: GetStaticProps = async () => {
+//   const allPostsData = await getSortedPostsData();
+//   return {
+//     props: {
+//       allPostsData,
+//     },
+//   };
+// }
 
 export default function Home({ allPostsData }) {
+  const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
     if (user) {
       router.push("/dashboard");
-    } 
+    } else {
+      setIsLoading(false);
+    }
   }, [user]);
+
+  if (isLoading) {
+    return <div>checking user authentication</div>
+  }
 
   return (
     <Layout home>

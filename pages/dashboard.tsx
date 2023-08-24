@@ -8,6 +8,7 @@ import { db } from "../firebase/config";
 import styles from "./Dashboard.module.css";
 import FindLeague from "../components/FindLeague";
 import CreateLeague from "../components/CreateLeague";
+import Link from "next/link";
 
 function Dashboard() {
     const isLoading = useAuthProtection();
@@ -22,7 +23,6 @@ function Dashboard() {
       const getMyLeagues = async () => {
         const leaguesRef = collection(db, "leagues");
         // find my owned leagues
-        // const q = query(leaguesRef, where("owner", "==", "mL5gupm506Uu7EQCG1Do8LAXVql1"));
         const q = query(leaguesRef, where("memberIds", "array-contains", user?.uid));
         const myLeaguesData = await getDocs(q);
         const myFoundLeagues = [];
@@ -52,7 +52,7 @@ function Dashboard() {
             {myLeagues.length > 0 
             ? <ul>
                 {myLeagues.map((league) => {
-                    return <li onClick={() => showLeague(league.name)} key={league.name} className={styles.leagueListItem}>{league.name}</li>
+                    return <li onClick={() => showLeague(league.name)} key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>{league.name}</Link></li>
                 })}
             </ul> 
             : <p>No leagues yet</p>

@@ -13,11 +13,9 @@ type ModalProps = {
 
 const Modal = ({ setIsOpen, message, leagueData }: ModalProps) => {
   const router = useRouter();
-  const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
   const goToLeaguePage = () => {
     router.push(`leagues/${leagueData.name}`);
-    updateSelectedLeague(leagueData); 
     setIsOpen(false)
   }
 
@@ -26,9 +24,6 @@ const Modal = ({ setIsOpen, message, leagueData }: ModalProps) => {
     <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
     <div className={styles.centered}>
         <div className={styles.modal}>
-          {/* <div className={styles.modalHeader}>
-            <h5 className={styles.heading}>Dialog</h5>
-          </div> */}
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
