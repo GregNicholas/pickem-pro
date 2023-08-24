@@ -16,8 +16,6 @@ function Dashboard() {
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
 
-    // const { selectedLeague, updateSelectedLeague } = useLeagueContext();
-
     useEffect(() => {
     // query for leagues that have current user in member id list and update state
       const getMyLeagues = async () => {
@@ -38,10 +36,6 @@ function Dashboard() {
       }
     }, [updatingLeague]);
 
-    const showLeague = (leagueName: string) => {
-        console.log(leagueName);
-    }
-
     if (isLoading) {
         return <div>checking user authentication</div>
     }
@@ -52,7 +46,7 @@ function Dashboard() {
             {myLeagues.length > 0 
             ? <ul>
                 {myLeagues.map((league) => {
-                    return <li onClick={() => showLeague(league.name)} key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>{league.name}</Link></li>
+                    return <li key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>{league.name}</Link></li>
                 })}
             </ul> 
             : <p>No leagues yet</p>
