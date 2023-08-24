@@ -1,19 +1,115 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useRouter } from "next/router";
 import { useLeagueContext } from "../../context/LeagueContext";
 import { useAuthContext } from "../../context/AuthContext";
-import { DocumentData, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { useFetchData } from "../../hooks/useFetchData";
+import { DocumentData, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
+
+// const week2 = {
+//   game1: {
+//     home: "PHI",
+//     away: "MIN",
+//     winner: ""
+//   },
+//   game2: {
+//     home: "CIN",
+//     away: "BAL",
+//     winner: ""
+//   },
+//   game3: {
+//     home: "DET",
+//     away: "SEA",
+//     winner: ""
+//   },
+//   game4: {
+//     home: "HOU",
+//     away: "IND",
+//     winner: ""
+//   },
+//   game5: {
+//     home: "TB",
+//     away: "CHI",
+//     winner: ""
+//   },
+//   game6: {
+//     home: "JAX",
+//     away: "KC",
+//     winner: ""
+//   },
+//   game7: {
+//     home: "ATL",
+//     away: "GB",
+//     winner: ""
+//   },
+//   game8: {
+//     home: "BUF",
+//     away: "LV",
+//     winner: ""
+//   },
+//   game9: {
+//     home: "TEN",
+//     away: "LAC",
+//     winner: ""
+//   },
+//   game10: {
+//     home: "LAR",
+//     away: "SF",
+//     winner: ""
+//   },
+//   game11: {
+//     home: "ARI",
+//     away: "NYG",
+//     winner: ""
+//   },
+//   game12: {
+//     home: "DAL",
+//     away: "NYJ",
+//     winner: ""
+//   },
+//   game13: {
+//     home: "DEN",
+//     away: "WAS",
+//     winner: ""
+//   },
+//   game14: {
+//     home: "NE",
+//     away: "MIA",
+//     winner: ""
+//   },
+//   game15: {
+//     home: "CAR",
+//     away: "NO",
+//     winner: ""
+//   },
+//   game16: {
+//     home: "PIT",
+//     away: "CLE",
+//     winner: ""
+//   }
+// }
 
 export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [leagueData, setLeagueData] = useState<DocumentData | null>(null);
+  const [pickWeek, setPickWeek] = useState("");
+  const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
   const { updateSelectedLeague } = useLeagueContext();
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    getMatchups();
+  }, []);
+  
+// example for how to use weekly matchups data
+const weeks = matchups ? Object.keys(matchups) : [];
+weeks.forEach((week) => {
+  console.log(week, ": ", matchups[week]);
+});
 
   if (!user) {
     router.push('/');
@@ -74,6 +170,10 @@ export default function League() {
     getLeagueInfo(router.query?.name as string);
   }
 
+  // const addMatchups = async () => {
+  //   await setDoc(doc(db, "matchups", "week2"), week2);
+  // }
+
   return (
     <Layout>
       {
@@ -91,28 +191,19 @@ export default function League() {
           </ul>
           <h2 className={styles.subHeader}>Make Picks</h2>
           <label htmlFor="week-select">Choose a week:</label>
-          <select name="weeks" id="week-select">
-            <option value="week1">Week 1</option>
-            <option value="week2">Week 2</option>
-            <option value="week3">Week 3</option>
-            <option value="week4">Week 4</option>
-            <option value="week5">Week 5</option>
-            <option value="week6">Week 6</option>
-            <option value="week7">Week 7</option>
-            <option value="week8">Week 8</option>
-            <option value="week9">Week 9</option>
-            <option value="week10">Week 10</option>
-            <option value="week11">Week 11</option>
-            <option value="week12">Week 12</option>
-            <option value="week13">Week 13</option>
-            <option value="week14">Week 14</option>
-            <option value="week15">Week 15</option>
-            <option value="week16">Week 16</option>
-            <option value="week17">Week 17</option>
-            <option value="week18">Week 18</option>
+          <select name="weeks" id="week-select" value={pickWeek} onChange={(e) => setPickWeek(e.target.value)}>
+            <option value="">select week</option>
+            {weeks.map((week) => (
+              <option key={week} value={week}>{week}</option>
+            ))}
           </select>
+
+          {/* <button onClick={addMatchups}>add matchups</button> */}
         </>
       }
     </Layout>
   )
 }
+
+
+
