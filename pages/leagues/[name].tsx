@@ -7,6 +7,7 @@ import { useFetchData } from "../../hooks/useFetchData";
 import { DocumentData, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
+import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
 
 // const week2 = {
 //   game1: {
@@ -96,6 +97,7 @@ export default function League() {
   const [error, setError] = useState("");
   const [leagueData, setLeagueData] = useState<DocumentData | null>(null);
   const [pickWeek, setPickWeek] = useState("");
+  const [displaySection, setDisplaySection] = useState("mypicks");
   const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
   const { updateSelectedLeague } = useLeagueContext();
@@ -182,6 +184,9 @@ weeks.forEach((week) => {
         :
         <>
           <h1 className={styles.pageTitle}>{leagueData?.name} page</h1>
+          <section className="leagueDisplay">
+            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
+          </section>
           {!isMember && <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>}
           <h2 className={styles.subHeader}>Members</h2>
           <ul id="members">
@@ -189,7 +194,7 @@ weeks.forEach((week) => {
               return <li key={member.id}>{member.name}</li>
             })}
           </ul>
-          <h2 className={styles.subHeader}>Make Picks</h2>
+          <h2 className={styles.subHeader}>My Picks</h2>
           <label htmlFor="week-select">Choose a week:</label>
           <select name="weeks" id="week-select" value={pickWeek} onChange={(e) => setPickWeek(e.target.value)}>
             <option value="">select week</option>
@@ -197,7 +202,7 @@ weeks.forEach((week) => {
               <option key={week} value={week}>{week}</option>
             ))}
           </select>
-
+          <h2 className={styles.subHeader}>League Stats</h2>
           {/* <button onClick={addMatchups}>add matchups</button> */}
         </>
       }
