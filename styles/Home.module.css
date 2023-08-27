@@ -30,7 +30,6 @@
 }
 
 .title:hover {
-  color: magenta;
   scale: 1.1;
   transform: translate(10px, -20px);
 }

@@ -107,11 +107,12 @@ export default function League() {
     getMatchups();
   }, []);
   
+  const weeks = matchups ? Object.keys(matchups) : [];
+  
 // example for how to use weekly matchups data
-const weeks = matchups ? Object.keys(matchups) : [];
-weeks.forEach((week) => {
-  console.log(week, ": ", matchups[week]);
-});
+// weeks.forEach((week) => {
+//   console.log(week, ": ", matchups[week]);
+// });
 
   if (!user) {
     router.push('/');
@@ -184,7 +185,7 @@ weeks.forEach((week) => {
         :
         <>
           <h1 className={styles.pageTitle}>{leagueData?.name} page</h1>
-          <section className="leagueDisplay">
+          <section className={styles.leagueDisplay}>
             <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             {!isMember && <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>}
 

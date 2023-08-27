@@ -27,3 +27,9 @@
   transform: translateX(1px) translateY(3px);
   box-shadow: none;
 }
+
+.leagueDisplay {
+  background: silver;
+  margin: 1rem 0;
+  padding: 0.5rem 0.5rem;
+}

@@ -36,10 +36,9 @@ export default function Layout({ children, home=false }) {
           <>
             <Image
               priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
+              src="/images/pickem-logo.png"
+              height={104}
+              width={483}
               alt={name}
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
@@ -49,10 +48,9 @@ export default function Layout({ children, home=false }) {
             <Link href="/">
               <Image
                 priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
+                src="/images/pickem-logo.png"
+                height={104}
+                width={483}
                 alt=""
               />
             </Link>
@@ -64,7 +62,7 @@ export default function Layout({ children, home=false }) {
           </>
         )}
       </header>
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       {(!home && !router.pathname.includes("dashboard")) && (
         <div className={styles.backToHome}>
           {
