@@ -13,7 +13,7 @@ export default function Layout({ children, home=false }) {
   const name = user?.displayName || "Welcome";
 
   const router = useRouter();
-  console.log("LAYOUT ROUTING: ", router.pathname, router.query, router.asPath);
+  // console.log("LAYOUT ROUTING: ", router.pathname, router.query, router.asPath);
   return (
     <div className={styles.container}>
       <Head>
