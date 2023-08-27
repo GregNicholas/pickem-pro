@@ -8,6 +8,7 @@ import { DocumentData, arrayUnion, doc, getDoc, setDoc, updateDoc } from "fireba
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
 import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
+import LeagueMembers from "../../components/LeagueMembers";
 
 // const week2 = {
 //   game1: {
@@ -186,19 +187,13 @@ export default function League() {
         <>
           <h1 className={styles.pageTitle}>{leagueData?.name} page</h1>
           <section className={styles.leagueDisplay}>
-            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
-            {!isMember && <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>}
-
-            {displaySection === "members" && <>
-              <h2 className={styles.subHeader}>Members</h2>
-              <ul id="members">
-                {leagueData?.members.map((member) => {
-                  return <li key={member.id}>{member.name}</li>
-                })}
-              </ul>
-            </>}
-
+            {!isMember ? <>
+              <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>
+              <LeagueMembers leagueData={leagueData} />
+            </>
+            : <>
             {displaySection === "mypicks" && <>
+              <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
               <h2 className={styles.subHeader}>My Picks</h2>
               <label htmlFor="week-select">Choose a week:</label>
               <select name="weeks" id="week-select" value={pickWeek} onChange={(e) => setPickWeek(e.target.value)}>
@@ -214,6 +209,10 @@ export default function League() {
             </>}
 
             {/* <button onClick={addMatchups}>add matchups</button> */}
+            </>
+            }
+
+            {displaySection === "members" && <LeagueMembers leagueData={leagueData} />}
           </section>
         </>
       }
