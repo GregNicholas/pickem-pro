@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import Layout from "../../components/Layout/Layout";
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router";
 import { useLeagueContext } from "../../context/LeagueContext";
 import { useAuthContext } from "../../context/AuthContext";
@@ -7,88 +6,90 @@ import { useFetchData } from "../../hooks/useFetchData";
 import { DocumentData, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
+import Layout from "../../components/Layout/Layout";
 import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
 import LeagueMembers from "../../components/LeagueMembers";
+import MyPicks from "../../components/MyPicks/MyPicks";
 
-// const week2 = {
-//   game1: {
-//     home: "PHI",
-//     away: "MIN",
+// const week01 = {
+//   game01: {
+//     home: "KC",
+//     away: "DET",
 //     winner: ""
 //   },
-//   game2: {
-//     home: "CIN",
-//     away: "BAL",
+//   game02: {
+//     home: "CLE",
+//     away: "CIN",
 //     winner: ""
 //   },
-//   game3: {
-//     home: "DET",
-//     away: "SEA",
+//   game03: {
+//     home: "BAL",
+//     away: "HOU",
 //     winner: ""
 //   },
-//   game4: {
-//     home: "HOU",
-//     away: "IND",
+//   game04: {
+//     home: "MIN",
+//     away: "TB",
 //     winner: ""
 //   },
-//   game5: {
-//     home: "TB",
-//     away: "CHI",
-//     winner: ""
-//   },
-//   game6: {
-//     home: "JAX",
-//     away: "KC",
-//     winner: ""
-//   },
-//   game7: {
+//   game05: {
 //     home: "ATL",
-//     away: "GB",
+//     away: "CAR",
 //     winner: ""
 //   },
-//   game8: {
-//     home: "BUF",
-//     away: "LV",
+//   game06: {
+//     home: "WAS",
+//     away: "ARI",
 //     winner: ""
 //   },
-//   game9: {
-//     home: "TEN",
-//     away: "LAC",
+//   game07: {
+//     home: "IND",
+//     away: "JAX",
 //     winner: ""
 //   },
-//   game10: {
-//     home: "LAR",
+//   game08: {
+//     home: "PIT",
 //     away: "SF",
 //     winner: ""
 //   },
+//   game09: {
+//     home: "NO",
+//     away: "TEN",
+//     winner: ""
+//   },
+//   game10: {
+//     home: "DEN",
+//     away: "LV",
+//     winner: ""
+//   },
 //   game11: {
-//     home: "ARI",
-//     away: "NYG",
+//     home: "NE",
+//     away: "PHI",
 //     winner: ""
 //   },
 //   game12: {
-//     home: "DAL",
-//     away: "NYJ",
+//     home: "SEA",
+//     away: "LAR",
 //     winner: ""
 //   },
 //   game13: {
-//     home: "DEN",
-//     away: "WAS",
-//     winner: ""
-//   },
-//   game14: {
-//     home: "NE",
+//     home: "LAC",
 //     away: "MIA",
 //     winner: ""
 //   },
+//   game14: {
+//     home: "CHI",
+//     away: "GB",
+//     winner: ""
+//   },
 //   game15: {
-//     home: "CAR",
-//     away: "NO",
+//     home: "NYG",
+//     away: "DAL",
 //     winner: ""
 //   },
 //   game16: {
-//     home: "PIT",
-//     away: "CLE",
+//     home: "BUF",
+//     away: "NYJ",
 //     winner: ""
 //   }
 // }
@@ -109,11 +110,7 @@ export default function League() {
   }, []);
   
   const weeks = matchups ? Object.keys(matchups) : [];
-  
-// example for how to use weekly matchups data
-// weeks.forEach((week) => {
-//   console.log(week, ": ", matchups[week]);
-// });
+  const myPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
 
   if (!user) {
     router.push('/');
@@ -146,15 +143,15 @@ export default function League() {
       name: user.displayName, 
       id: user.uid, 
       picks: {
-          week1: {},
-          week2: {},
-          week3: {},
-          week4: {},
-          week5: {},
-          week6: {},
-          week7: {},
-          week8: {},
-          week9: {},
+          week01: {},
+          week02: {},
+          week03: {},
+          week04: {},
+          week05: {},
+          week06: {},
+          week07: {},
+          week08: {},
+          week09: {},
           week10: {},
           week11: {},
           week12: {},
@@ -175,7 +172,7 @@ export default function League() {
   }
 
   // const addMatchups = async () => {
-  //   await setDoc(doc(db, "matchups", "week2"), week2);
+  //   await setDoc(doc(db, "matchups", "week01"), week01);
   // }
 
   return (
@@ -185,24 +182,16 @@ export default function League() {
         : error ? <div>{error}</div>
         :
         <>
-          <h1 className={styles.pageTitle}>{leagueData?.name} page</h1>
+          <h1 className={styles.pageTitle}>{leagueData?.name}</h1>
           <section className={styles.leagueDisplay}>
             {!isMember ? <>
               <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>
               <LeagueMembers leagueData={leagueData} />
             </>
             : <>
-            {displaySection === "mypicks" && <>
-              <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
-              <h2 className={styles.subHeader}>My Picks</h2>
-              <label htmlFor="week-select">Choose a week:</label>
-              <select name="weeks" id="week-select" value={pickWeek} onChange={(e) => setPickWeek(e.target.value)}>
-                <option value="">select week</option>
-                {weeks.map((week) => (
-                  <option key={week} value={week}>{week}</option>
-                ))}
-              </select>
-            </>}
+            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
+
+            {displaySection === "mypicks" && <MyPicks weeks={weeks} pickWeek={pickWeek} setPickWeek={setPickWeek} matchups={matchups} myPicks={myPicks} />}
 
             {displaySection === "leagueStats" && <>
               <h2 className={styles.subHeader}>League Stats</h2>
