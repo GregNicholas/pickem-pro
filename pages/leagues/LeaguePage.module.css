@@ -1,27 +1,30 @@
 .pageTitle {
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
   text-decoration: underline;
 }
 
 .subHeader {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .joinButton {
-  color: navy;
+  color: white;
+  letter-spacing: 1px;
   cursor: pointer;
   padding: 0.5rem 1.4rem;
   border-radius: 10px;
   border: none;
-  background-color: aqua;
+  background-color: var(--main-red);
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+  background-blend-mode: lighten;
   box-shadow: 1px 3px black;
 }
 
 .joinButton:hover {
   font-weight: bold;
-  background-color: royalblue;
-  color: black;
+  background-blend-mode: darken;
+  color: white;
 }
 
 .joinButton:active {
@@ -30,7 +33,12 @@
 }
 
 .leagueDisplay {
-  background: silver;
+  background: var(--light-background);
+  color: black;
+  min-height: 10rem;
   margin: 1rem 0;
-  padding: 0.5rem 0.5rem;
+  padding: 0 1rem 1rem 1rem;
+  box-shadow: inset 0px 0px 2px 0px black;
+  border-radius: 3px;
+  font-size: 1rem;
 }

@@ -2,13 +2,21 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
+  margin-top: 2px;
 }
 
 .leagueOption {
-  background: none;
+  background: white;
+  border: 2px solid var(--main-red);
   padding: 0.5rem 1.4rem;
+  width: 9rem;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
 .selectedOption {
-  background-color: aqua;
+  background-color: var(--main-red);
+  color: white;
+  font-weight: bold;
 }
