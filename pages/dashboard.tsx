@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuthProtection } from "../hooks/useAuthProtection";
 import { useAuthContext } from "../context/AuthContext";
 import logOut from "../firebase/auth/signout";
@@ -9,12 +9,14 @@ import styles from "./Dashboard.module.css";
 import FindLeague from "../components/FindLeague";
 import CreateLeague from "../components/CreateLeague";
 import Link from "next/link";
+import changeUserName from "../firebase/auth/changeUserName";
 
 function Dashboard() {
     const isLoading = useAuthProtection();
     const { user } = useAuthContext();
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
+    const [newUserName, setNewUserName] = useState(user?.displayName || "");
 
     useEffect(() => {
     // query for leagues that have current user in member id list and update state
@@ -40,6 +42,12 @@ function Dashboard() {
         return <div>checking user authentication</div>
     }
 
+    const handleUpdateUserName = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await changeUserName(newUserName);
+        setUpdatingLeague(prev => prev + 1);
+    }
+
     return (
         <Layout>
             <h2>{user?.displayName}'s Leagues</h2>
@@ -61,3 +69,14 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
+// change username
+// <form onSubmit={handleUpdateUserName} className="form">
+//     <label htmlFor="findLeagueName">
+//         <p>ChangeUserName</p>
+//         <input onChange={(e) => setNewUserName(e.target.value)} required name="newUserName" id="newUserName" placeholder="enter new name" value={newUserName} />
+//     </label>
+//     <button type="submit">Change Name</button>
+//     {/* {displayMessage && <p className="errorMessage">{displayMessage}</p>} */}
+// </form>

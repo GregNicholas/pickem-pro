@@ -10,6 +10,7 @@ interface MyPicksProps {
 }
 
 export default function MyPicks({weeks, pickWeek, setPickWeek, matchups, myPicks}: MyPicksProps) {
+  const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
   console.log("MY PICKS: ", matchups)
   console.log(myPicks, pickWeek)
   return (
@@ -30,8 +31,16 @@ export default function MyPicks({weeks, pickWeek, setPickWeek, matchups, myPicks
 
 {/* show matchups to pick for selected week */}
       {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && Object.keys(matchups[pickWeek]).sort().map((matchup) => {
-        console.log(matchup)
-        return <p key={matchup}>{matchups[pickWeek][matchup].home}</p>
+        console.log("MATCHUP: ", matchup)
+
+        // check if deadline has passed
+        
+        console.log(matchups[pickWeek][matchup].time.seconds > CURRENT_TIME_IN_SECONDS);
+
+        return <div key={matchups[pickWeek][matchup].home}>
+            <span>{matchups[pickWeek][matchup].away}</span>-@-
+            <span>{matchups[pickWeek][matchup].home}</span>
+          </div>
       })}
     </>
   )
