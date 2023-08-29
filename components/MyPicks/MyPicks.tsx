@@ -1,34 +1,43 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./MyPicks.module.css";
+import MatchupsForm from "../MatchupsForm/MatchupsForm";
 
 interface MyPicksProps {
   weeks: string[];
   matchups: any;
-  myPicks: any;
+  fetchedPicks: any;
 }
 
-export default function MyPicks({weeks, matchups, myPicks}: MyPicksProps) {
-  const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
-  // console.log("MY PICKS: ", myPicks)
-  // console.log(matchups, pickWeek)
+const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
+
+export default function MyPicks({weeks, matchups, fetchedPicks}: MyPicksProps) {
   const [pickWeek, setPickWeek] = useState("week01");
-  console.log("MIDDLEPICK WEEK", pickWeek);
-  const [thisWeekPicked, setThisWeekPicked] = useState(myPicks[pickWeek]);
+  // const [thisWeekPicked, setThisWeekPicked] = useState(myPicks[pickWeek]);
+  // const [tiebreaker, setTiebreaker] = useState<number | null>(null);
   const { user } = useAuthContext();
-  console.log("THIS week picks: ", thisWeekPicked);
-  console.log("MY PICKS: ", myPicks[pickWeek]);
+  // const sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
+  // const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
 
-  const handlePicked = (isBlocked: string | null, gameNum: string, team: string) => {
+  // const handlePicked = (isBlocked: string | null, gameNum: string, team: string) => {
+  //   if (!isBlocked && thisWeekPicked[gameNum] !== team) {
+  //     setThisWeekPicked((prev: { [x: string]: string; }) => ({
+  //       ...prev,
+  //       [gameNum]: team
+  //     }));
+  //   }
+  // }
 
-    if (!isBlocked && thisWeekPicked[gameNum] !== team) {
-      setThisWeekPicked((prev: { [x: string]: string; }) => ({
-        ...prev,
-        [gameNum]: team
-      }));
-    }
-  }
+  // const submitPicks = () => {
+    
+  //   //check if thisWeekPicked has a value for each game
+  //   if (Object.keys(thisWeekPicked).length === Object.keys(matchups[pickWeek]).length) {
+  //     console.log(thisWeekPicked);
+  //   } else {
+  //     console.log("not all games are picked");
+  //   }
+  // }
 
   return (
     <>
@@ -47,8 +56,9 @@ export default function MyPicks({weeks, matchups, myPicks}: MyPicksProps) {
       })} */}
 
 {/* show matchups to pick for selected week */}
-      {matchups && <div className={styles.pickscontainer}>
-        {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && Object.keys(matchups[pickWeek]).sort().map((gameNum) => {
+{matchups && <MatchupsForm matchups={matchups} pickWeek={pickWeek} fetchedPicks={fetchedPicks} />}
+      {/* {matchups && <div className={styles.pickscontainer}>
+        {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && sortedGames.map((gameNum) => {
           let homePickStyle = "";
           let awayPickStyle = "";
           // check if deadline has passed
@@ -86,8 +96,13 @@ export default function MyPicks({weeks, matchups, myPicks}: MyPicksProps) {
               </div>
             </div>
         })}
+        <label htmlFor="tiebreaker">
+          <p>Tiebreaker - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>
+          <input type="number" onChange={(e) => setTiebreaker(Number(e.target.value))} required name="tiebreaker" id="tiebreaker" value={tiebreaker || 0} />
+        </label>
+      <button onClick={submitPicks}>Submit</button>
       </div>
-      }
+      } */}
     </>
   )
 }
