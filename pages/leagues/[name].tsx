@@ -109,7 +109,7 @@ export default function League() {
   }, []);
   
   const weeks = matchups ? Object.keys(matchups) : [];
-  const myPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
+  const fetchedPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
 
   if (!user) {
     router.push('/');
@@ -191,7 +191,7 @@ export default function League() {
             : <>
             
 
-            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} myPicks={myPicks} />}
+            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} />}
 
             {displaySection === "leagueStats" && <>
               <h2 className={styles.subHeader}>League Stats</h2>
