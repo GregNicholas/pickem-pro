@@ -1,0 +1,29 @@
+.selectsection {
+  text-align: center;
+}
+
+.pickscontainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  margin: 1rem auto;
+}
+
+.gamecontainer {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 5px;
+}
+
+.teamcontainer {
+  flex: 1;
+  background-color: white;
+  border: solid 1px #dddddd;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+}

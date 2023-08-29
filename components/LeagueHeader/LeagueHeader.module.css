@@ -7,12 +7,18 @@
 
 .leagueOption {
   background: white;
-  border: 2px solid var(--main-red);
+  border: 2px solid var(--main-blue);
   padding: 0.5rem 1.4rem;
   width: 9rem;
   font-weight: normal;
   letter-spacing: 0.5px;
   cursor: pointer;
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+  background-blend-mode: lighten;
+}
+
+.leagueOption:hover {
+  background-blend-mode: darken;
 }
 
 .selectedOption {
