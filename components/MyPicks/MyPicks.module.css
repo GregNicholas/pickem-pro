@@ -21,9 +21,20 @@
 
 .teamcontainer {
   flex: 1;
+  text-align: center;
   background-color: white;
   border: solid 1px #dddddd;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px 5px;
   border-radius: 6px;
+}
+
+.blocked {
+  background: gray;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.picked {
+  background: yellow;
 }
