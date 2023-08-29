@@ -98,7 +98,6 @@ export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [leagueData, setLeagueData] = useState<DocumentData | null>(null);
-  const [pickWeek, setPickWeek] = useState("");
   const [displaySection, setDisplaySection] = useState("mypicks");
   const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
@@ -192,7 +191,7 @@ export default function League() {
             : <>
             
 
-            {displaySection === "mypicks" && <MyPicks weeks={weeks} pickWeek={pickWeek} setPickWeek={setPickWeek} matchups={matchups} myPicks={myPicks} />}
+            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} myPicks={myPicks} />}
 
             {displaySection === "leagueStats" && <>
               <h2 className={styles.subHeader}>League Stats</h2>
