@@ -32,16 +32,11 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
     }
 
     if (docSnap.exists()) {
-      // we will display the league name and option to join
-      if (myLeagues.includes(findLeagueName)) {
-        console.log(docSnap.data());
-        setCurrentLeague(docSnap.data());
-        showMessage(`You are already in ${findLeagueName}`);
-      } else {
+      // we will display the league name and option to open league page
         setCurrentLeague(docSnap.data());
         setModalMessage(`Found ${docSnap.data().name}!`);
         setIsModalOpen(true);
-      }
+      // }
     } else {
       // docSnap.data() will be undefined in this case
       showMessage("League does not exist");

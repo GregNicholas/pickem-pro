@@ -30,10 +30,9 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
     const updatedUsersPicks = JSON.parse(JSON.stringify(usersPicks));
     // Iterate through sortedGames and set user's pick to empty string if deadline has passed
     sortedGames.forEach((gameNum) => {
+      // if deadline for game has passed and user hasn't made pick, set it to empty string
       const deadlinePassed = CURRENT_TIME_IN_SECONDS > matchups[pickWeek][gameNum].time.seconds;
-
       if (deadlinePassed && !usersPicks[pickWeek].hasOwnProperty(gameNum)) {
-        console.log("Deadline passed, should set game empty string");
         updatedUsersPicks[pickWeek][gameNum] = "";
       }
     });
@@ -63,12 +62,8 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
         tiebreaker: Number(e.target.value)
     }}));
   }
-console.log("THIS WEEKS PICKS: ", usersPicks[pickWeek])
+
   const submitPicks = async () => {
-    // const picksToUpdate = JSON.parse(JSON.stringify(usersPicks));
-    // picksToUpdate[pickWeek].tiebreaker = tiebreaker;
-    // console.log(picksToUpdate);
-    //check if thisWeekPicked has a value for each game
     if (!usersPicks[pickWeek].tiebreaker) {
       usersPicks[pickWeek].tiebreaker = 0;
       setUsersPicks(prev => {
