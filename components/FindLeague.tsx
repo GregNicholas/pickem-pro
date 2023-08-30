@@ -15,12 +15,12 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [currentLeague, setCurrentLeague] = useState<any | null>(null);
+  let message = '';
 
   // const { selectedLeague, updateSelectedLeague } = useLeagueContext();
 
   const handleFindLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("SEARCH: ", findLeagueName, "We need to check if this league exists and allow user to join");
     const docRef = doc(db, "leagues", findLeagueName);
     const docSnap = await getDoc(docRef);
     
@@ -39,7 +39,7 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
         showMessage(`You are already in ${findLeagueName}`);
       } else {
         setCurrentLeague(docSnap.data());
-        setModalMessage(`open ${docSnap.data().name}?`);
+        setModalMessage(`Found ${docSnap.data().name}!`);
         setIsModalOpen(true);
       }
     } else {
