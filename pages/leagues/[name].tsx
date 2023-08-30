@@ -10,6 +10,7 @@ import Layout from "../../components/Layout/Layout";
 import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
 import LeagueMembers from "../../components/LeagueMembers";
 import MyPicks from "../../components/MyPicks/MyPicks";
+import {League} from "../../types";
 
 // const week01 = {
 //   game01: {
@@ -97,7 +98,7 @@ import MyPicks from "../../components/MyPicks/MyPicks";
 export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [leagueData, setLeagueData] = useState<DocumentData | null>(null);
+  const [leagueData, setLeagueData] = useState<League | null>(null);
   const [displaySection, setDisplaySection] = useState("mypicks");
   const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
@@ -109,7 +110,8 @@ export default function League() {
   }, []);
   
   const weeks = matchups ? Object.keys(matchups) : [];
-  const fetchedPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
+  // const fetchedPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
+  const fetchedPicks = leagueData?.members[user.uid]?.picks;
 
   if (!user) {
     router.push('/');
@@ -124,8 +126,9 @@ export default function League() {
     const docRef = doc(db, "leagues", leagueName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+      const fetchedData = docSnap.data() as League;
       updateSelectedLeague(docSnap.data());
-      setLeagueData(docSnap.data());
+      setLeagueData(fetchedData);
       setIsLoading(false);
     } else {
       setError("League info not found, please check url and refresh or go back to dashboard.");
@@ -163,10 +166,40 @@ export default function League() {
       }
     } 
     const leagueRef = doc(db, "leagues", leagueData.name);
+    const updateField = `members.${user.uid}`;
     await updateDoc(leagueRef, {
-      members: arrayUnion(userLeagueData),
-      memberIds: arrayUnion(user.uid),
+      [updateField]: userLeagueData,
+      "memberIds": arrayUnion(user.uid),
     });
+    // const userLeagueData = {
+    //   name: user.displayName, 
+    //   id: user.uid, 
+    //   picks: {
+    //       week01: {},
+    //       week02: {},
+    //       week03: {},
+    //       week04: {},
+    //       week05: {},
+    //       week06: {},
+    //       week07: {},
+    //       week08: {},
+    //       week09: {},
+    //       week10: {},
+    //       week11: {},
+    //       week12: {},
+    //       week13: {},
+    //       week14: {},
+    //       week15: {},
+    //       week16: {},
+    //       week17: {},
+    //       week18: {},
+    //   }
+    // } 
+    // const leagueRef = doc(db, "leagues", leagueData.name);
+    // await updateDoc(leagueRef, {
+    //   members: arrayUnion(userLeagueData),
+    //   memberIds: arrayUnion(user.uid),
+    // });
     getLeagueInfo(router.query?.name as string);
   }
 
@@ -177,7 +210,7 @@ export default function League() {
   return (
     <Layout>
       {
-        isLoading ? <div>fetching data</div>
+        isLoading || matchupsLoading ? <div>fetching data</div>
         : error ? <div>{error}</div>
         :
         <>
@@ -191,7 +224,7 @@ export default function League() {
             : <>
             
 
-            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} />}
+            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} />}
 
             {displaySection === "leagueStats" && <>
               <h2 className={styles.subHeader}>League Stats</h2>

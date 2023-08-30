@@ -5,14 +5,16 @@ export interface GamePicks {
 }
 
 export interface Member {
-  picks: GamePicks;
+  picks: any;
   id: string;
   name: string;
 }
 
 export interface League {
+  memberIds: string[];
+  members: {
+    [memberId: string]: Member;
+  };
   name: string;
   owner: string;
-  members: Member[];
-  memberIds: string[];
 }
