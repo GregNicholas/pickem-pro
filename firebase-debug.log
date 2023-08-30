@@ -1,0 +1,58 @@
+[debug] [2023-08-30T19:28:51.034Z] ----------------------------------------------------------------------
+[debug] [2023-08-30T19:28:51.037Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-30T19:28:51.037Z] CLI Version:   12.0.0
+[debug] [2023-08-30T19:28:51.038Z] Platform:      win32
+[debug] [2023-08-30T19:28:51.038Z] Node Version:  v18.16.0
+[debug] [2023-08-30T19:28:51.039Z] Time:          Wed Aug 30 2023 12:28:51 GMT-0700 (Pacific Daylight Time)
+[debug] [2023-08-30T19:28:51.039Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-30T19:28:51.136Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-30T19:28:51.137Z] > authorizing via signed-in user (gregschoenberg@gmail.com)
+[debug] [2023-08-30T19:28:51.137Z] [iam] checking project pickem-pro for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-30T19:28:51.140Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions [none]
+[debug] [2023-08-30T19:28:51.140Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions x-goog-quota-user=projects/pickem-pro
+[debug] [2023-08-30T19:28:51.140Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-30T19:28:51.365Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions 200
+[debug] [2023-08-30T19:28:51.366Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-30T19:28:51.369Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro [none]
+[debug] [2023-08-30T19:28:51.649Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro 200
+[debug] [2023-08-30T19:28:51.650Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro {"projectId":"pickem-pro","projectNumber":"227611455310","displayName":"pickem-pro","name":"projects/pickem-pro","resources":{"hostingSite":"pickem-pro"},"state":"ACTIVE","etag":"1_bb544040-f665-43d9-9c0b-c17f225c098f"}
+[debug] [2023-08-30T19:28:58.543Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/pickem-pro/sites pageToken=&pageSize=10
+[debug] [2023-08-30T19:28:59.129Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/pickem-pro/sites 200
+[debug] [2023-08-30T19:28:59.129Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/pickem-pro/sites {"sites":[{"name":"projects/pickem-pro/sites/pickem-pro","defaultUrl":"https://pickem-pro.web.app","appId":"1:227611455310:web:3990d5cd8d362e29ed381f","type":"DEFAULT_SITE"}]}
+[debug] [2023-08-30T19:28:59.130Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:227611455310:web:3990d5cd8d362e29ed381f/config [none]
+[debug] [2023-08-30T19:28:59.836Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:227611455310:web:3990d5cd8d362e29ed381f/config 200
+[debug] [2023-08-30T19:28:59.836Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:227611455310:web:3990d5cd8d362e29ed381f/config {"projectId":"pickem-pro","appId":"1:227611455310:web:3990d5cd8d362e29ed381f","storageBucket":"pickem-pro.appspot.com","apiKey":"AIzaSyBPsVGXYG6uVGK8JwvGVZAthoC3eMPmG8I","authDomain":"pickem-pro.firebaseapp.com","messagingSenderId":"227611455310","measurementId":"G-P8C434P5QF"}
+[debug] [2023-08-30T19:29:45.363Z] Error: Unable to find the next dep, try NPM installing?
+    at getConfig (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:381:19)
+    at build (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:61:56)
+    at async prepareFrameworks (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:207:122)
+    at async deploy (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-08-30T19:31:50.132Z] ----------------------------------------------------------------------
+[debug] [2023-08-30T19:31:50.135Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-30T19:31:50.135Z] CLI Version:   12.0.0
+[debug] [2023-08-30T19:31:50.136Z] Platform:      win32
+[debug] [2023-08-30T19:31:50.136Z] Node Version:  v18.16.0
+[debug] [2023-08-30T19:31:50.137Z] Time:          Wed Aug 30 2023 12:31:50 GMT-0700 (Pacific Daylight Time)
+[debug] [2023-08-30T19:31:50.137Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-30T19:31:50.242Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-30T19:31:50.243Z] > authorizing via signed-in user (gregschoenberg@gmail.com)
+[debug] [2023-08-30T19:31:50.243Z] [iam] checking project pickem-pro for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-30T19:31:50.247Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions [none]
+[debug] [2023-08-30T19:31:50.248Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions x-goog-quota-user=projects/pickem-pro
+[debug] [2023-08-30T19:31:50.248Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-30T19:31:50.674Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions 200
+[debug] [2023-08-30T19:31:50.675Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pickem-pro:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-30T19:31:50.678Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro [none]
+[debug] [2023-08-30T19:31:50.955Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro 200
+[debug] [2023-08-30T19:31:50.955Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pickem-pro {"projectId":"pickem-pro","projectNumber":"227611455310","displayName":"pickem-pro","name":"projects/pickem-pro","resources":{"hostingSite":"pickem-pro"},"state":"ACTIVE","etag":"1_bb544040-f665-43d9-9c0b-c17f225c098f"}
+[debug] [2023-08-30T19:33:04.519Z] Error: Unable to find the next dep, try NPM installing?
+    at getConfig (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:381:19)
+    at build (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:61:56)
+    at async prepareFrameworks (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:207:122)
+    at async deploy (C:\Users\gregs\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
