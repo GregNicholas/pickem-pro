@@ -6,7 +6,6 @@ import Layout, { siteTitle } from "../components/Layout/Layout";
 import { useRouter } from 'next/router';
 import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from '../lib/posts';
 
 // export const getStaticProps: GetStaticProps = async () => {
 //   const allPostsData = await getSortedPostsData();
@@ -40,7 +39,7 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>(Let's play ball!)</p>
+        <p>(Let's go!)</p>
         <ul className={utilStyles.nav}>
           <li className={utilStyles.navItem}>          
             <Link href="/dashboard">Go to Dashboard -{">"}</Link>
