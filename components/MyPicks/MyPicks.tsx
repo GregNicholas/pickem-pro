@@ -8,11 +8,12 @@ interface MyPicksProps {
   weeks: string[];
   matchups: any;
   fetchedPicks: any;
+  leagueName: string;
 }
 
 const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
 
-export default function MyPicks({weeks, matchups, fetchedPicks}: MyPicksProps) {
+export default function MyPicks({weeks, matchups, fetchedPicks, leagueName}: MyPicksProps) {
   const [pickWeek, setPickWeek] = useState("week01");
   // const [thisWeekPicked, setThisWeekPicked] = useState(myPicks[pickWeek]);
   // const [tiebreaker, setTiebreaker] = useState<number | null>(null);
@@ -56,7 +57,7 @@ export default function MyPicks({weeks, matchups, fetchedPicks}: MyPicksProps) {
       })} */}
 
 {/* show matchups to pick for selected week */}
-{matchups && <MatchupsForm matchups={matchups} pickWeek={pickWeek} fetchedPicks={fetchedPicks} />}
+{matchups && <MatchupsForm matchups={matchups} pickWeek={pickWeek} fetchedPicks={fetchedPicks} leagueName={leagueName} />}
       {/* {matchups && <div className={styles.pickscontainer}>
         {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && sortedGames.map((gameNum) => {
           let homePickStyle = "";

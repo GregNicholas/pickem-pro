@@ -28,6 +28,7 @@ export const useFetchData = (collectionName: string, document?: string) => {
         docs[doc.id] = doc.data();
         setData(docs);
       });
+      setIsLoading(false);
     }
   }  
 

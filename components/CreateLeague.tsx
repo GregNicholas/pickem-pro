@@ -33,30 +33,32 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
             name: createLeagueName,
             owner: user.uid,
             memberIds: [user.uid],
-            members: [{ 
-                        name: user.displayName, 
-                        id: user.uid, 
-                        picks: {
-                            week01: {},
-                            week02: {},
-                            week03: {},
-                            week04: {},
-                            week05: {},
-                            week06: {},
-                            week07: {},
-                            week08: {},
-                            week09: {},
-                            week10: {},
-                            week11: {},
-                            week12: {},
-                            week13: {},
-                            week14: {},
-                            week15: {},
-                            week16: {},
-                            week17: {},
-                            week18: {},
-                        }
-                     }],
+            members: {
+              [user.uid]: { 
+                  name: user.displayName, 
+                  id: user.uid, 
+                  picks: {
+                      week01: {},
+                      week02: {},
+                      week03: {},
+                      week04: {},
+                      week05: {},
+                      week06: {},
+                      week07: {},
+                      week08: {},
+                      week09: {},
+                      week10: {},
+                      week11: {},
+                      week12: {},
+                      week13: {},
+                      week14: {},
+                      week15: {},
+                      week16: {},
+                      week17: {},
+                      week18: {},
+                  }
+                }
+              },
         });
         showMessage(`Created League: ${createLeagueName}`);
     }
