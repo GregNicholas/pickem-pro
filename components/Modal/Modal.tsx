@@ -22,7 +22,7 @@ const Modal = ({ setIsOpen, message, leagueData }: ModalProps) => {
   return (
     <>
     <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
-    <div className={styles.centered}>
+    {/* <div className={styles.modalContainer}> */}
         <div className={styles.modal}>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
@@ -44,7 +44,7 @@ const Modal = ({ setIsOpen, message, leagueData }: ModalProps) => {
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 };

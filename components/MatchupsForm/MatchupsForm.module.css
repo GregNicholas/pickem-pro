@@ -1,0 +1,20 @@
+.tieInput {
+  height: 2.5rem;
+  width: 5rem;
+  font-size: 1.5rem;
+  padding: 4px;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+}
+
+.formLabel {
+  margin: 0.5rem 0 2px 0;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}

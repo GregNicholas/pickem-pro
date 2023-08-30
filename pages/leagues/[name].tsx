@@ -216,14 +216,12 @@ export default function League() {
         <>
           <section className={styles.leagueDisplay}>
             <h1 className={styles.pageTitle}>{leagueData?.name}</h1>
-            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             {!isMember ? <>
               <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>
               <LeagueMembers leagueData={leagueData} />
             </>
             : <>
-            
-
+            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} />}
 
             {displaySection === "leagueStats" && <>

@@ -1,6 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import styles from "../MyPicks/MyPicks.module.css";
+import pickstyles from "../MyPicks/MyPicks.module.css";
+import styles from "./MatchupsForm.module.css";
 import Matchup from "./Matchup";
 import { updateDoc, arrayUnion, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -97,13 +98,21 @@ console.log("THIS WEEKS PICKS: ", usersPicks[pickWeek])
   }
 
   return (
-    <div className={styles.pickscontainer}>
+    <div className={pickstyles.pickscontainer}>
         {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && sortedGames.map((gameNum) => {
           return <Matchup key={gameNum} matchups={matchups} usersPicks={usersPicks} setUsersPicks={setUsersPicks} pickWeek={pickWeek} gameNum={gameNum} handlePicked={handlePicked}/>
         })}
-        <label htmlFor="tiebreaker">
-          <p>Tiebreaker - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>
-          <input type="number" onChange={handleUpdateTiebreaker} required name="tiebreaker" id="tiebreaker" value={usersPicks[pickWeek].tiebreaker || 0} />
+        <label className={styles.center} htmlFor="tiebreaker">
+          <p className={styles.formLabel}><span className={styles.bold}>Tiebreaker</span> - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>
+          <input 
+            className={styles.tieInput} 
+            type="number" 
+            onChange={handleUpdateTiebreaker} 
+            required 
+            name="tiebreaker" 
+            id="tiebreaker" 
+            value={usersPicks[pickWeek].tiebreaker || 0} 
+          />
         </label>
       <button onClick={submitPicks}>Submit</button>
       </div>
