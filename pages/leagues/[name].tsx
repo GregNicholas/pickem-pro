@@ -11,6 +11,7 @@ import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
 import LeagueMembers from "../../components/LeagueMembers";
 import MyPicks from "../../components/MyPicks/MyPicks";
 import {League} from "../../types";
+import LeagueStats from "../../components/LeagueStats/LeagueStats";
 
 // const week01 = {
 //   game01: {
@@ -224,8 +225,8 @@ export default function League() {
             <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} />}
 
-            {displaySection === "leagueStats" && <>
-              <h2 className={styles.subHeader}>League Stats</h2>
+            {displaySection === "leaguestats" && <>
+              <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
             </>}
 
             {/* <button onClick={addMatchups}>add matchups</button> */}
