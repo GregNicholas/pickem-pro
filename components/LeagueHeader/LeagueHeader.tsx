@@ -10,19 +10,19 @@ export default function LeagueHeader({displaySection, setDisplaySection}: League
 return (
   <div className={styles.leagueHeader}>
     <button 
-      className={`${styles.leagueOption} ${displaySection==="mypicks" && styles.selectedOption}`}
+      className={`optionButton ${displaySection==="mypicks" && styles.selectedOption}`}
       onClick={() => setDisplaySection("mypicks")}
     >
       My Picks
     </button>
     <button 
-      className={`${styles.leagueOption} ${displaySection==="members" && styles.selectedOption}`}
+      className={`optionButton ${displaySection==="members" && styles.selectedOption}`}
       onClick={() => setDisplaySection("members")}
     >
       Members
     </button>
     <button 
-      className={`${styles.leagueOption} ${displaySection==="leaguestats" && styles.selectedOption}`}
+      className={`optionButton ${displaySection==="leaguestats" && styles.selectedOption}`}
       onClick={() => setDisplaySection("leaguestats")}
     >
       League Stats

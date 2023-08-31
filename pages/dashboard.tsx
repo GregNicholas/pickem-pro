@@ -16,6 +16,7 @@ function Dashboard() {
     const { user } = useAuthContext();
     const [myLeagues, setMyLeagues] = useState([]);
     const [updatingLeague, setUpdatingLeague] = useState(0);
+    const [searchBy, setSearchBy] = useState("find");
     const [newUserName, setNewUserName] = useState(user?.displayName || "");
 
     useEffect(() => {
@@ -52,18 +53,22 @@ function Dashboard() {
         <Layout>
             <h2>{user?.displayName}'s Leagues</h2>
             {myLeagues.length > 0 
-            ? <ul>
+            ? <ul className={styles.leagueList}>
                 {myLeagues.map((league) => {
-                    return <li key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>{league.name}</Link></li>
+                    return <li key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>&#8618;{league.name}</Link></li>
                 })}
             </ul> 
             : <p>No leagues yet</p>
             }
+            
+            <div className={styles.selectContainer} >
+                <button onClick={() => setSearchBy("find")} className={`minorOptionBtn ${searchBy === "find" && "selectedMinorOptionBtn"}`}>Find a league</button>
+                <button onClick={() => setSearchBy("create")} className={`minorOptionBtn ${searchBy === "create" && "selectedMinorOptionBtn"}`}>Create league</button>
+            </div>
+            {searchBy === "find" && <FindLeague myLeagues={myLeagues.map(league => league.name)}/>}
+            {searchBy === "create" && <CreateLeague setUpdatingLeague={setUpdatingLeague}/>}
 
-            <FindLeague myLeagues={myLeagues.map(league => league.name)}/>
-            <CreateLeague setUpdatingLeague={setUpdatingLeague}/>
-
-            <button onClick={() => logOut()}>Sign Out</button>
+            <button className={styles.signOutBtn} onClick={() => logOut()}>Sign Out</button>
         </Layout>
     );
 }

@@ -1,3 +1,9 @@
+.leagueList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .leagueListItem {
   cursor: pointer;
   width: fit-content;
@@ -5,4 +11,38 @@
 
 .leagueListItem:hover {
   font-weight: bold;
+}
+
+.selectContainer {
+  width: fit-content;
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.selectionOption {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: normal;
+  margin: 1rem 1.5rem 0.5rem 0;
+}
+
+.selected {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.signOutBtn {
+  margin: 3rem 0 1rem 0;
+}
+
+.simpleForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.simpleForm input {
+  height: 2rem;
+  width: 12rem;
 }

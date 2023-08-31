@@ -19,6 +19,7 @@ interface MatchupsFormProps {
 export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueName, getLeagueInfo}: MatchupsFormProps) {
   // we only want to initialize usersPicks this way the first time rendered. Currently not using the useEffect as props will only change after submission
   const [usersPicks, setUsersPicks] = useState(fetchedPicks);
+  const [displayMessage, setDisplayMessage] = useState('');
   const { user } = useAuthContext();
   const sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
   const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
@@ -77,19 +78,26 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
       })
     }
 
+    const showMessage = (message: string) => {
+      setDisplayMessage(message);
+      setTimeout(() => {
+        setDisplayMessage('');
+      }, 3000);
+    }
+
     const numGamesPicked = Object.keys(usersPicks[pickWeek]).filter(item => item.includes("game")).length;
     const numGamesInWeek = Object.keys(matchups[pickWeek]).length;
 
     if (numGamesPicked === numGamesInWeek) {
-      console.log("SUBMITTED: ", usersPicks[pickWeek]);
       const leagueRef = doc(db, "leagues", leagueName);
       const updateField = `members.${user.uid}.picks.${pickWeek}`
       await updateDoc(leagueRef, {
         [updateField]: usersPicks[pickWeek],
       });
       await getLeagueInfo(leagueName);
+      showMessage("SUBMITTED PICKS!")
     } else {
-      console.log("pick each game and tiebreaker");
+      showMessage("pick each game and tiebreaker");
     }
   }
 
@@ -110,6 +118,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
             value={usersPicks[pickWeek].tiebreaker.toString() || 0} 
           />
         </label>
+      {displayMessage && <p className="errorMessage">{displayMessage}</p>}
       <button onClick={submitPicks}>Submit</button>
       </div>
   )

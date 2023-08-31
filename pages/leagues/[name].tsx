@@ -100,7 +100,7 @@ export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [leagueData, setLeagueData] = useState<League | null>(null);
-  const [displaySection, setDisplaySection] = useState("mypicks");
+  const [displaySection, setDisplaySection] = useState("members");
   const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
   const { updateSelectedLeague } = useLeagueContext();
@@ -111,7 +111,6 @@ export default function League() {
   }, []);
   
   const weeks = matchups ? Object.keys(matchups) : [];
-  // const fetchedPicks = leagueData?.members.find((member) => member.id === user.uid)?.picks;
   const fetchedPicks = leagueData?.members[user.uid]?.picks;
 
   if (!user) {
@@ -183,7 +182,7 @@ export default function League() {
     <Layout>
       {
         isLoading || matchupsLoading ? <div>fetching data</div>
-        : error ? <div>{error}</div>
+        : error ? <div className="errorMessage">{error}</div>
         :
         <>
           <section className={styles.leagueDisplay}>

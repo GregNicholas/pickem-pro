@@ -45,7 +45,6 @@ export default function Layout({ children, home=false }) {
           </>
         ) : (
           <>
-            <Link href="/">
               <Image
                 priority
                 src="/images/pickem-logo.png"
@@ -53,11 +52,10 @@ export default function Layout({ children, home=false }) {
                 width={483}
                 alt=""
               />
-            </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/dashboard" className={utilStyles.colorInherit}>
+              <p href="/dashboard" className={utilStyles.colorInherit}>
                 {name}
-              </Link>
+              </p>
             </h2>
           </>
         )}
