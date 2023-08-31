@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Layout, { siteTitle } from "../components/Layout/Layout";
@@ -7,16 +6,7 @@ import { useRouter } from 'next/router';
 import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const allPostsData = await getSortedPostsData();
-//   return {
-//     props: {
-//       allPostsData,
-//     },
-//   };
-// }
-
-export default function Home({ allPostsData }) {
+export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuthContext();
   const router = useRouter();
