@@ -3,6 +3,7 @@ import signUp from "../../firebase/auth/signup";
 import { useRouter } from 'next/navigation';
 import Layout from "../../components/Layout/Layout";
 import Link from "next/link";
+import styles from "./Auth.module.css";
 
 function SignUp() {
     const usernameRef = useRef<HTMLInputElement>();
@@ -43,10 +44,10 @@ function SignUp() {
 
     return (
       <Layout>
-      <div className="wrapper">
-        <div className="form-wrapper">
-            <h1 className="mt-60 mb-30">Sign up</h1>
-            <form onSubmit={handleForm} className="form">
+      <div className={styles.wrapper}>
+        <div className={styles.formWrapper}>
+            <h1 className={styles.formHeading}>Sign up</h1>
+            <form onSubmit={handleForm} className={styles.form}>
                 <label htmlFor="username">
                     <p>User Name</p>
                     <input required type="text" name="username" id="username" placeholder="User Name" ref={usernameRef} />
@@ -61,12 +62,12 @@ function SignUp() {
                 </label>
                 <label htmlFor="confirmPassword">
                     <p>Confirm Password</p>
-                    <input required type="password" name="password" id="password" placeholder="password" ref={passwordConfirmationRef} />
+                    <input required type="password" name="password" id="password" placeholder="confirm password" ref={passwordConfirmationRef} />
                 </label>
-                <button type="submit">Sign up</button>
+                <button className={styles.submitBtn} type="submit">Sign up</button>
                 {error && <p className="errorMessage">{error}</p>}
             </form>
-            <p>Already have an account? <Link href="/auth/signin">Sign in! -{">"}</Link></p>
+            <p>Already have an account? <Link className={styles.link} href="/auth/signin">Sign in! &#8594;</Link></p>
         </div>
       </div>
       </Layout>

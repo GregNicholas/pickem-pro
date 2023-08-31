@@ -22,7 +22,12 @@
 
 .headingMd {
   font-size: 1.2rem;
-  line-height: 1.5;
+  line-height: 1;
+}
+
+.pageContainer {
+  padding: 1rem;
+  height: 100%;
 }
 
 .borderCircle {
@@ -54,4 +59,20 @@
 .errorMessage {
   font-weight: bold;
   color: red;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  width: 153px;
+  margin: 0 auto;
+}
+
+.navItem {
+  margin-bottom: 1rem;
+}
+
+.navItem:hover {
+  font-weight: bold;
 }

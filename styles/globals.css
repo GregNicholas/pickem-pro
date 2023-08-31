@@ -44,6 +44,11 @@ ul {
   list-style: none;
 }
 
+input {
+  padding: 2px 5px;
+  margin-top: 3px;
+}
+
 button {
   padding: 0.5rem 1rem;
   font-weight: bold;

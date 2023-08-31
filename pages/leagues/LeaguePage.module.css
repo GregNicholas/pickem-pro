@@ -1,13 +1,16 @@
 .pageTitle {
   font-size: 2rem;
   text-align: center;
-  text-decoration: underline;
+  margin-bottom: 0.5rem;
+  color: var(--main-blue);
+  overflow-wrap: break-word;
 }
 
 .subHeader {
   font-size: 1.6rem;
   text-align: center;
   margin: 0.5rem 0;
+  color: var(--main-blue);
 }
 
 .joinButton {
@@ -38,10 +41,10 @@
   background: var(--light-background);
   color: black;
   min-height: 10rem;
-  margin: 1rem 0;
+  margin: 0 0 1rem 0;
   padding: 0 1rem 1rem 1rem;
   box-shadow: inset 0px 0px 2px 0px black;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   font-size: 1rem;
 }
 

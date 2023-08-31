@@ -9,11 +9,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
 }
 
 .leagueListItem {
   cursor: pointer;
   width: fit-content;
+  font-size: 1.2rem;
 }
 
 .leagueListItem:hover {
@@ -46,10 +49,15 @@
 
 .simpleForm {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
 .simpleForm input {
   height: 2rem;
+  width: 12rem;
+}
+
+.simpleForm button {
   width: 12rem;
 }

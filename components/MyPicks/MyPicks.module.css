@@ -3,9 +3,10 @@
 }
 
 .selectWeek {
-  height: 2rem;
+  padding: 5px;
   font-size: 1.3rem;
-  margin-left: 0.5rem;
+  border: 2px solid var(--main-blue);
+  border-radius: 4px;
 }
 
 .pickscontainer {
@@ -34,11 +35,12 @@
 
 .teamcontainer {
   flex: 1;
+  font-size: 1.2rem;
   text-align: center;
   background-color: white;
   border: solid 1px #dddddd;
   cursor: pointer;
-  padding: 8px 5px;
+  padding: 10px 5px;
   border-radius: 6px;
 }
 

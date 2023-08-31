@@ -11,12 +11,15 @@
   align-items: center;
   background: #d50a0a;
   padding: 1rem 0.5rem;
+  box-shadow: inset 0px 0px 2px 0px black;
+  /* position: sticky;
+  top: -7rem; */
 }
 
 .main {
-  padding: 1rem 0.5rem;
+  /* padding: 1rem 0.5rem; */
 }
 
 .backToHome {
-  margin-top: auto;
+  margin: 0 0.5rem 1.5rem 1rem;
 }

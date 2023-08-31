@@ -18,3 +18,14 @@
 .center {
   text-align: center;
 }
+
+.submitBtn {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--main-blue);
+  color: white;
+  padding: 0.5rem 1.4rem;
+  border-radius: 4px;
+}
