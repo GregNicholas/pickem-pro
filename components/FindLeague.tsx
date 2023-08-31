@@ -3,6 +3,7 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 import Modal from "./Modal/Modal";
 import { League } from "../types";
+import dashboardStyles from "../pages/Dashboard.module.css";
 // import { useLeagueContext } from "../context/LeagueContext";
 
 type FindLeagueProps = {
@@ -46,15 +47,14 @@ export default function FindLeague({myLeagues}: FindLeagueProps) {
 
   return (
     <>
-    <h3>Find a league</h3>
-    <form onSubmit={handleFindLeague} className="form">
+    <p>Find a league:</p>
+    <form onSubmit={handleFindLeague} className={dashboardStyles.simpleForm}>
         <label htmlFor="findLeagueName">
-            <p>League Name</p>
-            <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="enter league name" value={findLeagueName} />
+            <input onChange={(e) => setFindLeagueName(e.target.value)} required name="findLeagueName" id="findLeagueName" placeholder="search league name" value={findLeagueName} />
         </label>
         <button type="submit">Search</button>
-        {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
+    {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     {isModalOpen && <Modal setIsOpen={setIsModalOpen} message={modalMessage} leagueData={currentLeague}/>}
     </>
   )

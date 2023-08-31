@@ -48,3 +48,51 @@ button {
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
+
+.errorMessage {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: red;
+}
+
+.optionButton {
+  background: rgb(226, 226, 226);
+  border: 2px solid var(--main-blue);
+  padding: 0.5rem 1.4rem;
+  width: 9rem;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+  background-blend-mode: lighten;
+}
+
+.optionButton:hover {
+  background-blend-mode: darken;
+}
+
+.selectedOption {
+  background-color: var(--main-red);
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 1.2rem;
+}
+
+.minorOptionBtn {
+  border: none;
+  background: gray;
+  color: white;
+  padding: 0.4rem 1.2rem;
+  width: 8rem;
+  height: 2.2rem;
+  cursor: pointer;
+}
+
+.selectedMinorOptionBtn {
+  background-color: var(--main-red);
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 1.2rem;
+  width: 9rem;
+  height: 2.4rem;
+}

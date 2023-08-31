@@ -2,6 +2,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { db } from "../firebase/config";
 import { useAuthContext } from "../context/AuthContext";
+import { useRouter } from "next/router";
+import dashboardStyles from "../pages/Dashboard.module.css";
 
 type CreateLeagueProps = {
   setUpdatingLeague: Dispatch<SetStateAction<number>>;
@@ -11,6 +13,7 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
   const [createLeagueName, setCreateLeagueName] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
   const { user } = useAuthContext();
+  const router = useRouter();
 
   const showMessage = (message: string) => {
     setDisplayMessage(message);
@@ -61,6 +64,9 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
               },
         });
         showMessage(`Created League: ${createLeagueName}`);
+        setTimeout(() => {
+          router.push(`/leagues/${createLeagueName}`);
+        }, 1000);
     }
     setCreateLeagueName('');
     setUpdatingLeague(prev => prev + 1);
@@ -68,16 +74,14 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
 
   return (
     <>
-    <h3>Create a league</h3>
-    <p>Enter a name for your league here</p>
-    <form onSubmit={handleCreateLeague} className="form">
+    <p>Create a NEW league:</p>
+    <form onSubmit={handleCreateLeague} className={dashboardStyles.simpleForm}>
         <label htmlFor="createLeagueName">
-            <p>League Name</p>
             <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
         </label>
         <button type="submit">Create</button>
-        {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </form>
+    {displayMessage && <p className="errorMessage">{displayMessage}</p>}
     </>
   )
 }

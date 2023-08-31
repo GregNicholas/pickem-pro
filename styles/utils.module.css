@@ -50,3 +50,8 @@
 .lightText {
   color: #666;
 }
+
+.errorMessage {
+  font-weight: bold;
+  color: red;
+}
