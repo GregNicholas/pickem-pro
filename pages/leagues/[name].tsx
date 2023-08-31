@@ -146,24 +146,24 @@ export default function League() {
       name: user.displayName, 
       id: user.uid, 
       picks: {
-          week01: {},
-          week02: {},
-          week03: {},
-          week04: {},
-          week05: {},
-          week06: {},
-          week07: {},
-          week08: {},
-          week09: {},
-          week10: {},
-          week11: {},
-          week12: {},
-          week13: {},
-          week14: {},
-          week15: {},
-          week16: {},
-          week17: {},
-          week18: {},
+        week01: {tiebreaker: 0},
+        week02: {tiebreaker: 0},
+        week03: {tiebreaker: 0},
+        week04: {tiebreaker: 0},
+        week05: {tiebreaker: 0},
+        week06: {tiebreaker: 0},
+        week07: {tiebreaker: 0},
+        week08: {tiebreaker: 0},
+        week09: {tiebreaker: 0},
+        week10: {tiebreaker: 0},
+        week11: {tiebreaker: 0},
+        week12: {tiebreaker: 0},
+        week13: {tiebreaker: 0},
+        week14: {tiebreaker: 0},
+        week15: {tiebreaker: 0},
+        week16: {tiebreaker: 0},
+        week17: {tiebreaker: 0},
+        week18: {tiebreaker: 0},
       }
     } 
     const leagueRef = doc(db, "leagues", leagueData.name);
@@ -172,35 +172,6 @@ export default function League() {
       [updateField]: userLeagueData,
       "memberIds": arrayUnion(user.uid),
     });
-    // const userLeagueData = {
-    //   name: user.displayName, 
-    //   id: user.uid, 
-    //   picks: {
-    //       week01: {},
-    //       week02: {},
-    //       week03: {},
-    //       week04: {},
-    //       week05: {},
-    //       week06: {},
-    //       week07: {},
-    //       week08: {},
-    //       week09: {},
-    //       week10: {},
-    //       week11: {},
-    //       week12: {},
-    //       week13: {},
-    //       week14: {},
-    //       week15: {},
-    //       week16: {},
-    //       week17: {},
-    //       week18: {},
-    //   }
-    // } 
-    // const leagueRef = doc(db, "leagues", leagueData.name);
-    // await updateDoc(leagueRef, {
-    //   members: arrayUnion(userLeagueData),
-    //   memberIds: arrayUnion(user.uid),
-    // });
     getLeagueInfo(router.query?.name as string);
   }
 
@@ -223,7 +194,7 @@ export default function League() {
             </>
             : <>
             <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
-            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} />}
+            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} getLeagueInfo={getLeagueInfo}/>}
 
             {displaySection === "leaguestats" && <>
               <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
