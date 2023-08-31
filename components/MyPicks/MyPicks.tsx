@@ -9,9 +9,10 @@ interface MyPicksProps {
   matchups: any;
   fetchedPicks: any;
   leagueName: string;
+  getLeagueInfo: (leagueName: string) => Promise<void>;
 }
 
-export default function MyPicks({weeks, matchups, fetchedPicks, leagueName}: MyPicksProps) {
+export default function MyPicks({weeks, matchups, fetchedPicks, leagueName, getLeagueInfo}: MyPicksProps) {
   const [pickWeek, setPickWeek] = useState("week01");
   const { user } = useAuthContext();
 
@@ -27,7 +28,7 @@ export default function MyPicks({weeks, matchups, fetchedPicks, leagueName}: MyP
         </select>
       </section>
 {/* show matchups to pick for selected week */}
-      {matchups && <MatchupsForm matchups={matchups} pickWeek={pickWeek} fetchedPicks={fetchedPicks} leagueName={leagueName} />}
+      {matchups && <MatchupsForm matchups={matchups} pickWeek={pickWeek} fetchedPicks={fetchedPicks} leagueName={leagueName} getLeagueInfo={getLeagueInfo} />}
     </>
   )
 }

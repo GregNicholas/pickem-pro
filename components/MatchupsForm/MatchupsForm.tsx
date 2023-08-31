@@ -13,9 +13,10 @@ interface MatchupsFormProps {
   pickWeek: string;
   fetchedPicks: any;
   leagueName: string;
+  getLeagueInfo: (leagueName: string) => Promise<void>;
 }
 
-export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueName}: MatchupsFormProps) {
+export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueName, getLeagueInfo}: MatchupsFormProps) {
   // we only want to initialize usersPicks this way the first time rendered. Currently not using the useEffect as props will only change after submission
   const [usersPicks, setUsersPicks] = useState(fetchedPicks);
   const { user } = useAuthContext();
@@ -54,7 +55,6 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   }
 
   const handleUpdateTiebreaker = (e: ChangeEvent<HTMLInputElement>) => { 
-    console.log(e.target.value)
     setUsersPicks((prev) => ({
       ...prev,
       [pickWeek]: {
@@ -87,6 +87,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
       await updateDoc(leagueRef, {
         [updateField]: usersPicks[pickWeek],
       });
+      await getLeagueInfo(leagueName);
     } else {
       console.log("pick each game and tiebreaker");
     }
@@ -106,7 +107,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
             required 
             name="tiebreaker" 
             id="tiebreaker" 
-            value={usersPicks[pickWeek].tiebreaker || 0} 
+            value={usersPicks[pickWeek].tiebreaker.toString() || 0} 
           />
         </label>
       <button onClick={submitPicks}>Submit</button>
