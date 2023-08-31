@@ -3,7 +3,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import pickstyles from "../MyPicks/MyPicks.module.css";
 import styles from "./MatchupsForm.module.css";
 import Matchup from "./Matchup";
-import { updateDoc, arrayUnion, doc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 interface MatchupsFormProps {
@@ -21,6 +21,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   const { user } = useAuthContext();
   let sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
   sortedGames = sortedGames.filter(game => game !== "tiebreaker")
+
   const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
 
   const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
@@ -87,7 +88,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
     }
 
     const numGamesPicked = Object.keys(usersPicks[pickWeek]).filter(item => item.includes("game")).length;
-    const numGamesInWeek = Object.keys(matchups[pickWeek]).length;
+    const numGamesInWeek = sortedGames.length;
 
     if (numGamesPicked === numGamesInWeek) {
       const leagueRef = doc(db, "leagues", leagueName);
