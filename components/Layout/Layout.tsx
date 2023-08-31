@@ -10,7 +10,7 @@ export const siteTitle = "Pickem Hub";
 
 export default function Layout({ children, home=false }) {
   const { user } = useAuthContext();
-  const name = user?.displayName || "Welcome";
+  const name = `${user?.displayName} logged in`  || "Welcome";
 
   const router = useRouter();
   // console.log("LAYOUT ROUTING: ", router.pathname, router.query, router.asPath);
@@ -41,7 +41,7 @@ export default function Layout({ children, home=false }) {
               width={483}
               alt={name}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h2 className={utilStyles.headingLg}>Welcome</h2>
           </>
         ) : (
           <>
@@ -52,10 +52,8 @@ export default function Layout({ children, home=false }) {
                 width={483}
                 alt=""
               />
-            <h2 className={utilStyles.headingLg}>
-              <p className={utilStyles.colorInherit}>
-                {name}
-              </p>
+            <h2 className={utilStyles.headingMd}>
+                <Link href="/dashboard" >{name}</Link>
             </h2>
           </>
         )}
@@ -65,7 +63,7 @@ export default function Layout({ children, home=false }) {
         <div className={styles.backToHome}>
           {
             router.pathname.includes("leagues") 
-            && <Link href="/dashboard">← Back to dashboard</Link> 
+            && <Link href="/dashboard">← Back to home</Link> 
           }
         </div>
       )}

@@ -24,16 +24,16 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
 
   const handleCreateLeague = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("SEARCH: ", createLeagueName, "We need to check if this league exists, if not, create a new league");
     // Add a new document in collection "cities"
-    const docRef = doc(db, "leagues", createLeagueName);
+    const newLeagueName = createLeagueName.trim();
+    const docRef = doc(db, "leagues", newLeagueName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         // change to display message to user
         showMessage("league already exists");
     } else {
-        await setDoc(doc(db, "leagues", createLeagueName), {
-            name: createLeagueName,
+        await setDoc(doc(db, "leagues", newLeagueName), {
+            name: newLeagueName,
             owner: user.uid,
             memberIds: [user.uid],
             members: {
@@ -63,9 +63,9 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
                 }
               },
         });
-        showMessage(`Created League: ${createLeagueName}`);
+        showMessage(`Created League: ${newLeagueName}`);
         setTimeout(() => {
-          router.push(`/leagues/${createLeagueName}`);
+          router.push(`/leagues/${newLeagueName}`);
         }, 1000);
     }
     setCreateLeagueName('');
@@ -77,7 +77,7 @@ export default function CreateLeague({setUpdatingLeague}: CreateLeagueProps) {
     <p>Create a NEW league:</p>
     <form onSubmit={handleCreateLeague} className={dashboardStyles.simpleForm}>
         <label htmlFor="createLeagueName">
-            <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="enter league name" value={createLeagueName} />
+            <input onChange={(e) => setCreateLeagueName(e.target.value)} required name="createLeagueName" id="createLeagueName" placeholder="new league name" value={createLeagueName} />
         </label>
         <button type="submit">Create</button>
     </form>

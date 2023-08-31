@@ -109,7 +109,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
           return <Matchup key={gameNum} matchups={matchups} usersPicks={usersPicks} setUsersPicks={setUsersPicks} pickWeek={pickWeek} gameNum={gameNum} handlePicked={handlePicked} CURRENT_TIME_IN_SECONDS={CURRENT_TIME_IN_SECONDS} />
         })}
         <label className={styles.center} htmlFor="tiebreaker">
-          <p className={styles.formLabel}><span className={styles.bold}>Tiebreaker</span> - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>
+          <p className={`${styles.formLabel} ${styles.bold}`}><span className={styles.bold}>Tiebreaker</span> - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>
           <input 
             className={styles.tieInput} 
             type="number" 
@@ -121,7 +121,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
           />
         </label>
       {displayMessage && <p className="errorMessage">{displayMessage}</p>}
-      <button onClick={submitPicks}>Submit</button>
+      <button className={styles.submitBtn} onClick={submitPicks}>Submit</button>
       </div>
   )
 }

@@ -56,7 +56,7 @@ function Dashboard() {
             {myLeagues.length > 0 
             ? <ul className={styles.leagueList}>
                 {myLeagues.map((league) => {
-                    return <li key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>&#8618;{league.name}</Link></li>
+                    return <li key={league.name} className={styles.leagueListItem}><Link href={`/leagues/${league.name}`}>{league.name} &#187;</Link></li>
                 })}
             </ul> 
             : <p>No leagues yet</p>

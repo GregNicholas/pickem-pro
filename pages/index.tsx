@@ -28,17 +28,16 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>(Let's go!)</p>
+      <section className={`${utilStyles.pageContainer} ${utilStyles.headingMd}`}>
         <ul className={utilStyles.nav}>
           <li className={utilStyles.navItem}>          
-            <Link href="/dashboard">Go to Dashboard -{">"}</Link>
+            <Link href="/dashboard">Go to Dashboard</Link>
           </li>
           <li className={utilStyles.navItem}>
-            <Link href="/auth/signin">Sign in! -{">"}</Link>
+            <Link href="/auth/signin">Sign in!</Link>
           </li>
           <li className={utilStyles.navItem}>
-            <Link href="/auth/signup">Sign up! -{">"}</Link>
+            <Link href="/auth/signup">Sign up!</Link>
           </li>
         </ul>
       </section>

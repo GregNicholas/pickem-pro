@@ -100,7 +100,7 @@ export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [leagueData, setLeagueData] = useState<League | null>(null);
-  const [displaySection, setDisplaySection] = useState("members");
+  const [displaySection, setDisplaySection] = useState("mypicks");
   const { fetchData: getMatchups, data: matchups, error: matchupsError, isLoading: matchupsLoading} = useFetchData("matchups");
   const router = useRouter();
   const { updateSelectedLeague } = useLeagueContext();
@@ -186,7 +186,7 @@ export default function League() {
         :
         <>
           <section className={styles.leagueDisplay}>
-            <h1 className={styles.pageTitle}>{leagueData?.name}</h1>
+            <h1 className={styles.pageTitle}>{leagueData?.name} league</h1>
             {!isMember ? <>
               <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>
               <LeagueMembers leagueData={leagueData} />
