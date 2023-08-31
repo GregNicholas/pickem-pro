@@ -51,6 +51,7 @@ function Dashboard() {
 
     return (
         <Layout>
+          <div className={styles.dashboardContainer}>
             <h2>{user?.displayName}'s Leagues</h2>
             {myLeagues.length > 0 
             ? <ul className={styles.leagueList}>
@@ -69,6 +70,7 @@ function Dashboard() {
             {searchBy === "create" && <CreateLeague setUpdatingLeague={setUpdatingLeague}/>}
 
             <button className={styles.signOutBtn} onClick={() => logOut()}>Sign Out</button>
+          </div>
         </Layout>
     );
 }

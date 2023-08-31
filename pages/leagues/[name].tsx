@@ -110,7 +110,7 @@ export default function League() {
     getMatchups();
   }, []);
   
-  const weeks = matchups ? Object.keys(matchups) : [];
+  let weeks = matchups ? Object.keys(matchups) : [];
   const fetchedPicks = leagueData?.members[user.uid]?.picks;
 
   if (!user) {
