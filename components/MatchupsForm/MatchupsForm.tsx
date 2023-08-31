@@ -6,8 +6,6 @@ import Matchup from "./Matchup";
 import { updateDoc, arrayUnion, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
-const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
-
 interface MatchupsFormProps {
   matchups: any;
   pickWeek: string;
@@ -21,8 +19,11 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   const [usersPicks, setUsersPicks] = useState(fetchedPicks);
   const [displayMessage, setDisplayMessage] = useState('');
   const { user } = useAuthContext();
-  const sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
+  let sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
+  sortedGames = sortedGames.filter(game => game !== "tiebreaker")
   const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
+
+  const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
 
   // useEffect(() => {
   //   setUsersPicks(fetchedPicks);
@@ -104,7 +105,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   return (
     <div className={pickstyles.pickscontainer}>
         {(pickWeek && matchups[pickWeek] && Object.keys(matchups[pickWeek]).length > 0) && sortedGames.map((gameNum) => {
-          return <Matchup key={gameNum} matchups={matchups} usersPicks={usersPicks} setUsersPicks={setUsersPicks} pickWeek={pickWeek} gameNum={gameNum} handlePicked={handlePicked}/>
+          return <Matchup key={gameNum} matchups={matchups} usersPicks={usersPicks} setUsersPicks={setUsersPicks} pickWeek={pickWeek} gameNum={gameNum} handlePicked={handlePicked} CURRENT_TIME_IN_SECONDS={CURRENT_TIME_IN_SECONDS} />
         })}
         <label className={styles.center} htmlFor="tiebreaker">
           <p className={styles.formLabel}><span className={styles.bold}>Tiebreaker</span> - Predict total points for {tiebreakerGame.away} @ {tiebreakerGame.home}: </p>

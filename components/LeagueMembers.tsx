@@ -8,7 +8,7 @@ export default function LeagueMembers({leagueData}: {leagueData: League}) {
   return (
   <>
     <h2 className={styles.subHeader}>Members</h2>
-    <ul id="members">
+    <ul className={styles.membersList} id="members">
       {memberNames}
     </ul>
   </>

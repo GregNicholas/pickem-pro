@@ -7,6 +7,7 @@
 .subHeader {
   font-size: 1.6rem;
   text-align: center;
+  margin: 0.5rem 0;
 }
 
 .joinButton {
@@ -42,4 +43,10 @@
   box-shadow: inset 0px 0px 2px 0px black;
   border-radius: 3px;
   font-size: 1rem;
+}
+
+.membersList {
+  max-width: 20rem;
+  margin: 0 auto;
+  text-align: center;
 }

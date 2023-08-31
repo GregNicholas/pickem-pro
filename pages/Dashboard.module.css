@@ -1,3 +1,10 @@
+.dashboardContainer {
+  padding: 1rem;
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .leagueList {
   display: flex;
   flex-direction: column;
