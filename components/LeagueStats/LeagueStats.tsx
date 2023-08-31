@@ -2,6 +2,7 @@ import { useState } from "react";
 import {League} from "../../types";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./LeagueStats.module.css";
+import { Member, UsersPicks, MatchupsData } from "../../types";
 
 interface LeagueStatsProps {
   weeks: string[];
@@ -57,46 +58,66 @@ interface LeagueStatsProps {
 // USER CAN SELECT WEEK FROM DROPDOWN and see games across top with users on y axis and their picks for each game. scores to the right. We would loop through members, Grab their picks for that week and map the picks to each row of the table
 
 export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsProps) {
-  console.log("Matchups", {matchups}) // matchups object with weeks key, weeks have games keys
-  console.log({weeks}) // array of week names "week01", etc..
-  console.log("MEMBAS: ", leagueData.members) // members names and picks
-
+  const [selectedStats, setSelectedStats] = useState("totalpoints");
   const membersData = leagueData.members;
-  // array of member names
-  const memberNames = Object.entries(membersData).map(([key, member]) => {
-    return member.name
-  });
+  // // array of member names
+  // const memberNames = Object.entries(membersData).map(([key, member]) => {
+  //   return member.name
+  // });
 
-  const memberScores = Object.entries(membersData).map(([id, member]) => {
-    // const memberName = member.name;
-    // console.log("FOREACH MEMBER: ", member)
-    Object.entries(member.picks["week01"]).forEach(([game, picked]) => {
-      if (game !== "tiebreaker") {
-        console.log(game, picked)
-        if(picked === matchups["week01"][game].winner) {
-          console.log("add a point to week one for this player")
-        }
-      }
-    })
-    return ({ [member.name]: member.picks})
-  })
-  console.log("SCORES: ", memberScores)
-
-  // const week01 =  Object.entries(membersData).forEach(([key, member]) => {
-  //   console.log("ONE MEMBER", member)
-  //   console.log(member.name, "Week 1 picks", member.picks["week01"])
+  // const memberScores = Object.entries(membersData).map(([id, member]) => {
+  //   // const memberName = member.name;
+  //   // console.log("FOREACH MEMBER: ", member)
   //   Object.entries(member.picks["week01"]).forEach(([game, picked]) => {
-  //     console.log(game, "picked", picked)
-  //     if(game !== "tiebreaker") {
-  //       console.log(matchups["week01"][game].winner)
+  //     if (game !== "tiebreaker") {
+  //       console.log(game, picked)
+  //       if(picked === matchups["week01"][game].winner) {
+  //         console.log("add a point to week one for this player")
+  //       }
   //     }
   //   })
+  //   return ({ [member.name]: member.picks})
   // })
+  // console.log("SCORES: ", memberScores)
+
+  const calculateTotalPoints = (members: { [x: string]: Member | { picks: any; }; }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
+    const totalPoints = [];
+  
+    for (const userId in members) {
+      let points = 0;
+      const userPicks = members[userId].picks;
+  
+      for (const week of weeks) {
+        const weekPicks = userPicks[week];
+  
+        if (weekPicks) {
+          for (const game in weekPicks) {
+            if (game !== 'tiebreaker') {
+              const userPick = weekPicks[game];
+              const matchup = matchups[week][game];
+  
+              if (userPick === matchup.winner) {
+                points++;
+              }
+            }
+          }
+        }
+      }
+  
+      totalPoints.push({ userId, points });
+    }
+  
+    return totalPoints;
+  };
+  
+  const totalPointsArray = calculateTotalPoints(leagueData.members, matchups, weeks); // Array of objects [{ userId, points }]
+  totalPointsArray.sort((a, b) => b.points - a.points);
+totalPointsArray.forEach((member) => {
+  console.log(membersData[member.userId].name, member.points);
+})
+  
 
   return (
-    <>
-    <h2 className={leagueStyles.subHeader}>League Stats</h2>
-    {/* {membersList} */}
-    </>
+    <div> coming soon</div>
   )
 }
