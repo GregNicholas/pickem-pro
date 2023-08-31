@@ -4,6 +4,12 @@ import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./MyPicks.module.css";
 import MatchupsForm from "../MatchupsForm/MatchupsForm";
 
+// const now = new Date();
+// let thisWeek = "week01";
+//   switch (now) {
+//     case now > 
+let thisWeek = "week01";
+
 interface MyPicksProps {
   weeks: string[];
   matchups: any;
@@ -13,7 +19,7 @@ interface MyPicksProps {
 }
 
 export default function MyPicks({weeks, matchups, fetchedPicks, leagueName, getLeagueInfo}: MyPicksProps) {
-  const [pickWeek, setPickWeek] = useState("week01");
+  const [pickWeek, setPickWeek] = useState(thisWeek);
   const { user } = useAuthContext();
 
   return (
