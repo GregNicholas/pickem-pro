@@ -53,7 +53,7 @@ export default function Layout({ children, home=false }) {
                 alt=""
               />
             <h2 className={utilStyles.headingLg}>
-              <p href="/dashboard" className={utilStyles.colorInherit}>
+              <p className={utilStyles.colorInherit}>
                 {name}
               </p>
             </h2>
@@ -65,8 +65,7 @@ export default function Layout({ children, home=false }) {
         <div className={styles.backToHome}>
           {
             router.pathname.includes("leagues") 
-            ? <Link href="/dashboard">← Back to dashboard</Link> 
-            : <Link href="/">← Back to home</Link> 
+            && <Link href="/dashboard">← Back to dashboard</Link> 
           }
         </div>
       )}
