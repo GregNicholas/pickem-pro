@@ -118,6 +118,24 @@ totalPointsArray.forEach((member) => {
   
 
   return (
-    <div> coming soon</div>
+    <section className={styles.leagueStats}>
+      <header>
+        <h2 className={leagueStyles.subHeader}>League Stats</h2>
+        <nav>
+          <button onClick={() => setSelectedStats("totalpoints")} className={styles.leagueStatsBtn}>
+            Total Points
+          </button>
+          <button onClick={() => setSelectedStats("weeklystats")} className={styles.leagueStatsBtn}>
+            Weekly Stats
+          </button>
+          <button onClick={() => setSelectedStats("trophycase")} className={styles.leagueStatsBtn}>
+            Trophy Case
+          </button>
+        </nav>
+      </header>
+      {selectedStats === "totalpoints" && <p>Total points</p>}
+      {selectedStats === "weeklystats" && <p>Weekly stats</p>}
+      {selectedStats === "trophycase" && <p>trophy case</p>}
+    </section>
   )
 }

@@ -35,11 +35,16 @@
 
 .teamcontainer {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.2rem;
   text-align: center;
   background-color: white;
   border: solid 1px #dddddd;
   cursor: pointer;
+  height: 50px;
   padding: 10px 5px;
   border-radius: 6px;
 }

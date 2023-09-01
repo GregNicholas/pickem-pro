@@ -13,88 +13,104 @@ import MyPicks from "../../components/MyPicks/MyPicks";
 import {League} from "../../types";
 import LeagueStats from "../../components/LeagueStats/LeagueStats";
 
-// const week01 = {
-//   game01: {
-//     home: "KC",
-//     away: "DET",
-//     winner: ""
-//   },
-//   game02: {
-//     home: "CLE",
-//     away: "CIN",
-//     winner: ""
-//   },
-//   game03: {
-//     home: "BAL",
-//     away: "HOU",
-//     winner: ""
-//   },
-//   game04: {
-//     home: "MIN",
-//     away: "TB",
-//     winner: ""
-//   },
-//   game05: {
-//     home: "ATL",
-//     away: "CAR",
-//     winner: ""
-//   },
-//   game06: {
-//     home: "WAS",
-//     away: "ARI",
-//     winner: ""
-//   },
-//   game07: {
-//     home: "IND",
-//     away: "JAX",
-//     winner: ""
-//   },
-//   game08: {
-//     home: "PIT",
-//     away: "SF",
-//     winner: ""
-//   },
-//   game09: {
-//     home: "NO",
-//     away: "TEN",
-//     winner: ""
-//   },
-//   game10: {
-//     home: "DEN",
-//     away: "LV",
-//     winner: ""
-//   },
-//   game11: {
-//     home: "NE",
-//     away: "PHI",
-//     winner: ""
-//   },
-//   game12: {
-//     home: "SEA",
-//     away: "LAR",
-//     winner: ""
-//   },
-//   game13: {
-//     home: "LAC",
-//     away: "MIA",
-//     winner: ""
-//   },
-//   game14: {
-//     home: "CHI",
-//     away: "GB",
-//     winner: ""
-//   },
-//   game15: {
-//     home: "NYG",
-//     away: "DAL",
-//     winner: ""
-//   },
-//   game16: {
-//     home: "BUF",
-//     away: "NYJ",
-//     winner: ""
-//   }
-// }
+const week = {
+  game01: {
+    home: "GB",
+    away: "DET",
+    winner: "",
+    time: 0
+  },
+  game02: {
+    home: "JAX",
+    away: "ATL",
+    winner: "",
+    time: 0
+  },
+  game03: {
+    home: "IND",
+    away: "LAR",
+    winner: "",
+    time: 0
+  },
+  game04: {
+    home: "CLE",
+    away: "BAL",
+    winner: "",
+    time: 0
+  },
+  game05: {
+    home: "CAR",
+    away: "MIN",
+    winner: "",
+    time: 0
+  },
+  game06: {
+    home: "TEN",
+    away: "CIN",
+    winner: "",
+    time: 0
+  },
+  game07: {
+    home: "NO",
+    away: "TB",
+    winner: "",
+    time: 0
+  },
+  game08: {
+    home: "BUF",
+    away: "MIA",
+    winner: "",
+    time: 0
+  },
+  game09: {
+    home: "CHI",
+    away: "DEN",
+    winner: "",
+    time: 0
+  },
+  game10: {
+    home: "PHI",
+    away: "WAS",
+    winner: "",
+    time: 0
+  },
+  game11: {
+    home: "HOU",
+    away: "PIT",
+    winner: "",
+    time: 0
+  },
+  game12: {
+    home: "LAC",
+    away: "LV",
+    winner: "",
+    time: 0
+  },
+  game13: {
+    home: "SF",
+    away: "ARI",
+    winner: "",
+    time: 0
+  },
+  game14: {
+    home: "DAL",
+    away: "NE",
+    winner: "",
+    time: 0
+  },
+  game15: {
+    home: "NYJ",
+    away: "KC",
+    winner: "",
+    time: 0
+  },
+  game16: {
+    home: "NYG",
+    away: "SEA",
+    winner: "",
+    time: 0
+  }
+}
 
 export default function League() {
   const [isLoading, setIsLoading] = useState(true);
@@ -174,9 +190,9 @@ export default function League() {
     getLeagueInfo(router.query?.name as string);
   }
 
-  // const addMatchups = async () => {
-  //   await setDoc(doc(db, "matchups", "week01"), week01);
-  // }
+  const addMatchups = async () => {
+    await setDoc(doc(db, "matchups", "week04"), week);
+  }
 
   return (
     <Layout>
@@ -199,7 +215,7 @@ export default function League() {
               <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
             </>}
 
-            {/* <button onClick={addMatchups}>add matchups</button> */}
+            <button onClick={addMatchups}>add matchups</button>
             </>
             }
 

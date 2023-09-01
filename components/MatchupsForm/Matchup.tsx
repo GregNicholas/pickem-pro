@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import Image from "next/image";
 import styles from "../MyPicks/MyPicks.module.css";
 
 // const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
@@ -52,13 +53,15 @@ export default function Matchup({ matchups, usersPicks, setUsersPicks, pickWeek,
           className={`${styles.teamcontainer} ${styles[isBlockedStyle]} ${styles[awayPickStyle]}`}
           onClick={() => handlePicked(isBlockedStyle, gameNum, awayTeam)}
         >
-          {awayTeam}
+          <Image src={`/images/${awayTeam}.png`} height={33} width={33} alt={awayTeam} />
+          <span>{awayTeam}</span>
         </div>@
         <div 
           className={`${styles.teamcontainer} ${styles[isBlockedStyle]} ${styles[homePickStyle]}`}
           onClick={() => handlePicked(isBlockedStyle, gameNum, homeTeam)}
         >
-          {homeTeam}
+          <Image src={`/images/${homeTeam}.png`} height={33} width={33} alt={homeTeam} />
+          <span>{homeTeam}</span>
         </div>
       </div>
       </div>
