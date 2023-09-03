@@ -13,105 +13,6 @@ import MyPicks from "../../components/MyPicks/MyPicks";
 import {League} from "../../types";
 import LeagueStats from "../../components/LeagueStats/LeagueStats";
 
-// const week = {
-//   game01: {
-//     home: "GB",
-//     away: "DET",
-//     winner: "",
-//     time: 0
-//   },
-//   game02: {
-//     home: "JAX",
-//     away: "ATL",
-//     winner: "",
-//     time: 0
-//   },
-//   game03: {
-//     home: "IND",
-//     away: "LAR",
-//     winner: "",
-//     time: 0
-//   },
-//   game04: {
-//     home: "CLE",
-//     away: "BAL",
-//     winner: "",
-//     time: 0
-//   },
-//   game05: {
-//     home: "CAR",
-//     away: "MIN",
-//     winner: "",
-//     time: 0
-//   },
-//   game06: {
-//     home: "TEN",
-//     away: "CIN",
-//     winner: "",
-//     time: 0
-//   },
-//   game07: {
-//     home: "NO",
-//     away: "TB",
-//     winner: "",
-//     time: 0
-//   },
-//   game08: {
-//     home: "BUF",
-//     away: "MIA",
-//     winner: "",
-//     time: 0
-//   },
-//   game09: {
-//     home: "CHI",
-//     away: "DEN",
-//     winner: "",
-//     time: 0
-//   },
-//   game10: {
-//     home: "PHI",
-//     away: "WAS",
-//     winner: "",
-//     time: 0
-//   },
-//   game11: {
-//     home: "HOU",
-//     away: "PIT",
-//     winner: "",
-//     time: 0
-//   },
-//   game12: {
-//     home: "LAC",
-//     away: "LV",
-//     winner: "",
-//     time: 0
-//   },
-//   game13: {
-//     home: "SF",
-//     away: "ARI",
-//     winner: "",
-//     time: 0
-//   },
-//   game14: {
-//     home: "DAL",
-//     away: "NE",
-//     winner: "",
-//     time: 0
-//   },
-//   game15: {
-//     home: "NYJ",
-//     away: "KC",
-//     winner: "",
-//     time: 0
-//   },
-//   game16: {
-//     home: "NYG",
-//     away: "SEA",
-//     winner: "",
-//     time: 0
-//   }
-// }
-
 export default function League() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -190,8 +91,107 @@ export default function League() {
     getLeagueInfo(router.query?.name as string);
   }
 
+  // const week = {
+  //   game01: {
+  //     away: "CLE",
+  //     home: "CIN",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game02: {
+  //     away: "MIN",
+  //     home: "DET",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game03: {
+  //     away: "CHI",
+  //     home: "GB",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game04: {
+  //     away: "JAX",
+  //     home: "TEN",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game05: {
+  //     away: "HOU",
+  //     home: "IND",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game06: {
+  //     away: "DEN",
+  //     home: "LV",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game07: {
+  //     away: "BUF",
+  //     home: "MIA",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game08: {
+  //     away: "NYJ",
+  //     home: "NE",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game09: {
+  //     away: "ATL",
+  //     home: "NO",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game10: {
+  //     away: "PHI",
+  //     home: "NYG",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game11: {
+  //     away: "SEA",
+  //     home: "ARI",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game12: {
+  //     away: "KC",
+  //     home: "LAC",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game13: {
+  //     away: "LAR",
+  //     home: "SF",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game14: {
+  //     away: "DAL",
+  //     home: "WAS",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game15: {
+  //     away: "TB",
+  //     home: "CAR",
+  //     winner: "",
+  //     time: 0
+  //   },
+  //   game16: {
+  //     away: "PIT",
+  //     home: "BAL",
+  //     winner: "",
+  //     time: 0
+  //   },
+  // }
+
   // const addMatchups = async () => {
-  //   await setDoc(doc(db, "matchups", "week04"), week);
+  //   await setDoc(doc(db, "matchups", "week18"), week);
   // }
 
   return (
