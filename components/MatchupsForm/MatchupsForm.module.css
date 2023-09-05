@@ -28,4 +28,12 @@
   color: white;
   padding: 0.5rem 1.4rem;
   border-radius: 4px;
+  cursor: pointer;
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+  background-blend-mode: lighten;
+  box-shadow: 2px 3px 3px 0px var(--main-blue);
+}
+
+.submitBtn:hover {
+  background-blend-mode: darken;
 }
