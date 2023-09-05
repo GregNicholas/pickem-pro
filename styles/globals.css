@@ -85,12 +85,14 @@ button {
 
 .minorOptionBtn {
   border: none;
+  border-radius: 3px;
   background: gray;
   color: white;
   padding: 0.4rem 1.2rem;
-  width: 8rem;
+  width: 8.5rem;
   height: 2.2rem;
   cursor: pointer;
+  box-shadow: 2px 3px 3px 0px black;
 }
 
 .selectedMinorOptionBtn {
@@ -98,6 +100,8 @@ button {
   color: white;
   font-weight: bold;
   padding: 0.2rem 1.2rem;
-  width: 9rem;
+  /* width: 9rem; */
   height: 2.4rem;
+  transform: translate(2px, 3px);
+  box-shadow: none;
 }

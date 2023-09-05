@@ -24,8 +24,9 @@
 }
 
 .selectContainer {
-  width: fit-content;
+  width: 19rem;
   display: flex;
+  justify-content: space-between;
   gap: 1.5rem;
   margin: 1rem 0;
 }
@@ -56,10 +57,24 @@
 .simpleForm input {
   font-size: 1.2rem;
   padding: 0.5rem 5px;
-  width: 15rem;
+  width: 19rem;
+  margin: 2px 0;
 }
 
 .simpleForm button {
   font-size: 1.2rem;
-  width: 15rem;
+  width: 19rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 2px 3px 3px 0px black;
+  cursor: pointer;
+}
+
+.simpleForm button:hover {
+  background: lightgray;
+}
+
+.simpleForm button:active {
+  box-shadow: none;
+  transform: translate(2px, 3px);
 }
