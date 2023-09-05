@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {League} from "../../types";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./LeagueStats.module.css";
 import { Member, UsersPicks, MatchupsData } from "../../types";
+import WeeklyStats from "./WeeklyStats";
 
 interface LeagueStatsProps {
   weeks: string[];
@@ -60,36 +61,18 @@ interface LeagueStatsProps {
 export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsProps) {
   const [selectedStats, setSelectedStats] = useState("totalpoints");
   const membersData = leagueData.members;
-  // // array of member names
-  // const memberNames = Object.entries(membersData).map(([key, member]) => {
-  //   return member.name
-  // });
 
-  // const memberScores = Object.entries(membersData).map(([id, member]) => {
-  //   // const memberName = member.name;
-  //   // console.log("FOREACH MEMBER: ", member)
-  //   Object.entries(member.picks["week01"]).forEach(([game, picked]) => {
-  //     if (game !== "tiebreaker") {
-  //       console.log(game, picked)
-  //       if(picked === matchups["week01"][game].winner) {
-  //         console.log("add a point to week one for this player")
-  //       }
-  //     }
-  //   })
-  //   return ({ [member.name]: member.picks})
-  // })
-  // console.log("SCORES: ", memberScores)
+  const calculateStats = (members: { [x: string]: Member | { picks: any; }; }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
+    const membersStats = [];
 
-  const calculateTotalPoints = (members: { [x: string]: Member | { picks: any; }; }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
-    const totalPoints = [];
-  
     for (const userId in members) {
-      let points = 0;
+      let totalPoints = 0;
+      let weekPoints = 0;
+      const weeklyPoints = {};
       const userPicks = members[userId].picks;
   
       for (const week of weeks) {
         const weekPicks = userPicks[week];
-  
         if (weekPicks) {
           for (const game in weekPicks) {
             if (game !== 'tiebreaker') {
@@ -97,44 +80,49 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
               const matchup = matchups[week][game];
   
               if (userPick === matchup.winner) {
-                points++;
+                totalPoints++;
+                weekPoints++;
               }
             }
           }
         }
+        weeklyPoints[week] = weekPoints;
+        weekPoints = 0;
       }
   
-      totalPoints.push({ userId, points });
+      membersStats.push({ userId, totalPoints, weeklyPoints });
     }
-  
-    return totalPoints;
+    return membersStats;
   };
   
-  const totalPointsArray = calculateTotalPoints(leagueData.members, matchups, weeks); // Array of objects [{ userId, points }]
-  totalPointsArray.sort((a, b) => b.points - a.points);
-totalPointsArray.forEach((member) => {
-  console.log(membersData[member.userId].name, member.points);
-})
-  
+// if this became expensive we could do useMemo possibly in the league page
+  const membersStatsArray = calculateStats(leagueData.members, matchups, weeks);
+  console.log(membersStatsArray);
+
+  membersStatsArray.sort((a, b) => b.totalPoints - a.totalPoints);
+  const totalPointsArray = membersStatsArray.map((member) => {
+    return [membersData[member.userId].name, member.totalPoints];
+  })
+  console.log(totalPointsArray)
 
   return (
-    <section className={styles.leagueStats}>
+    <section className={styles.leagueStatsContainer}>
       <header>
         <h2 className={leagueStyles.subHeader}>League Stats</h2>
         <nav>
-          <button onClick={() => setSelectedStats("totalpoints")} className={styles.leagueStatsBtn}>
-            Total Points
-          </button>
           <button onClick={() => setSelectedStats("weeklystats")} className={styles.leagueStatsBtn}>
             Weekly Stats
+          </button>
+          <button onClick={() => setSelectedStats("totalpoints")} className={styles.leagueStatsBtn}>
+            Total Points
           </button>
           <button onClick={() => setSelectedStats("trophycase")} className={styles.leagueStatsBtn}>
             Trophy Case
           </button>
         </nav>
       </header>
+      {selectedStats === "weeklystats" && <WeeklyStats />}      
       {selectedStats === "totalpoints" && <p>Total points</p>}
-      {selectedStats === "weeklystats" && <p>Weekly stats</p>}
       {selectedStats === "trophycase" && <p>trophy case</p>}
     </section>
   )
