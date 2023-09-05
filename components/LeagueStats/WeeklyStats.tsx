@@ -1,23 +1,24 @@
 import { useState } from "react";
-import { Member, UsersPicks, MatchupsData } from "../../types";
+import { Member, UsersPicks, MatchupsData, League } from "../../types";
 import WeekTable from "./WeekTable";
 
 interface WeeklyStatsProps {
-  membersPicks: { [x: string]: Member };
+  leagueData: League;
   matchups: MatchupsData;
   weeks: string[];
 }
 
-export default function WeeklyStats({ membersPicks, matchups, weeks }: WeeklyStatsProps) {
+export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStatsProps) {
   const [selectedWeek, setSelectedWeek] = useState("week01");
 
-  // console.log(JSON.stringify(membersPicks));
+  // console.log(JSON.stringify(leagueData.membersPicks));
   // console.log({matchups});
   // console.log({weeks});
+
   return (
     <>
       <p>weekly stats placeholder</p>
-      <WeekTable membersPicks={membersPicks} matchups={matchups["week01"]} />
+      <WeekTable leagueData={leagueData} matchups={matchups} week={"week18"} />
     </>
   )
 }

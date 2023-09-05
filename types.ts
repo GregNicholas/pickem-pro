@@ -23,6 +23,7 @@ export interface Matchup {
   winner: string;
   home: string;
   away: string;
+  timestamp: string;
 }
 
 export interface Picks {
@@ -40,7 +41,5 @@ export interface LeagueData {
 }
 
 export interface MatchupsData {
-  [week: string]: {
-    [game: string]: Matchup;
-  };
+  [gameId: string]: Matchup;
 }

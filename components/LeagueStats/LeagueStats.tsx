@@ -103,7 +103,7 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
   const totalPointsArray = membersStatsArray.map((member) => {
     return [membersData[member.userId].name, member.totalPoints];
   })
-  // console.log("total points by user: ", totalPointsArray)
+  console.log("total points by user: ", totalPointsArray)
 
   return (
     <section className={styles.leagueStatsContainer}>
@@ -121,7 +121,7 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
           </button>
         </nav>
       </header>
-      {selectedStats === "weeklystats" && <WeeklyStats membersPicks={leagueData.members} matchups={matchups} weeks={weeks} />}      
+      {selectedStats === "weeklystats" && <WeeklyStats leagueData={leagueData} matchups={matchups} weeks={weeks} />}      
       {selectedStats === "totalpoints" && <p>Total points</p>}
       {selectedStats === "trophycase" && <p>trophy case</p>}
     </section>
