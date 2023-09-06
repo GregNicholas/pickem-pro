@@ -1,6 +1,6 @@
-import styles from "./LeagueStats.module.css";
 import { Member, UsersPicks, MatchupsData, Matchup, League } from "../../types";
 import Image from "next/image";
+import styles from "./LeagueStats.module.css";
 
 interface WeekTableProps {
   leagueData: League;
@@ -36,12 +36,11 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
   }
 
   const weekScores = getWeekScores(membersPicks, weekMatchups).sort((a, b) => b[1] - a[1]);
-  console.log(weekScores);
 
   return (
     <>
     <h3>{week}</h3>
-    
+
     <div className={styles.tableContainer}>
       <table className={styles.weekTable}>
         <thead>
@@ -53,6 +52,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
                 {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
               </th>
             ))}
+            {/* <th>tiebreaker {weekMatchups.tiebreaker}</th> */}
           </tr>
         </thead>
         <tbody>

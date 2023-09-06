@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Member, UsersPicks, MatchupsData, League } from "../../types";
 import WeekTable from "./WeekTable";
+import styles from "./LeagueStats.module.css"
 
 interface WeeklyStatsProps {
   leagueData: League;
@@ -8,16 +9,22 @@ interface WeeklyStatsProps {
   weeks: string[];
 }
 
+let thisWeek = "week01"
+if(true) {
+  thisWeek = "week02"
+}
+console.log(thisWeek);
 export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStatsProps) {
-  const [selectedWeek, setSelectedWeek] = useState("week01");
-
-  // console.log(JSON.stringify(leagueData.membersPicks));
-  // console.log({matchups});
-  // console.log({weeks});
+  const [selectedWeek, setSelectedWeek] = useState(thisWeek);
 
   return (
     <>
-      <WeekTable leagueData={leagueData} matchups={matchups} week={"week18"} />
+      <section className={styles.weekStatSelectContainer}>
+        {weeks.map(week => (
+          <button key={week+"select"} onClick={() => setSelectedWeek(week)} className={`${styles.weekSelectBtn} ${week === selectedWeek && styles.selected}`}>{week}</button>
+        ))}
+      </section>
+      <WeekTable leagueData={leagueData} matchups={matchups} week={selectedWeek} />
     </>
   )
 }

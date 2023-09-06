@@ -30,6 +30,23 @@
   padding: 0.5rem;
 }
 
+.weekStatSelectContainer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.weekSelectBtn {
+  padding: 0.2rem 0.8rem;
+  border: none;
+}
+
+.selected {
+  background: var(--main-red);
+  color: white;
+}
+
 .tableContainer {
   width: 100%;
   max-height: 98vh;
@@ -53,6 +70,7 @@
 }
 
 .weekTable thead th {
+  font-weight: 400;
   padding: 3px;
   position: sticky;
   top: 0;
