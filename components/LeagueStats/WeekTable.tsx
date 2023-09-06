@@ -14,9 +14,6 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
   const memberIds = leagueData.memberIds;
   const weekMatchups = matchups[week]
   const games = Object.keys(weekMatchups).filter((key) => key.startsWith("game")).sort();
-  // console.log({membersPicks});
-  // console.log({weekMatchups});
-  // console.log({memberIds});
 
   function getWeekScores(membersPicks: {[memberId: string]: Member}, weekMatchups) {
     const scores = [];
@@ -24,19 +21,47 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
       let weekScore = 0;
       // one member's picks for this week
       const picks = membersPicks[memberId].picks[week];
+      const tiebreaker = membersPicks[memberId].picks[week].tiebreaker;
       games.forEach(game => {
         if (weekMatchups[game].winner === picks[game]){
           weekScore++;
         }
       });
-      scores.push([memberId, weekScore]);
+      scores.push([memberId, weekScore, tiebreaker]);
     });
 
     return scores;
   }
 
   const weekScores = getWeekScores(membersPicks, weekMatchups).sort((a, b) => b[1] - a[1]);
+  const highScore = weekScores[0][1];
+  const leaders = weekScores.filter(score => score[1] === highScore);
+  let weekWinner = "";
 
+  if (leaders.length === 1) {
+    console.log(leaders[0], "is the winner")
+  } else {
+    const tiebreakerLeaders = leaders.map(leader => {
+      const leaderTiebreaker = leader[2];
+      return [...leader, Math.abs(leaderTiebreaker - weekMatchups.tiebreaker)];
+    })
+  
+    tiebreakerLeaders.sort((a, b) => a[3] - b[3]);
+    console.log("sortedLeaders: ", tiebreakerLeaders);
+  // now check tiebreakerLeaders for duplicates and return winner / winners
+    const filteredLeaders = tiebreakerLeaders.filter(leader => leader[3] === tiebreakerLeaders[0][3]);
+    if (filteredLeaders.length === 1) {
+      console.log(filteredLeaders[0], "IS the winner by tiebreaker");
+    } else {
+      console.log("we have a tie");
+      filteredLeaders.forEach(leader => {
+        console.log(leader);
+      })
+    }
+  }
+// modify the above and display the winner
+// also modify table to show picks if the matchups data has a winner
+  
   return (
     <>
     <h3>{week}</h3>
@@ -90,35 +115,3 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
 }
 
 import React from "react";
-
-// Working through logic and data: 
-
-  // const memberIds = Object.keys(membersPicks).map((memberId) => membersPicks[memberId].name);
-  // const games = Object.keys(weekMatchups).filter((key) => key.startsWith("game"));
-
-    // <table>
-    //   <thead>
-    //     <tr>
-    //       <th></th>
-    //       {games.map((gameId) => (
-    //         <th key={gameId}>
-    //           {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
-    //         </th>
-    //       ))}
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {memberNames.map((memberName) => (
-    //       <tr key={memberName}>
-    //         <td>{memberName}</td>
-    //         {games.map((gameId) => (
-    //           <td key={gameId}>
-    //             {membersPicks[memberName.toLowerCase()].picks.week01[gameId]}
-    //           </td>
-    //         ))}
-    //       </tr>
-    //     ))}
-    //   </tbody>
-    // </table>
-
-

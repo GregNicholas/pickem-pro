@@ -10,10 +10,7 @@ interface WeeklyStatsProps {
 }
 
 let thisWeek = "week01"
-if(true) {
-  thisWeek = "week02"
-}
-console.log(thisWeek);
+
 export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStatsProps) {
   const [selectedWeek, setSelectedWeek] = useState(thisWeek);
 
