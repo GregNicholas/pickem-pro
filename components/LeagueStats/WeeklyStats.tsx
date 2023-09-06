@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Member, UsersPicks, MatchupsData, League } from "../../types";
+import { Member, UsersPicks, Matchups, League } from "../../types";
 import WeekTable from "./WeekTable";
 import styles from "./LeagueStats.module.css"
 
 interface WeeklyStatsProps {
   leagueData: League;
-  matchups: MatchupsData;
+  matchups: Matchups;
   weeks: string[];
 }
 

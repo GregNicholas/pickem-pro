@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
-import {League} from "../../types";
+import { useState } from "react";
+import {League, Matchups} from "../../types";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./LeagueStats.module.css";
-import { Member, UsersPicks, MatchupsData } from "../../types";
+import { Member, UsersPicks, Week } from "../../types";
 import WeeklyStats from "./WeeklyStats";
 
 interface LeagueStatsProps {
   weeks: string[];
-  matchups: MatchupsData;
+  matchups: Matchups;
   leagueData: League;
 }
 
@@ -61,6 +61,8 @@ interface LeagueStatsProps {
 export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsProps) {
   const [selectedStats, setSelectedStats] = useState("weeklystats");
   const membersData = leagueData.members;
+
+  console.log("MAtchups: ", matchups)
 
   const calculateStats = (members: { [x: string]: Member | { picks: any; }; }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
     const membersStats = [];

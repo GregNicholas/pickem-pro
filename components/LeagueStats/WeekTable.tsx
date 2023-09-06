@@ -1,10 +1,10 @@
-import { Member, UsersPicks, MatchupsData, Matchup, League } from "../../types";
+import { Member, UsersPicks, Matchups, Matchup, League } from "../../types";
 import Image from "next/image";
 import styles from "./LeagueStats.module.css";
 
 interface WeekTableProps {
   leagueData: League;
-  matchups: MatchupsData;
+  matchups: Matchups;
   week: string;
 }
 
@@ -18,7 +18,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
   // console.log({weekMatchups});
   // console.log({memberIds});
 
-  function getWeekScores(membersPicks: {[memberId: string]: Member}, weekMatchups: Matchup) {
+  function getWeekScores(membersPicks: {[memberId: string]: Member}, weekMatchups) {
     const scores = [];
     Object.keys(membersPicks).forEach((memberId) => {
       let weekScore = 0;
@@ -52,18 +52,19 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
                 {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
               </th>
             ))}
-            {/* <th>tiebreaker {weekMatchups.tiebreaker}</th> */}
+            <th>tie breaker {weekMatchups.tiebreaker}</th>
           </tr>
         </thead>
         <tbody>
           {weekScores.map((memberScore) => {
-            const memberName = membersPicks[memberScore[0]].name
+            const memberName = membersPicks[memberScore[0]].name;
+            const myPicks = membersPicks[memberScore[0]].picks;
             return (
               <tr key={memberScore[0]}>
                 <th>{memberName}</th>
                 <td>{memberScore[1]}</td>
                 {games.map((gameId) => {
-                  const pick = membersPicks[memberScore[0]].picks[week][gameId];
+                  const pick = myPicks[week][gameId];
                   const winner = weekMatchups[gameId].winner;
                   let pickStatus = "";
                   if (winner && winner === pick) {
@@ -77,6 +78,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
                     : ""}
                   </td>
                 )})}
+                <td>{myPicks[week].tiebreaker}</td>
               </tr>
             )
           })}
