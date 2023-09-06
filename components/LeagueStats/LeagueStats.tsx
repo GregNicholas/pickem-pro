@@ -116,9 +116,9 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
           <button onClick={() => setSelectedStats("totalpoints")} className={`${styles.leagueStatsBtn} ${selectedStats === "totalpoints" && styles.leagueStatsBtnSelected}`}>
             Total Points
           </button>
-          <button onClick={() => setSelectedStats("trophycase")} className={`${styles.leagueStatsBtn} ${selectedStats === "trophycase" && styles.leagueStatsBtnSelected}`}>
+          {/* <button onClick={() => setSelectedStats("trophycase")} className={`${styles.leagueStatsBtn} ${selectedStats === "trophycase" && styles.leagueStatsBtnSelected}`}>
             Trophy Case
-          </button>
+          </button> */}
         </nav>
       </header>
       {selectedStats === "weeklystats" && <WeeklyStats leagueData={leagueData} matchups={matchups} weeks={weeks} />}      

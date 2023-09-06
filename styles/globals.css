@@ -86,13 +86,18 @@ button {
 .minorOptionBtn {
   border: none;
   border-radius: 3px;
-  background: gray;
-  color: white;
+  background: #b3b3b3;
+  color: black;
   padding: 0.4rem 1.2rem;
   width: 8.5rem;
   height: 2.2rem;
   cursor: pointer;
   box-shadow: 2px 3px 3px 0px black;
+}
+
+.minorOptionBtn:active {
+  box-shadow: none;
+  transform: translate(2px, 3px);
 }
 
 .selectedMinorOptionBtn {

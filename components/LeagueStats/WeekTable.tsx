@@ -1,6 +1,6 @@
-
-import { useState } from "react";
+import styles from "./LeagueStats.module.css";
 import { Member, UsersPicks, MatchupsData, Matchup, League } from "../../types";
+import Image from "next/image";
 
 interface WeekTableProps {
   leagueData: League;
@@ -41,37 +41,48 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
   return (
     <>
     <h3>{week}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>score</th>
-          {games.map((gameId) => (
-            <th key={gameId}>
-              {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {weekScores.map((memberScore) => {
-          const memberName = membersPicks[memberScore[0]].name
-          return (
-            <tr key={memberScore[0]}>
-              <td>{memberName}</td>
-              <td>{memberScore[1]}</td>
-              {games.map((gameId) => {
-                const pick = membersPicks[memberScore[0]].picks[week][gameId];
-                return (
-                <td key={gameId}>
-                  {pick}
-                </td>
-              )})}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    
+    <div className={styles.tableContainer}>
+      <table className={styles.weekTable}>
+        <thead>
+          <tr>
+            <th></th>
+            <th>score</th>
+            {games.map((gameId) => (
+              <th key={gameId}>
+                {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {weekScores.map((memberScore) => {
+            const memberName = membersPicks[memberScore[0]].name
+            return (
+              <tr key={memberScore[0]}>
+                <th>{memberName}</th>
+                <td>{memberScore[1]}</td>
+                {games.map((gameId) => {
+                  const pick = membersPicks[memberScore[0]].picks[week][gameId];
+                  const winner = weekMatchups[gameId].winner;
+                  let pickStatus = "";
+                  if (winner && winner === pick) {
+                    pickStatus = "correctPick";
+                  } else if (winner && winner !== pick) {
+                    pickStatus = "incorrectPick";
+                  }
+                  return (
+                  <td className={styles[pickStatus]} key={gameId}>
+                    {pick ? <Image src={`/images/${pick}.png`} height={33} width={33} alt={pick} />
+                    : ""}
+                  </td>
+                )})}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
     </>
   )
 }

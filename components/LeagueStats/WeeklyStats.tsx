@@ -17,7 +17,6 @@ export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStats
 
   return (
     <>
-      <p>weekly stats placeholder</p>
       <WeekTable leagueData={leagueData} matchups={matchups} week={"week18"} />
     </>
   )
