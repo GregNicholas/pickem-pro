@@ -105,14 +105,18 @@
   position: sticky;
   left: 0;
   z-index: 1;
-  min-width: 60px;
-  max-width: 90px;
+  max-width: 150px;
+  white-space: wrap;
   overflow-wrap: break-word;
 }
 
 @media screen and (max-width: 550px) {
   .weekTable {
     white-space: wrap;
+  }
+  .weekTable tbody th {
+    min-width: 60px;
+    max-width: 100px;
   }
 }
 
@@ -122,4 +126,10 @@
 
 .incorrectPick {
   background: #ffa9a9 !important;
+}
+
+.winnerCell {
+  font-weight: bold !important;
+  background: gold !important;
+  color: black !important;
 }
