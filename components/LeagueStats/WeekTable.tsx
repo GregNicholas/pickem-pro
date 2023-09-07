@@ -97,7 +97,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
             const myPicks = membersPicks[memberScore[0]].picks;
             return (
               <tr key={memberScore[0]}>
-                <th className={memberScore[1] === highScore && weekWinner.includes(memberName) ? styles.winnerCell : ""}>{memberName}</th>
+                <th className={memberScore[1] === highScore && weekWinner.includes(memberName) ? styles.winnerCell : ""}><span>{memberName}</span></th>
                 <td>{memberScore[1]}</td>
                 {games.map((gameId) => {
                   const pick = myPicks[week][gameId];
