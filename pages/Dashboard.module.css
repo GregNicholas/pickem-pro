@@ -1,6 +1,7 @@
 .dashboardContainer {
   padding: 1rem;
   padding: 1rem;
+  width: fit-content;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -46,6 +47,20 @@
 
 .signOutBtn {
   margin: 3rem 0 1rem 0;
+  background: #b3b3b3;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 2px 3px 3px 0px black;
+  cursor: pointer;
+}
+
+.signOutBtn:hover {
+  background: lightgray;
+}
+
+.signOutBtn:active {
+  box-shadow: none;
+  transform: translate(2px, 3px);
 }
 
 .simpleForm {
@@ -64,6 +79,7 @@
 .simpleForm button {
   font-size: 1.2rem;
   width: 19rem;
+  background: #b3b3b3;
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 2px 3px 3px 0px black;

@@ -1,18 +1,172 @@
+.leagueStatsContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .leagueStatsBtn {
   background: none;
   border: none;
   padding: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .leagueStatsBtn:hover {
-  color: blue;
+  color: var(--main-red);
   text-decoration: underline;
 }
 
-.leagueStats nav {
+.leagueStatsBtnSelected {
+  color: var(--main-red);
+  text-decoration: underline;
+}
+
+.leagueStatsContainer nav {
   display: flex;
   gap: 2rem;
   width: fit-content;
-  margin: 0 auto;
+  margin: 0 auto 1.4rem auto;
   padding: 0.5rem;
+}
+
+.weekStatSelectContainer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  overflow-x: auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0px lightgray;
+}
+
+.weekSelectBtn {
+  padding: 0.2rem 0.8rem;
+  border: 1px solid lightgray;
+}
+
+.weekSelectBtn:hover {
+  background: var(--main-red);
+}
+
+.selected {
+  background: var(--main-red);
+  color: white;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.9);
+}
+.selected:hover {
+  background: var(--main-red);
+}
+
+.weekHeading {
+  font-size: 2rem;
+  margin: 3px 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--main-blue);
+}
+
+.winnerMessage {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.winnerName {
+  font-weight: bold;
+  background: gold;
+  padding: 0 5px 5px 5px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.tableContainer {
+  width: 100%;
+  max-height: 98vh;
+  overflow: auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0px lightgray;
+}
+
+.weekTable {
+  white-space: nowrap;
+  margin: 0;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  border: 1px solid black;
+}
+
+.weekTable td,
+.weekTable th {
+  border: 1px solid #202020;
+  padding: 0.5rem;
+}
+
+.weekTable thead th {
+  font-weight: 400;
+  padding: 3px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 25vw;
+  color: white;
+  background: #002854;
+}
+
+.weekTable td {
+  background: #fff;
+  padding: 4px 5px;
+  text-align: center;
+}
+
+.weekTable tbody th {
+  font-weight: 100;
+  font-style: italic;
+  text-align: left;
+  position: relative;
+}
+
+.weekTable thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.weekTable tbody th {
+  color: white;
+  background: #002854;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  max-width: 150px;
+  white-space: wrap;
+  overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 550px) {
+  .weekTable {
+    white-space: wrap;
+  }
+  .weekTable tbody th {
+    min-width: 60px;
+    max-width: 100px;
+  }
+}
+
+.correctPick {
+  background: #8aff8a !important;
+}
+
+.incorrectPick {
+  background: #ffa9a9 !important;
+}
+
+.winnerCell {
+  font-weight: bold !important;
+  background: gold !important;
+  color: black !important;
 }

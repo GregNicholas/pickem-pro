@@ -70,6 +70,9 @@ button {
   cursor: pointer;
   background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
   background-blend-mode: lighten;
+  box-shadow: inset 0px 0px 2px 2px rgba(255, 255, 255, 0.4);
+  transition: all 100ms linear;
+  border-radius: 4px;
 }
 
 .optionButton:hover {
@@ -86,13 +89,18 @@ button {
 .minorOptionBtn {
   border: none;
   border-radius: 3px;
-  background: gray;
-  color: white;
+  background: #b3b3b3;
+  color: black;
   padding: 0.4rem 1.2rem;
   width: 8.5rem;
   height: 2.2rem;
   cursor: pointer;
   box-shadow: 2px 3px 3px 0px black;
+}
+
+.minorOptionBtn:active {
+  box-shadow: none;
+  transform: translate(2px, 3px);
 }
 
 .selectedMinorOptionBtn {

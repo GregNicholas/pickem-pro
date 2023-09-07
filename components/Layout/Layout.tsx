@@ -41,7 +41,7 @@ export default function Layout({ children, home=false }) {
               width={483}
               alt={name}
             />
-            <h2 className={utilStyles.headingLg}>Welcome</h2>
+            <h2 className={`${utilStyles.headingLg} ${styles.headingGreet}`}>Welcome</h2>
           </>
         ) : (
           <>
@@ -52,7 +52,7 @@ export default function Layout({ children, home=false }) {
                 width={483}
                 alt=""
               />
-            <h2 className={utilStyles.headingMd}>
+            <h2 className={`${utilStyles.headingMd} ${styles.headingGreet}`}>
                 <Link href="/dashboard" >{name}</Link>
             </h2>
           </>
