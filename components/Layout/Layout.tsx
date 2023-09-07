@@ -18,9 +18,10 @@ export default function Layout({ children, home=false }) {
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="Pro football pickem. Create or join a league and compete."
         />
         <meta
           property="og:image"
