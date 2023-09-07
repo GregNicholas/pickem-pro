@@ -71,8 +71,8 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
   
   return (
     <>
-    <h3>{week}</h3>
-    {weekWinner && <p><span>{weekWinner}</span> {winnerMessage}</p>}
+    <h3 className={styles.weekHeading}>{week}</h3>
+    {weekWinner && <p className={styles.winnerMessage}><span className={styles.winnerName}>{weekWinner}</span> {winnerMessage}</p>}
     <div className={styles.tableContainer}>
       <table className={styles.weekTable}>
         <thead>

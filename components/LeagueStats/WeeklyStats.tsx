@@ -18,7 +18,7 @@ export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStats
     <>
       <section className={styles.weekStatSelectContainer}>
         {weeks.map(week => (
-          <button key={week+"select"} onClick={() => setSelectedWeek(week)} className={`${styles.weekSelectBtn} ${week === selectedWeek && styles.selected}`}>{week}</button>
+          <button key={week+"select"} onClick={() => setSelectedWeek(week)} className={`${styles.weekSelectBtn} ${week === selectedWeek && styles.selected}`} id={week}>{week}</button>
         ))}
       </section>
       <WeekTable leagueData={leagueData} matchups={matchups} week={selectedWeek} />

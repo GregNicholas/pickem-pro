@@ -42,9 +42,39 @@
   border: none;
 }
 
+.weekSelectBtn:hover {
+  background: var(--main-red);
+}
+
 .selected {
   background: var(--main-red);
   color: white;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+.selected:hover {
+  background: var(--main-red);
+}
+
+.weekHeading {
+  font-size: 2rem;
+  margin: 3px 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--main-blue);
+}
+
+.winnerMessage {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.winnerName {
+  font-weight: bold;
+  background: gold;
+  padding: 0 5px 5px 5px;
+  font-size: 1.5rem;
+  border-radius: 5px;
 }
 
 .tableContainer {
