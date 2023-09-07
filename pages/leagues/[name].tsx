@@ -40,7 +40,6 @@ export default function League() {
   }
 
   const getLeagueInfo = async (leagueName: string) => {
-    console.log("GETTING LEAGUE INFO ON LEAGUE PAGE (FETCH)")
     const docRef = doc(db, "leagues", leagueName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

@@ -25,4 +25,5 @@
   background-color: var(--main-red);
   color: white;
   font-weight: bold;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
 }

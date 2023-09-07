@@ -9,6 +9,8 @@ interface WeeklyStatsProps {
   weeks: string[];
 }
 
+// The weeks array is mapped so that the user can select the desired week and see the table of results for that week. Default is to show the current week.
+
 let thisWeek = "week01"
 
 export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStatsProps) {

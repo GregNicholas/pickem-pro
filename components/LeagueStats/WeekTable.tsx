@@ -8,6 +8,10 @@ interface WeekTableProps {
   week: string;
 }
 
+// This component shows a table with games across top with member names on y axis with a row of their picks for each game. Total score for week is shown next to each member's.
+// We loop through members, Grab their picks for that week and map the picks to each row of the table. 
+// Picks are shown on the condition that the game results are known
+// Conditional styling is used to show correct picks and the winner for the week. In the event of a tie, the winner is calculated based on the tiebreaker
 
 export default function WeekTable({ leagueData, matchups, week }: WeekTableProps) { 
   const membersPicks = leagueData.members;
@@ -93,7 +97,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
             const myPicks = membersPicks[memberScore[0]].picks;
             return (
               <tr key={memberScore[0]}>
-                <th className={memberScore[1] === highScore && weekWinner.includes(memberName) && styles.winnerCell}>{memberName}</th>
+                <th className={memberScore[1] === highScore && weekWinner.includes(memberName) ? styles.winnerCell : ""}>{memberName}</th>
                 <td>{memberScore[1]}</td>
                 {games.map((gameId) => {
                   const pick = myPicks[week][gameId];
@@ -105,7 +109,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
                     pickStatus = "incorrectPick";
                   }
                   return (
-                  <td className={styles[pickStatus]} key={gameId}>
+                  <td className={styles[pickStatus] ? styles[pickStatus] : ""} key={gameId}>
                     {/* only show picks that are made if the results are in for that game */}
                     {pick && winner ? <Image src={`/images/${pick}.png`} height={33} width={33} alt={pick} />
                     : ""}
