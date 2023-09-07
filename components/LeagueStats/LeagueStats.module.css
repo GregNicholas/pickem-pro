@@ -91,7 +91,7 @@
 }
 
 .weekTable {
-  white-space: nowrap;
+  white-space: wrap;
   margin: 0;
   border: none;
   border-collapse: separate;
@@ -103,12 +103,11 @@
 .weekTable td,
 .weekTable th {
   border: 1px solid #202020;
-  padding: 0.5rem;
+  padding: 5px 0.5rem;
 }
 
 .weekTable thead th {
   font-weight: 400;
-  padding: 3px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -149,12 +148,10 @@
 }
 
 @media (max-width: 600px) {
-  .weekTable {
-    white-space: wrap;
-  }
   .weekTable tbody th {
     min-width: 60px;
     max-width: 100px;
+    white-space: wrap;
   }
 }
 
