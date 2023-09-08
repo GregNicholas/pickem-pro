@@ -65,6 +65,7 @@ button {
   border: 2px solid var(--main-blue);
   padding: 0.5rem 1.4rem;
   width: 9rem;
+  height: 3.125rem;
   font-weight: normal;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -72,12 +73,11 @@ button {
   background-blend-mode: lighten;
   box-shadow: inset 0px 0px 2px 2px rgba(255, 255, 255, 0.4);
   transition: all 100ms linear;
-  border-radius: 4px;
 }
 
-.optionButton:hover {
+/* .optionButton:hover {
   background-blend-mode: darken;
-}
+} */
 
 .selectedOption {
   background-color: var(--main-red);

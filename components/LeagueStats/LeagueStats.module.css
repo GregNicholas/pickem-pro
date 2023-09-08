@@ -4,22 +4,29 @@
 }
 
 .leagueStatsBtn {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 1.1rem;
-  font-weight: bold;
+  /* background: none; */
+  /* border: none; */
+  /* padding: 0; */
+  /* font-size: 1.1rem; */
+  /* font-weight: bold; */
+  border-radius: 5px;
+  border: 1px solid var(--main-blue);
   text-transform: uppercase;
 }
 
 .leagueStatsBtn:hover {
-  color: var(--main-red);
+  /* color: var(--main-red); */
   text-decoration: underline;
 }
 
 .leagueStatsBtnSelected {
   color: var(--main-red);
   text-decoration: underline;
+  background-color: var(--main-red);
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 1.2rem;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .leagueStatsContainer nav {

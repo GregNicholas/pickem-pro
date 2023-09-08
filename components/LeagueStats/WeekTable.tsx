@@ -37,42 +37,47 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
     return scores;
   }
 
-  // message to be displayed when results are in
-  let weekWinner = "";
-  let winnerMessage = "";
+  function getWeekWinner() {
+    // message to be displayed when results are in
+    let weekWinner = "";
+    let winnerMessage = "";
 
-  // sort the array of members' scores and see if there is one winner
-  const weekScores = getWeekScores(membersPicks, weekMatchups).sort((a, b) => b[1] - a[1]);
-  const highScore = weekScores[0][1];
-  const leaders = weekScores.filter(score => score[1] === highScore);
+    // sort the array of members' scores and see if there is one winner
+    const weekScores = getWeekScores(membersPicks, weekMatchups).sort((a, b) => b[1] - a[1]);
+    const highScore = weekScores[0][1];
+    const leaders = weekScores.filter(score => score[1] === highScore);
 
-  if (games.every(game => weekMatchups[game].winner)) {
-    if (leaders.length === 1) {
-      weekWinner = membersPicks[leaders[0][0]].name;
-      winnerMessage = ` is the ${week} winner with ${leaders[0][1]} correct picks!`;
-    } else {
-      const tiebreakerLeaders = leaders.map(leader => {
-        const leaderTiebreaker = leader[2];
-        return [...leader, Math.abs(leaderTiebreaker - weekMatchups.tiebreaker)];
-      })
-    
-    // sort by tiebreaker, check tiebreakerLeaders for duplicates, and set winner and message
-      tiebreakerLeaders.sort((a, b) => a[3] - b[3]);
-      const filteredLeaders = tiebreakerLeaders.filter(leader => leader[3] === tiebreakerLeaders[0][3]);
-      if (filteredLeaders.length === 1) {
-        weekWinner = membersPicks[filteredLeaders[0][0]].name;
-        winnerMessage = ` is the ${week} winner, with ${leaders[0][1]} correct picks! Tiebreaker predicted within ${filteredLeaders[0][3]} points!`;
+    if (games.every(game => weekMatchups[game].winner)) {
+      if (leaders.length === 1) {
+        weekWinner = membersPicks[leaders[0][0]].name;
+        winnerMessage = ` is the ${week} winner with ${leaders[0][1]} correct picks!`;
       } else {
-        winnerMessage = `have tied with ${leaders[0][1]} correct picks! They predicted the tiebreaker within ${filteredLeaders[0][3]} points!`;
-        filteredLeaders.forEach(leader => {
-          weekWinner += membersPicks[leader[0]].name + ", ";
+        const tiebreakerLeaders = leaders.map(leader => {
+          const leaderTiebreaker = leader[2];
+          return [...leader, Math.abs(leaderTiebreaker - weekMatchups.tiebreaker)];
         })
+      
+      // sort by tiebreaker, check tiebreakerLeaders for duplicates, and set winner and message
+        tiebreakerLeaders.sort((a, b) => a[3] - b[3]);
+        const filteredLeaders = tiebreakerLeaders.filter(leader => leader[3] === tiebreakerLeaders[0][3]);
+        if (filteredLeaders.length === 1) {
+          weekWinner = membersPicks[filteredLeaders[0][0]].name;
+          winnerMessage = ` is the ${week} winner, with ${leaders[0][1]} correct picks! Tiebreaker predicted within ${filteredLeaders[0][3]} points!`;
+        } else {
+          winnerMessage = `have tied with ${leaders[0][1]} correct picks! They predicted the tiebreaker within ${filteredLeaders[0][3]} points!`;
+          filteredLeaders.forEach(leader => {
+            weekWinner += membersPicks[leader[0]].name + ", ";
+          })
+        }
       }
     }
+    return {weekScores, highScore, weekWinner, winnerMessage};
   }
+
+  const thisWeekResults = getWeekWinner();
+  const {weekScores, highScore, weekWinner, winnerMessage} = thisWeekResults;
   
-// modify the above and display the winner
-  
+    
   return (
     <>
     <h3 className={styles.weekHeading}>{week}</h3>
