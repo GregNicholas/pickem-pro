@@ -1,14 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import styles from "./LeagueHeader.module.css";
 
-interface LeagueHeaderProps {
+interface LeagueNavProps {
   displaySection: string;
   setDisplaySection: Dispatch<SetStateAction<string>>;
 }
 
-export default function LeagueHeader({displaySection, setDisplaySection}: LeagueHeaderProps) {
+export default function LeagueNav({displaySection, setDisplaySection}: LeagueNavProps) {
 return (
-  <div className={styles.leagueHeader}>
+  <div className={styles.leagueNavContainer}>
     <button 
       className={`optionButton ${displaySection==="mypicks" ? styles.selectedOption : ""}`}
       onClick={() => setDisplaySection("mypicks")}

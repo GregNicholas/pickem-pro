@@ -7,7 +7,7 @@ import { DocumentData, arrayUnion, doc, getDoc, setDoc, updateDoc } from "fireba
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
 import Layout from "../../components/Layout/Layout";
-import LeagueHeader from "../../components/LeagueHeader/LeagueHeader";
+import LeagueNav from "../../components/LeagueHeader/LeagueNav";
 import LeagueMembers from "../../components/LeagueMembers";
 import MyPicks from "../../components/MyPicks/MyPicks";
 import {League} from "../../types";
@@ -91,109 +91,6 @@ export default function League() {
     getLeagueInfo(router.query?.name as string);
   }
 
-  // const week = {
-  //   game01: {
-  //     away: "CLE",
-  //     home: "CIN",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game02: {
-  //     away: "MIN",
-  //     home: "DET",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game03: {
-  //     away: "CHI",
-  //     home: "GB",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game04: {
-  //     away: "JAX",
-  //     home: "TEN",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game05: {
-  //     away: "HOU",
-  //     home: "IND",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game06: {
-  //     away: "DEN",
-  //     home: "LV",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game07: {
-  //     away: "BUF",
-  //     home: "MIA",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game08: {
-  //     away: "NYJ",
-  //     home: "NE",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game09: {
-  //     away: "ATL",
-  //     home: "NO",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game10: {
-  //     away: "PHI",
-  //     home: "NYG",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game11: {
-  //     away: "SEA",
-  //     home: "ARI",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game12: {
-  //     away: "KC",
-  //     home: "LAC",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game13: {
-  //     away: "LAR",
-  //     home: "SF",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game14: {
-  //     away: "DAL",
-  //     home: "WAS",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game15: {
-  //     away: "TB",
-  //     home: "CAR",
-  //     winner: "",
-  //     time: 0
-  //   },
-  //   game16: {
-  //     away: "PIT",
-  //     home: "BAL",
-  //     winner: "",
-  //     time: 0
-  //   },
-  // }
-
-  // const addMatchups = async () => {
-  //   await setDoc(doc(db, "matchups", "week18"), week);
-  // }
-
   return (
     <Layout>
       {
@@ -202,20 +99,23 @@ export default function League() {
         :
         <>
           <section className={styles.leagueDisplay}>
-            <h1 className={styles.pageTitle}>{leagueData?.name} league</h1>
+            
             {!isMember ? <>
+              <h1 className={styles.pageTitle}>{leagueData?.name} league</h1>
               <button className={styles.joinButton} onClick={joinLeague}>Join {leagueData?.name}!</button>
               <LeagueMembers leagueData={leagueData} />
             </>
             : <>
-            <LeagueHeader displaySection={displaySection} setDisplaySection={setDisplaySection}/>
+            <div className={styles.leagueHeader}>
+              <h1 className={styles.pageTitle}>{leagueData?.name} league</h1>
+              <LeagueNav displaySection={displaySection} setDisplaySection={setDisplaySection}/>
+            </div>
             {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} getLeagueInfo={getLeagueInfo}/>}
 
             {displaySection === "leaguestats" && <>
               <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
             </>}
 
-            {/* <button onClick={addMatchups}>add matchups</button> */}
             </>
             }
 

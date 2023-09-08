@@ -4,6 +4,12 @@
   margin-bottom: 0.5rem;
   color: var(--main-blue);
   overflow-wrap: break-word;
+  background-color: var(--main-blue);
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.2);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 
 .subHeader {
@@ -11,6 +17,14 @@
   text-align: center;
   margin: 0.5rem 0;
   color: var(--main-blue);
+}
+
+.leagueHeader {
+  background: lightgray;
+  width: 100vw;
+  transform: translateX(-0.5rem);
+  padding: 0 1rem 0.5rem 1rem;
+  box-shadow: inset 0px 0px 2px 0px black;
 }
 
 .joinButton {
@@ -42,7 +56,7 @@
   color: black;
   min-height: 10rem;
   margin: 0 0 1rem 0;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 0.5rem 1rem 0.5rem;
   box-shadow: inset 0px 0px 2px 0px black;
   /* border-radius: 3px; */
   font-size: 1rem;
