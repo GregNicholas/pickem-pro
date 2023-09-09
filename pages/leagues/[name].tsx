@@ -111,16 +111,16 @@ export default function League() {
               <LeagueNav displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             </div>
             <div className={styles.leagueMain}>
-            {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} getLeagueInfo={getLeagueInfo}/>}
+              {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} getLeagueInfo={getLeagueInfo}/>}
 
-            {displaySection === "leaguestats" && <>
-              <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
-            </>}
+              {displaySection === "leaguestats" &&
+                <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>}
+
+              {displaySection === "members" && <LeagueMembers leagueData={leagueData} />}
             </div>
             </>
             }
 
-            {displaySection === "members" && <LeagueMembers leagueData={leagueData} />}
           </section>
         </>
       }

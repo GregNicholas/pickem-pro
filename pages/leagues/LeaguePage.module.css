@@ -53,6 +53,8 @@
   background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
   background-blend-mode: lighten;
   box-shadow: 1px 3px black;
+  margin: 0 auto;
+  display: block;
 }
 
 .joinButton:hover {
