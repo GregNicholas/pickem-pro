@@ -110,12 +110,13 @@ export default function League() {
               <h1 className={styles.pageTitle}>{leagueData?.name} league</h1>
               <LeagueNav displaySection={displaySection} setDisplaySection={setDisplaySection}/>
             </div>
+            <div className={styles.leagueMain}>
             {displaySection === "mypicks" && <MyPicks weeks={weeks} matchups={matchups} fetchedPicks={fetchedPicks} leagueName={leagueData.name} getLeagueInfo={getLeagueInfo}/>}
 
             {displaySection === "leaguestats" && <>
               <LeagueStats weeks={weeks} matchups={matchups} leagueData={leagueData}/>
             </>}
-
+            </div>
             </>
             }
 

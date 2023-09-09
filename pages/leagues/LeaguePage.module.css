@@ -1,3 +1,14 @@
+.leagueDisplay {
+  background: var(--light-background);
+  color: black;
+  min-height: 10rem;
+  margin: 0 0 1rem 0;
+  padding: 0 0 1rem 0;
+  box-shadow: inset 0px 0px 2px 0px black;
+  /* border-radius: 3px; */
+  font-size: 1rem;
+}
+
 .pageTitle {
   font-size: 2rem;
   text-align: center;
@@ -21,10 +32,14 @@
 
 .leagueHeader {
   background: lightgray;
-  width: 100vw;
-  transform: translateX(-0.5rem);
+  width: 100%;
+
   padding: 0 1rem 0.5rem 1rem;
   box-shadow: inset 0px 0px 2px 0px black;
+}
+
+.leagueMain {
+  padding: 0 0.5rem 1rem 0.5rem;
 }
 
 .joinButton {
@@ -49,17 +64,6 @@
 .joinButton:active {
   transform: translateX(1px) translateY(3px);
   box-shadow: none;
-}
-
-.leagueDisplay {
-  background: var(--light-background);
-  color: black;
-  min-height: 10rem;
-  margin: 0 0 1rem 0;
-  padding: 0 0.5rem 1rem 0.5rem;
-  box-shadow: inset 0px 0px 2px 0px black;
-  /* border-radius: 3px; */
-  font-size: 1rem;
 }
 
 .membersList {

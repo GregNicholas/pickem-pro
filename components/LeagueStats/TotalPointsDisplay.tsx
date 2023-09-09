@@ -15,6 +15,7 @@ interface MembersStatsProps {
 export default function TotalPointsDisplay({membersStatsArray, weeks}: MembersStatsProps) {
   return (
     <>
+    <h3 className={styles.weekHeading}>Full Season</h3>
     <div className={styles.tableContainer}>
     <table className={styles.weekTable}>
         <thead>
