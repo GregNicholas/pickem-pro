@@ -2,6 +2,8 @@
   --main-red: #d50a0a;
   --main-blue: #013369;
   --light-background: #f3f3f3;
+  --correct-pick: #8aff8a;
+  --incorrect-pick: #ffa9a9;
 }
 
 html,

@@ -23,10 +23,23 @@ export default function Matchup({ matchups, usersPicks, setUsersPicks, pickWeek,
     const homeTeam = matchups[pickWeek][gameNum].home;
     const awayTeam = matchups[pickWeek][gameNum].away;
 
+// set the style of picked games depending on whether results are in
     if (homeTeam === usersPicks[pickWeek][gameNum]) {
-      homePickStyle = "picked";
+      if (homeTeam === matchups[pickWeek][gameNum]?.winner) {
+        homePickStyle = "pickedCorrect";
+      } else if (matchups[pickWeek][gameNum]?.winner === "") {
+        homePickStyle = "picked";
+      } else {
+        homePickStyle = "pickedWrong";
+      }
     } else if (awayTeam === usersPicks[pickWeek][gameNum]){
-      awayPickStyle = "picked";
+      if (awayTeam === matchups[pickWeek][gameNum]?.winner) {
+        awayPickStyle = "pickedCorrect";
+      } else if (matchups[pickWeek][gameNum]?.winner === "") {
+        awayPickStyle = "picked";
+      } else {
+        awayPickStyle = "pickedWrong";
+      }
     }
 
     const date = new Date(matchups[pickWeek][gameNum].time.seconds * 1000);
@@ -35,14 +48,6 @@ export default function Matchup({ matchups, usersPicks, setUsersPicks, pickWeek,
     const day = date.getDate().toString();
     const year = date.getFullYear().toString();
     const dateDisplay =  weekday + " " + month + "/" + day + "/" + year
-
-    // if (isBlockedStyle === "blocked" && !thisWeekPicked.hasOwnProperty(gameNum)) {
-    //   console.log(thisWeekPicked.hasOwnProperty(gameNum), gameNum)
-    //   setThisWeekPicked(prev => ({
-    //     ...prev,
-    //     [gameNum]: ""
-    //   }));
-    // }
 
     // this is the display for each game
     return (

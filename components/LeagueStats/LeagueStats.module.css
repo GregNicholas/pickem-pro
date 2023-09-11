@@ -164,11 +164,11 @@
 }
 
 .correctPick {
-  background: #8aff8a !important;
+  background: var(--correct-pick) !important;
 }
 
 .incorrectPick {
-  background: #ffa9a9 !important;
+  background: var(--incorrect-pick) !important;
 }
 
 .winnerCell {
@@ -178,13 +178,3 @@
   /* background: gold !important;
   padding: 8px 8px 4px 8px !important; */
 }
-
-/* .winnerCell span {
-  font-weight: bold !important;
-  background-color: var(--main-blue) !important;
-  color: transparent !important;
-  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.3) !important;
-  -webkit-background-clip: text !important;
-  -moz-background-clip: text !important;
-  background-clip: text !important;
-} */
