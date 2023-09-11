@@ -20,7 +20,9 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   const [displayMessage, setDisplayMessage] = useState('');
   const { user } = useAuthContext();
   let sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
-  sortedGames = sortedGames.filter(game => game !== "tiebreaker")
+  sortedGames = sortedGames.filter(game => {
+    return game.includes("game");
+  });
 
   const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
 

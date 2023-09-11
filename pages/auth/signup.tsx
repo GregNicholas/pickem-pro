@@ -38,7 +38,6 @@ function SignUp() {
         }
 
         // else successful
-        console.log("RES:", result);
         return router.push("/dashboard");
     }
 
@@ -62,7 +61,7 @@ function SignUp() {
                 </label>
                 <label htmlFor="confirmPassword">
                     <p>Confirm Password</p>
-                    <input required type="password" name="password" id="password" placeholder="confirm password" ref={passwordConfirmationRef} />
+                    <input required type="password" name="password" id="passwordConfirm" placeholder="confirm password" ref={passwordConfirmationRef} />
                 </label>
                 <button className={styles.submitBtn} type="submit">Sign up</button>
                 {error && <p className="errorMessage">{error}</p>}

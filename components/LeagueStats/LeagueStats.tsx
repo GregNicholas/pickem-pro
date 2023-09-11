@@ -30,11 +30,11 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
         const weekPicks = userPicks[week];
         if (weekPicks) {
           for (const game in weekPicks) {
-            if (game !== 'tiebreaker') {
+            if (game.includes("game")) {
               const userPick = weekPicks[game];
-              const matchup = matchups[week][game];
+              const winner = matchups[week][game].winner;
   
-              if (userPick === matchup.winner) {
+              if (userPick === winner) {
                 totalPoints++;
                 weekPoints++;
               }

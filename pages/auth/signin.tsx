@@ -21,7 +21,6 @@ function SignIn() {
         }
 
         // else successful
-        console.log({result})
         return router.push("/dashboard")
     }
     return (
