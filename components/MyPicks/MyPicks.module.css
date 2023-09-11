@@ -57,3 +57,11 @@
 .picked {
   background: yellow;
 }
+
+.pickedWrong {
+  background: var(--incorrect-pick);
+}
+
+.pickedCorrect {
+  background: var(--correct-pick);
+}

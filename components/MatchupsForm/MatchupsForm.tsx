@@ -26,12 +26,6 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
 
   const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
   const isTiebreakerLocked = (CURRENT_TIME_IN_SECONDS > tiebreakerGame.time.seconds) ? true : false;
-  
-
-  console.log("Tiebreaker locked? ", isTiebreakerLocked)
-  // useEffect(() => {
-  //   setUsersPicks(fetchedPicks);
-  // }, [fetchedPicks, pickWeek]);
 
   useEffect(() => {
     const updatedUsersPicks = JSON.parse(JSON.stringify(usersPicks));
