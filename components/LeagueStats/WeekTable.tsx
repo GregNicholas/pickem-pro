@@ -90,7 +90,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
             <th>score</th>
             {games.map((gameId) => (
               <th key={gameId}>
-                {weekMatchups[gameId].home} @ {weekMatchups[gameId].away}
+                {weekMatchups[gameId].away} @ {weekMatchups[gameId].home}
               </th>
             ))}
             <th>tie breaker {weekMatchups.tiebreaker}</th>
