@@ -19,7 +19,7 @@ export default function Matchup({ matchups, usersPicks, setUsersPicks, pickWeek,
     let homePickStyle = "";
     let awayPickStyle = "";
     // check if deadline has passed
-    const isBlockedStyle = (CURRENT_TIME_IN_SECONDS > matchups[pickWeek][gameNum].time.seconds) ? "blocked" : null;
+    const isBlockedStyle = (CURRENT_TIME_IN_SECONDS > matchups[pickWeek][gameNum].time.seconds) ? "blocked" : "";
     const homeTeam = matchups[pickWeek][gameNum].home;
     const awayTeam = matchups[pickWeek][gameNum].away;
 
