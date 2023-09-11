@@ -25,7 +25,10 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   const tiebreakerGame = matchups ? matchups[pickWeek][sortedGames[sortedGames.length - 1]] : null;
 
   const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
+  const isTiebreakerLocked = (CURRENT_TIME_IN_SECONDS > tiebreakerGame.time.seconds) ? true : false;
+  
 
+  console.log("Tiebreaker locked? ", isTiebreakerLocked)
   // useEffect(() => {
   //   setUsersPicks(fetchedPicks);
   // }, [fetchedPicks, pickWeek]);
@@ -67,6 +70,10 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
   }
 
   const submitPicks = async () => {
+    if (isTiebreakerLocked) { 
+      return showMessage("Picks are locked for this week.")
+    }
+
     if (!usersPicks[pickWeek].tiebreaker) {
       usersPicks[pickWeek].tiebreaker = 0;
       setUsersPicks(prev => {
@@ -80,7 +87,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
       })
     }
 
-    const showMessage = (message: string) => {
+    function showMessage(message: string) {
       setDisplayMessage(message);
       setTimeout(() => {
         setDisplayMessage('');
@@ -118,6 +125,7 @@ export default function MatchupsForm({matchups, pickWeek, fetchedPicks, leagueNa
             name="tiebreaker" 
             id="tiebreaker" 
             value={usersPicks[pickWeek].tiebreaker.toString() || 0} 
+            disabled={isTiebreakerLocked} 
           />
         </label>
       {displayMessage && <p className="errorMessage">{displayMessage}</p>}
