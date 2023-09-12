@@ -5,16 +5,25 @@ import styles from "./LeagueStats.module.css"
 
 interface WeeklyStatsProps {
   leagueData: League;
-  matchups: Matchups;
+  matchups: any;
   weeks: string[];
 }
 
 // The weeks array is mapped so that the user can select the desired week and see the table of results for that week. Default is to show the current week.
 
-let thisWeek = "week01"
+let startWeek = "week01"
 
 export default function WeeklyStats({ leagueData, matchups, weeks }: WeeklyStatsProps) {
-  const [selectedWeek, setSelectedWeek] = useState(thisWeek);
+  const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
+  let curWeek = startWeek;
+  for (let i = 0; i < weeks.length - 1; i++) {
+    if (CURRENT_TIME_IN_SECONDS > matchups[weeks[i]].startWeek?.seconds) {
+      curWeek = weeks[i];
+    } else {
+      break;
+    }
+  }
+  const [selectedWeek, setSelectedWeek] = useState(curWeek);
 
   return (
     <>

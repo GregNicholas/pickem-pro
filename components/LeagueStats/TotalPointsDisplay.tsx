@@ -21,7 +21,7 @@ export default function TotalPointsDisplay({membersStatsArray, weeks}: MembersSt
         <thead>
           <tr>
             <th></th>
-            <th>Total Score</th>
+            <th className={styles.pointTotal}>Total Score</th>
             {weeks.map((week) => (
               <th key={week}>
                 {week}
@@ -35,7 +35,7 @@ export default function TotalPointsDisplay({membersStatsArray, weeks}: MembersSt
             return (
               <tr key={userId}>
                 <th><span>{name}</span></th>
-                <td>{totalPoints}</td>
+                <td className={styles.pointTotal}>{totalPoints}</td>
                 {weeks.map((week) => {
                   return (
                   <td key={week+userId}>
