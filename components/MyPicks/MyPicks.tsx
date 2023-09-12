@@ -1,14 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./MyPicks.module.css";
 import MatchupsForm from "../MatchupsForm/MatchupsForm";
 
-// const now = new Date();
-// let thisWeek = "week01";
-//   switch (now) {
-//     case now > 
-let thisWeek = "week01";
+let startWeek = "week01";
 
 interface MyPicksProps {
   weeks: string[];
@@ -19,7 +15,16 @@ interface MyPicksProps {
 }
 
 export default function MyPicks({weeks, matchups, fetchedPicks, leagueName, getLeagueInfo}: MyPicksProps) {
-  const [pickWeek, setPickWeek] = useState(thisWeek);
+  const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
+  let curWeek = startWeek;
+  for (let i = 0; i < weeks.length - 1; i++) {
+    if (CURRENT_TIME_IN_SECONDS > matchups[weeks[i]].endWeek?.seconds) {
+      curWeek = weeks[i + 1];
+    } else {
+      break;
+    }
+  }
+  const [pickWeek, setPickWeek] = useState(curWeek);
   const { user } = useAuthContext();
 
   return (
