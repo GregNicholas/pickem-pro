@@ -100,6 +100,11 @@ button {
   box-shadow: 2px 3px 3px 0px black;
 }
 
+.minorOptionBtn:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.4),
+    2px 3px 3px 0px black;
+}
+
 .minorOptionBtn:active {
   box-shadow: none;
   transform: translate(2px, 3px);
@@ -114,4 +119,8 @@ button {
   height: 2.4rem;
   transform: translate(2px, 3px);
   box-shadow: none;
+}
+
+.selectedMinorOptionBtn:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1), 0 0 0 0px black;
 }

@@ -50,7 +50,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
     if (games.every(game => weekMatchups[game].winner)) {
       if (leaders.length === 1) {
         weekWinner = membersPicks[leaders[0][0]].name;
-        winnerMessage = ` is the ${week} winner with ${leaders[0][1]} correct picks!`;
+        winnerMessage = ` wins ${week} with ${leaders[0][1]} correct picks!`;
       } else {
         const tiebreakerLeaders = leaders.map(leader => {
           const leaderTiebreaker = leader[2];
@@ -62,7 +62,7 @@ export default function WeekTable({ leagueData, matchups, week }: WeekTableProps
         const filteredLeaders = tiebreakerLeaders.filter(leader => leader[3] === tiebreakerLeaders[0][3]);
         if (filteredLeaders.length === 1) {
           weekWinner = membersPicks[filteredLeaders[0][0]].name;
-          winnerMessage = ` is the ${week} winner, with ${leaders[0][1]} correct picks! Tiebreaker predicted within ${filteredLeaders[0][3]} points!`;
+          winnerMessage = ` wins ${week} with ${leaders[0][1]} correct picks! Tiebreaker predicted within ${filteredLeaders[0][3]} points!`;
         } else {
           winnerMessage = `have tied with ${leaders[0][1]} correct picks! They predicted the tiebreaker within ${filteredLeaders[0][3]} points!`;
           filteredLeaders.forEach(leader => {

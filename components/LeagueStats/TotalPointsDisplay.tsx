@@ -1,3 +1,4 @@
+import { Member } from "../../types";
 import styles from "./LeagueStats.module.css";
 
 interface MembersStats {
@@ -9,10 +10,13 @@ interface MembersStats {
 
 interface MembersStatsProps {
   membersStatsArray: MembersStats[];
-  weeks: string[]
+  weeks: string[];
+  membersData: {
+    [memberId: string]: Member;
+  };
 }
 
-export default function TotalPointsDisplay({membersStatsArray, weeks}: MembersStatsProps) {
+export default function TotalPointsDisplay({membersStatsArray, weeks, membersData}: MembersStatsProps) {
   return (
     <>
     <h3 className={styles.weekHeading}>Full Season</h3>
@@ -37,9 +41,10 @@ export default function TotalPointsDisplay({membersStatsArray, weeks}: MembersSt
                 <th><span>{name}</span></th>
                 <td className={styles.pointTotal}>{totalPoints}</td>
                 {weeks.map((week) => {
+                  const isWeekPicked = membersData[userId].picks[week].game12 ? true : false;
                   return (
-                  <td key={week+userId}>
-                    {weeklyPoints[week]}
+                  <td key={week+userId} className={isWeekPicked ? "" : styles.notPicked}>
+                    {isWeekPicked ? weeklyPoints[week] : "X"}
                   </td>
                 )})}
               </tr>

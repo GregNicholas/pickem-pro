@@ -15,7 +15,6 @@ interface LeagueStatsProps {
 export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsProps) {
   const [selectedStats, setSelectedStats] = useState("weeklystats");
   const membersData = leagueData.members;
-
   // the calculateStats function loops through the members data and each week's picks, comparing them to the actual results to calculate points earned. The function returns an array with each element being an object with the user's id, total points, and weekly points. This array is sorted by total points, then used to display results in order.
   const calculateStats = (members: { [x: string]: Member }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
     const membersStats = [];
@@ -76,7 +75,7 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
         </nav>
       </header>
       {selectedStats === "weeklystats" && <WeeklyStats leagueData={leagueData} matchups={matchups} weeks={weeks} />}      
-      {selectedStats === "totalpoints" && <TotalPointsDisplay membersStatsArray={membersStatsArray} weeks={weeks} />}
+      {selectedStats === "totalpoints" && <TotalPointsDisplay membersStatsArray={membersStatsArray} weeks={weeks} membersData={membersData} />}
       {/* {selectedStats === "trophycase" && <p>trophy case</p>} */}
     </section>
   )
