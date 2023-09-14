@@ -1,10 +1,9 @@
 import { useState } from "react";
-import {League, Matchups, Member, UsersPicks, Week} from "../../types";
+import { League, Matchups, Member, UsersPicks, Week } from "../../types";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./LeagueStats.module.css";
 import WeeklyStats from "./WeeklyStats";
 import TotalPointsDisplay from "./TotalPointsDisplay";
-
 
 interface LeagueStatsProps {
   weeks: string[];
@@ -12,11 +11,19 @@ interface LeagueStatsProps {
   leagueData: League;
 }
 
-export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsProps) {
+export default function LeagueStats({
+  weeks,
+  matchups,
+  leagueData,
+}: LeagueStatsProps) {
   const [selectedStats, setSelectedStats] = useState("weeklystats");
   const membersData = leagueData.members;
   // the calculateStats function loops through the members data and each week's picks, comparing them to the actual results to calculate points earned. The function returns an array with each element being an object with the user's id, total points, and weekly points. This array is sorted by total points, then used to display results in order.
-  const calculateStats = (members: { [x: string]: Member }, matchups: { [x: string]: { [x: string]: any; }; }, weeks: string[]) => {
+  const calculateStats = (
+    members: { [x: string]: Member },
+    matchups: { [x: string]: { [x: string]: any } },
+    weeks: string[],
+  ) => {
     const membersStats = [];
 
     for (const userId in members) {
@@ -24,7 +31,7 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
       let weekPoints = 0;
       const weeklyPoints = {};
       const userPicks = members[userId].picks;
-  
+
       for (const week of weeks) {
         const weekPicks = userPicks[week];
         if (weekPicks) {
@@ -32,7 +39,7 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
             if (game.includes("game")) {
               const userPick = weekPicks[game];
               const winner = matchups[week][game].winner;
-  
+
               if (userPick === winner) {
                 totalPoints++;
                 weekPoints++;
@@ -49,8 +56,8 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
     }
     return membersStats;
   };
-  
-// if this became expensive we could do useMemo possibly in the league page
+
+  // if this became expensive we could do useMemo possibly in the league page
   const membersStatsArray = calculateStats(leagueData.members, matchups, weeks);
 
   membersStatsArray.sort((a, b) => b.totalPoints - a.totalPoints);
@@ -63,10 +70,24 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
       <header>
         <h2 className={leagueStyles.subHeader}>League Stats</h2>
         <nav>
-          <button onClick={() => setSelectedStats("weeklystats")} className={`${styles.leagueStatsBtn} optionButton ${selectedStats === "weeklystats" ? styles.leagueStatsBtnSelected : ""}`}>
+          <button
+            onClick={() => setSelectedStats("weeklystats")}
+            className={`${styles.leagueStatsBtn} optionButton ${
+              selectedStats === "weeklystats"
+                ? styles.leagueStatsBtnSelected
+                : ""
+            }`}
+          >
             Weekly Picks
           </button>
-          <button onClick={() => setSelectedStats("totalpoints")} className={`${styles.leagueStatsBtn} optionButton ${selectedStats === "totalpoints" ? styles.leagueStatsBtnSelected : ""}`}>
+          <button
+            onClick={() => setSelectedStats("totalpoints")}
+            className={`${styles.leagueStatsBtn} optionButton ${
+              selectedStats === "totalpoints"
+                ? styles.leagueStatsBtnSelected
+                : ""
+            }`}
+          >
             Total Points
           </button>
           {/* <button onClick={() => setSelectedStats("trophycase")} className={`${styles.leagueStatsBtn} ${selectedStats === "trophycase" && styles.leagueStatsBtnSelected}`}>
@@ -74,9 +95,21 @@ export default function LeagueStats({weeks, matchups, leagueData}: LeagueStatsPr
           </button> */}
         </nav>
       </header>
-      {selectedStats === "weeklystats" && <WeeklyStats leagueData={leagueData} matchups={matchups} weeks={weeks} />}      
-      {selectedStats === "totalpoints" && <TotalPointsDisplay membersStatsArray={membersStatsArray} weeks={weeks} membersData={membersData} />}
+      {selectedStats === "weeklystats" && (
+        <WeeklyStats
+          leagueData={leagueData}
+          matchups={matchups}
+          weeks={weeks}
+        />
+      )}
+      {selectedStats === "totalpoints" && (
+        <TotalPointsDisplay
+          membersStatsArray={membersStatsArray}
+          weeks={weeks}
+          membersData={membersData}
+        />
+      )}
       {/* {selectedStats === "trophycase" && <p>trophy case</p>} */}
     </section>
-  )
+  );
 }

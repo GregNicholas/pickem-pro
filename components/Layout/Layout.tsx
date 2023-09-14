@@ -3,17 +3,16 @@ import Image from "next/image";
 import styles from "./Layout.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-import { useAuthContext } from '../../context/AuthContext';
+import { useRouter } from "next/router";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const siteTitle = "Pickem Hub";
 
-export default function Layout({ children, home=false }) {
+export default function Layout({ children, home = false }) {
   const { user } = useAuthContext();
-  const name = `${user?.displayName} logged in`  || "Welcome";
+  const name = `${user?.displayName} logged in` || "Welcome";
 
   const router = useRouter();
-  // console.log("LAYOUT ROUTING: ", router.pathname, router.query, router.asPath);
   return (
     <div className={styles.container}>
       <Head>
@@ -26,7 +25,7 @@ export default function Layout({ children, home=false }) {
         <meta
           property="og:image"
           content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
+            siteTitle,
           )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
         />
         <meta name="og:title" content={siteTitle} />
@@ -42,30 +41,31 @@ export default function Layout({ children, home=false }) {
               width={483}
               alt={name}
             />
-            <h2 className={`${utilStyles.headingLg} ${styles.headingGreet}`}>Welcome</h2>
+            <h2 className={`${utilStyles.headingLg} ${styles.headingGreet}`}>
+              Welcome
+            </h2>
           </>
         ) : (
           <>
-              <Image
-                priority
-                src="/images/pickem-logo.png"
-                height={104}
-                width={483}
-                alt=""
-              />
+            <Image
+              priority
+              src="/images/pickem-logo.png"
+              height={104}
+              width={483}
+              alt=""
+            />
             <h2 className={`${utilStyles.headingMd} ${styles.headingGreet}`}>
-                <Link href="/dashboard" >{name}</Link>
+              <Link href="/dashboard">{name}</Link>
             </h2>
           </>
         )}
       </header>
       <main className={styles.main}>{children}</main>
-      {(!home && !router.pathname.includes("dashboard")) && (
+      {!home && !router.pathname.includes("dashboard") && (
         <div className={styles.backToHome}>
-          {
-            router.pathname.includes("leagues") 
-            && <Link href="/dashboard">← Back to home</Link> 
-          }
+          {router.pathname.includes("leagues") && (
+            <Link href="/dashboard">← Back to home</Link>
+          )}
         </div>
       )}
     </div>
