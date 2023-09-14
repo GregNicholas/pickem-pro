@@ -30,8 +30,8 @@ export default function MatchupsForm({
     return game.includes("game");
   });
 
-  const leagueContextData = useLeagueContext();
-  console.log("League context data: ", leagueContextData.selectedLeague)
+  // const leagueContextData = useLeagueContext();
+  // console.log("League context data: ", leagueContextData.selectedLeague)
 
   const tiebreakerGame = matchups
     ? matchups[pickWeek][sortedGames[sortedGames.length - 1]]
