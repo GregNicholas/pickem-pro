@@ -19,6 +19,7 @@ import LeagueMembers from "../../components/LeagueMembers";
 import MyPicks from "../../components/MyPicks/MyPicks";
 import { League } from "../../types";
 import LeagueStats from "../../components/LeagueStats/LeagueStats";
+import Head from "next/head";
 
 export default function League() {
   const [isLoading, setIsLoading] = useState(true);
@@ -105,8 +106,14 @@ export default function League() {
     getLeagueInfo(router.query?.name as string);
   };
 
+  const siteTitle = `${leagueData?.name} League`;
+
   return (
     <Layout>
+      <Head>
+      <meta name="og:title" content={siteTitle} />
+      <title>{siteTitle}</title>
+      </Head>
       {isLoading || matchupsLoading ? (
         <div>fetching data</div>
       ) : error ? (

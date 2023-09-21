@@ -25,9 +25,6 @@ export default function Home() {
 
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
       <section className={`${utilStyles.pageContainer} ${utilStyles.headingMd}`}>
         <ul className={utilStyles.nav}>
           <li className={utilStyles.navItem}>          

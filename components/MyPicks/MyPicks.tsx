@@ -37,7 +37,7 @@ export default function MyPicks({
     <>
       <h2 className={leagueStyles.subHeader}>{user?.displayName}'s Picks</h2>
       <section className={styles.selectsection}>
-        <label htmlFor="week-select" aria-hidden="true">
+        <label htmlFor="week-select">
           <select
             className={styles.selectWeek}
             name="weeks"
