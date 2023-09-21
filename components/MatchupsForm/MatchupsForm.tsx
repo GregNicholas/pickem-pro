@@ -23,7 +23,8 @@ export default function MatchupsForm({
   getLeagueInfo,
 }: MatchupsFormProps) {
   const [usersPicks, setUsersPicks] = useState(fetchedPicks);
-  const [displayMessage, setDisplayMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const { user } = useAuthContext();
   let sortedGames = matchups ? Object.keys(matchups[pickWeek]).sort() : null;
   sortedGames = sortedGames.filter((game) => {
@@ -85,7 +86,7 @@ export default function MatchupsForm({
 
   const submitPicks = async () => {
     if (isTiebreakerLocked) {
-      return showMessage("Picks are locked for this week.");
+      return showMessage("Picks are locked for this week.", "error");
     }
 
     if (!usersPicks[pickWeek].tiebreaker) {
@@ -101,11 +102,21 @@ export default function MatchupsForm({
       });
     }
 
-    function showMessage(message: string) {
-      setDisplayMessage(message);
-      setTimeout(() => {
-        setDisplayMessage("");
-      }, 5000);
+    function showMessage(message: string, type: string) {
+      if (type === "error") {
+        setErrorMessage(message);
+        setSuccessMessage("");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      } else if (type === "success") {
+        setSuccessMessage(message);
+        setErrorMessage("");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 5000);
+      }
+      
     }
 
     const numGamesPicked = Object.keys(usersPicks[pickWeek]).filter((item) =>
@@ -120,9 +131,9 @@ export default function MatchupsForm({
         [updateField]: usersPicks[pickWeek],
       });
       await getLeagueInfo(leagueName);
-      showMessage("SUBMITTED PICKS!");
+      showMessage("SUBMITTED PICKS!", "success");
     } else {
-      showMessage("pick each game and tiebreaker");
+      showMessage("pick each game and tiebreaker", "error");
     }
   };
 
@@ -160,7 +171,8 @@ export default function MatchupsForm({
           disabled={isTiebreakerLocked}
         />
       </label>
-      {displayMessage && <p className="errorMessage">{displayMessage}</p>}
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+      {successMessage && <p className="successMessage">{successMessage}</p>}
       <button className={styles.submitBtn} onClick={submitPicks}>
         Submit
       </button>
