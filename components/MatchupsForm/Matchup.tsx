@@ -75,7 +75,7 @@ export default function Matchup({
     <div>
       <p className={styles.gameDate}>{dateDisplay}</p>
       <div className={`${styles.gamecontainer}`}>
-        <div
+        <button
           className={`${styles.teamcontainer} ${styles[isBlockedStyle]} ${styles[awayPickStyle]}`}
           onClick={() => handlePicked(isBlockedStyle, gameNum, awayTeam)}
         >
@@ -85,10 +85,10 @@ export default function Matchup({
             width={33}
             alt={awayTeam}
           />
-          <span>{awayTeam}</span>
-        </div>
+          {awayTeam}
+        </button>
         @
-        <div
+        <button
           className={`${styles.teamcontainer} ${styles[isBlockedStyle]} ${styles[homePickStyle]}`}
           onClick={() => handlePicked(isBlockedStyle, gameNum, homeTeam)}
         >
@@ -98,8 +98,8 @@ export default function Matchup({
             width={33}
             alt={homeTeam}
           />
-          <span>{homeTeam}</span>
-        </div>
+          {homeTeam}
+        </button>
       </div>
     </div>
   );
