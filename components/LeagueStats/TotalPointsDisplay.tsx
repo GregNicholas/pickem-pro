@@ -45,9 +45,7 @@ export default function TotalPointsDisplay({
                   </th>
                   <td className={styles.pointTotal}>{totalPoints}</td>
                   {weeks.map((week) => {
-                    const isWeekPicked = membersData[userId].picks[week].game12
-                      ? true
-                      : false;
+                    const isWeekPicked = Object.keys(membersData[userId].picks[week]).length > 1
                     return (
                       <td
                         key={week + userId}
