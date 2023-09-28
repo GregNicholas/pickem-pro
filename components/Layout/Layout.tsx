@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./Layout.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import Link from "next/link";
+import { FaRegUser } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useAuthContext } from "../../context/AuthContext";
 
@@ -10,7 +11,7 @@ export const siteTitle = "Pickem Hub";
 
 export default function Layout({ children, home = false }) {
   const { user } = useAuthContext();
-  const name = `${user?.displayName} logged in` || "Welcome";
+  const name = `${user?.displayName}` || "Welcome";
 
   const router = useRouter();
   return (
@@ -56,7 +57,7 @@ export default function Layout({ children, home = false }) {
               alt=""
             />
             <h2 className={`${utilStyles.headingMd} ${styles.headingGreet}`}>
-              <Link href="/dashboard">{name}</Link>
+              <Link className={styles.headingLink}href="/dashboard"><FaRegUser /> {name}</Link>
             </h2>
           </>
         )}
