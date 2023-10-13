@@ -4,11 +4,9 @@ import { useLeagueContext } from "../../context/LeagueContext";
 import { useAuthContext } from "../../context/AuthContext";
 import { useFetchData } from "../../hooks/useFetchData";
 import {
-  DocumentData,
   arrayUnion,
   doc,
   getDoc,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";

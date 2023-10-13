@@ -40,7 +40,7 @@ export default function LeagueStats({
               const userPick = weekPicks[game];
               const winner = matchups[week][game].winner;
 
-              if (userPick === winner) {
+              if (userPick && userPick === winner) {
                 totalPoints++;
                 weekPoints++;
               }
@@ -90,9 +90,6 @@ export default function LeagueStats({
           >
             Total Points
           </button>
-          {/* <button onClick={() => setSelectedStats("trophycase")} className={`${styles.leagueStatsBtn} ${selectedStats === "trophycase" && styles.leagueStatsBtnSelected}`}>
-            Trophy Case
-          </button> */}
         </nav>
       </header>
       {selectedStats === "weeklystats" && (

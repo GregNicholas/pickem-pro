@@ -36,7 +36,7 @@ export default function WeekTable({
       const picks = membersPicks[memberId].picks[week];
       const tiebreaker = membersPicks[memberId].picks[week].tiebreaker;
       games.forEach((game) => {
-        if (weekMatchups[game].winner === picks[game]) {
+        if (weekMatchups[game].winner && weekMatchups[game].winner === picks[game]) {
           weekScore++;
         }
       });
