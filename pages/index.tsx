@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import Head from "next/head";
 import Link from "next/link";
-import Layout, { siteTitle } from "../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import { useRouter } from 'next/router';
 import { useAuthContext } from '../context/AuthContext';
 import utilStyles from "../styles/utils.module.css";
@@ -27,9 +26,6 @@ export default function Home() {
     <Layout home>
       <section className={`${utilStyles.pageContainer} ${utilStyles.headingMd}`}>
         <ul className={utilStyles.nav}>
-          <li className={utilStyles.navItem}>          
-            <Link href="/dashboard">Go to Dashboard</Link>
-          </li>
           <li className={utilStyles.navItem}>
             <Link href="/auth/signin">Sign in!</Link>
           </li>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { League, Matchups, Member, UsersPicks, Week } from "../../types";
 import leagueStyles from "../../pages/leagues/LeaguePage.module.css";
 import styles from "./LeagueStats.module.css";
@@ -26,6 +26,7 @@ export default function LeagueStats({
   ) => {
     const membersStats = [];
 
+    console.log("calculating stats for members...")
     for (const userId in members) {
       let totalPoints = 0;
       let weekPoints = 0;
@@ -54,16 +55,13 @@ export default function LeagueStats({
       const name = members[userId].name;
       membersStats.push({ userId, name, totalPoints, weeklyPoints });
     }
+
+    membersStats.sort((a, b) => b.totalPoints - a.totalPoints);
+
     return membersStats;
   };
 
-  // if this became expensive we could do useMemo possibly in the league page
-  const membersStatsArray = calculateStats(leagueData.members, matchups, weeks);
-
-  membersStatsArray.sort((a, b) => b.totalPoints - a.totalPoints);
-  // const totalPointsArray = membersStatsArray.map((member) => {
-  //   return [membersData[member.userId].name, member.totalPoints];
-  // })
+  const membersStatsArray = useMemo(() => calculateStats(leagueData.members, matchups, weeks), [leagueData.members, matchups, weeks]);
 
   return (
     <section className={styles.leagueStatsContainer}>
@@ -106,7 +104,7 @@ export default function LeagueStats({
           membersData={membersData}
         />
       )}
-      {/* {selectedStats === "trophycase" && <p>trophy case</p>} */}
+
     </section>
   );
 }

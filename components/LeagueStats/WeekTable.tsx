@@ -52,6 +52,7 @@ export default function WeekTable({
     weekWinner: string;
     winnerMessage: string;
   } {
+
     // message to be displayed when results are in
     let weekWinner = "";
     let winnerMessage = "";
