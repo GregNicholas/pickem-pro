@@ -12,6 +12,7 @@ import {
 import { db } from "../../firebase/config";
 import styles from "./LeaguePage.module.css";
 import Layout from "../../components/Layout/Layout";
+import Loader from "../../components/Loader/Loader";
 import LeagueNav from "../../components/LeagueHeader/LeagueNav";
 import LeagueMembers from "../../components/LeagueMembers";
 import MyPicks from "../../components/MyPicks/MyPicks";
@@ -113,7 +114,7 @@ export default function League() {
       <title>{siteTitle}</title>
       </Head>
       {isLoading || matchupsLoading ? (
-        <div>fetching data</div>
+        <Loader />
       ) : error ? (
         <div className="errorMessage">{error}</div>
       ) : (
