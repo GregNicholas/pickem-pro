@@ -179,5 +179,3 @@ export default function WeekTable({
     </>
   );
 }
-
-import React from "react";
