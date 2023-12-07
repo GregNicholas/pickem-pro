@@ -26,7 +26,6 @@ export default function LeagueStats({
   ) => {
     const membersStats = [];
 
-    console.log("calculating stats for members...")
     for (const userId in members) {
       let totalPoints = 0;
       let weekPoints = 0;

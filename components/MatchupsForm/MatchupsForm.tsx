@@ -30,14 +30,27 @@ export default function MatchupsForm({
   sortedGames = sortedGames.filter((game) => {
     return game.includes("game");
   });
-
+  const MNFGame = matchups ? sortedGames.filter(game => matchups[pickWeek][game].MNF)[0] : null;
+  sortedGames.sort((a, b) => {
+    if (!matchups[pickWeek][b].MNF) {
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    }
+    return -1;
+  });
   // const leagueContextData = useLeagueContext();
   // console.log("League context data: ", leagueContextData.selectedLeague)
-
-  const tiebreakerGame = matchups
-    ? matchups[pickWeek][sortedGames[sortedGames.length - 1]]
-    : null;
-
+let tiebreakerGame = null;
+if (matchups) {
+  if (MNFGame) {
+    tiebreakerGame = matchups[pickWeek][MNFGame];
+  } else {
+    tiebreakerGame = matchups[pickWeek][sortedGames[sortedGames.length - 1]];
+  }
+}
+  
   const CURRENT_TIME_IN_SECONDS = Math.floor(new Date().getTime() / 1000);
   const isTiebreakerLocked =
     CURRENT_TIME_IN_SECONDS > tiebreakerGame.time.seconds ? true : false;
